@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import css from "./CalendarPagination.module.css";
 
-const CalendarPagination = ({ data }) => {
+const CalendarPagination = ({ data, changeMonth }) => {
   const getMonthName = (monthNumber) => {
     const months = [
       "January",
@@ -23,10 +23,12 @@ const CalendarPagination = ({ data }) => {
 
   const prevMonth = () => {
     console.log("Change to prev month");
+    changeMonth({ prev: true });
   };
 
   const nextMonth = () => {
     console.log("Change to next month");
+    changeMonth({ next: true });
   };
 
   return (
@@ -42,6 +44,7 @@ const CalendarPagination = ({ data }) => {
 
 CalendarPagination.propTypes = {
   data: PropTypes.object,
+  changeMonth: PropTypes.func,
 };
 
 export default CalendarPagination;
