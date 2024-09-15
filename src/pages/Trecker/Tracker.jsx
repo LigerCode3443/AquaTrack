@@ -1,5 +1,5 @@
 import WaterDetailedInfo from "../../components/WaterDetailedInfo/WaterDetailedInfo";
-import WaterMainInfo from "../../components/WaterMainInfo /WaterMainInfo";
+import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo";
 
 const Tracker = () => {
   return (
