@@ -42,13 +42,17 @@ const Calendar = () => {
   };
 
   const addEmptyDays = (data) => {
-    const firstDayDate = new Date(data.year, data.month - 1, data.days[0].date);
+    const firstDayDate = new Date(
+      data.year,
+      data.month - 1,
+      data.days[0].date - 1
+    );
     const firstDayOfWeek = firstDayDate.getDay();
 
     const lastDayDate = new Date(
       data.year,
       data.month - 1,
-      data.days[data.days.length - 1].date
+      data.days[data.days.length - 1].date - 1
     );
     const lastDayOfWeek = lastDayDate.getDay();
 
