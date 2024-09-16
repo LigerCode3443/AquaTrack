@@ -12,6 +12,7 @@ const WrapperAdvantages = styled.div`
   background-size: cover;
   background-position: center;
   max-width: 343px;
+  min-width: 288px;
   padding: 209px 16px 32px 16px;
   flex-grow: 1;
   border-radius: 30px;
@@ -24,6 +25,9 @@ const WrapperAdvantages = styled.div`
     background-image: url(${tab1x});
     max-width: 704px;
     padding: 283px 32px 32px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 161px;
 
     @media screen and (min-resolution: 192dpi) {
       background-image: url(${tab2x});
@@ -34,6 +38,7 @@ const WrapperAdvantages = styled.div`
     background-image: url(${desk1x});
     max-width: 672px;
     padding: 537px 32px 64px 32px;
+    gap: 129px;
 
     @media screen and (min-resolution: 192dpi) {
       background-image: url(${desk2x});
