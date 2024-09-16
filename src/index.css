@@ -2,8 +2,15 @@
   font-family: "Poppins";
   src: url("./fonts/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
 body {
   font-family: "Poppins", sans-serif;
+  color: #323f47;
 }
 
 h1,
@@ -30,6 +37,10 @@ button {
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+  color: #323f47;
+  letter-spacing: -0.01em;
+  line-height: 24px;
+  border-radius: 30px;
 }
 
 a {
