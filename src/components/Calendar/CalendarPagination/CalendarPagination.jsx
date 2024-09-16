@@ -1,7 +1,12 @@
 import PropTypes from "prop-types";
 import css from "./CalendarPagination.module.css";
 
-const CalendarPagination = ({ data, changeMonth }) => {
+const CalendarPagination = ({
+  data,
+  isActiveBtn,
+  changeMonth,
+  showStatistics,
+}) => {
   const getMonthName = (monthNumber) => {
     const months = [
       "January",
@@ -33,11 +38,23 @@ const CalendarPagination = ({ data, changeMonth }) => {
 
   return (
     <div className={css.container}>
-      <button className={css["month-back"]} onClick={prevMonth}></button>
+      <button
+        disabled={!isActiveBtn}
+        className={css["month-back"]}
+        onClick={prevMonth}
+      ></button>
       <p className={css.date}>
-        {getMonthName(data.month)}, {data.year}
+        {isActiveBtn
+          ? getMonthName(data.month)
+          : getMonthName(new Date().getMonth() + 1)}
+        , {data.year}
       </p>
-      <button className={css["month-next"]} onClick={nextMonth}></button>
+      <button
+        disabled={!isActiveBtn}
+        className={css["month-next"]}
+        onClick={nextMonth}
+      ></button>
+      <button className={css["month-next"]} onClick={showStatistics}></button>
     </div>
   );
 };
@@ -45,6 +62,7 @@ const CalendarPagination = ({ data, changeMonth }) => {
 CalendarPagination.propTypes = {
   data: PropTypes.object,
   changeMonth: PropTypes.func,
+  showStatistics: PropTypes.func,
 };
 
 export default CalendarPagination;
