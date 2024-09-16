@@ -74,12 +74,14 @@ const Statistics = ({ data }) => {
             </linearGradient>
           </defs>
           <XAxis
+            className={css.XAxis}
             dataKey="date"
             tick={{ dy: 11 }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
+            className={css.YAxis}
             height={150}
             tick={{ dx: -11 }}
             axisLine={false}
