@@ -19,9 +19,9 @@ const CalendarItem = ({ item, isToday }) => {
         )}
         onClick={() => showStat(item.date)}
       >
-        {item.date}
+        {new Date(item.date).getDate().toString()}
       </button>
-      <span className={css.precentage}>{item.precent}%</span>
+      <span className={css.precentage}>{item.quantity}</span>
     </th>
   );
 };

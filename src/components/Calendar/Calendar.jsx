@@ -5,35 +5,170 @@ import css from "./Calendar.module.css";
 import Statistics from "./Statistics/Statistics";
 
 const buildData = () => {
-  const newData = {
-    days: [],
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
+  return {
+    ownerId: "60f7b2e72f9b9c001f8e4b0b",
+    waterRecords: [
+      {
+        userWaterGoal: 2000,
+        date: "2024-08-31T21:00:00.000Z",
+        quantity: 933,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-01T21:00:00.000Z",
+        quantity: 940,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-02T21:00:00.000Z",
+        quantity: 1613,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-03T21:00:00.000Z",
+        quantity: 187,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-04T21:00:00.000Z",
+        quantity: 1353,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-05T21:00:00.000Z",
+        quantity: 1948,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-06T21:00:00.000Z",
+        quantity: 595,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-07T21:00:00.000Z",
+        quantity: 725,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-08T21:00:00.000Z",
+        quantity: 1824,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-09T21:00:00.000Z",
+        quantity: 1769,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-10T21:00:00.000Z",
+        quantity: 622,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-11T21:00:00.000Z",
+        quantity: 918,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-12T21:00:00.000Z",
+        quantity: 1734,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-13T21:00:00.000Z",
+        quantity: 1459,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-14T21:00:00.000Z",
+        quantity: 945,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-15T21:00:00.000Z",
+        quantity: 561,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-16T21:00:00.000Z",
+        quantity: 367,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-17T21:00:00.000Z",
+        quantity: 1514,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-18T21:00:00.000Z",
+        quantity: 796,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-19T21:00:00.000Z",
+        quantity: 1565,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-20T21:00:00.000Z",
+        quantity: 1512,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-21T21:00:00.000Z",
+        quantity: 1666,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-22T21:00:00.000Z",
+        quantity: 1763,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-23T21:00:00.000Z",
+        quantity: 503,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-24T21:00:00.000Z",
+        quantity: 1206,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-25T21:00:00.000Z",
+        quantity: 727,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-26T21:00:00.000Z",
+        quantity: 1809,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-27T21:00:00.000Z",
+        quantity: 219,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-28T21:00:00.000Z",
+        quantity: 411,
+      },
+      {
+        userWaterGoal: 2000,
+        date: "2024-09-29T21:00:00.000Z",
+        quantity: 1995,
+      },
+    ],
   };
-
-  for (let i = 0; i < new Date(newData.year, newData.month, 0).getDate(); i++) {
-    newData.days.push({
-      precent: Math.floor(Math.random() * 10) * 10 + 10,
-      date: i + 1,
-    });
-  }
-
-  return newData;
 };
 
-const addEmptyDays = (data) => {
-  const firstDayDate = new Date(
-    data.year,
-    data.month - 1,
-    data.days[0].date - 1
-  );
+const addEmptyDays = (record) => {
+  const firstDayDate = new Date(record[0].date);
+  firstDayDate.setDate(firstDayDate.getDate() - 1);
   const firstDayOfWeek = firstDayDate.getDay();
 
-  const lastDayDate = new Date(
-    data.year,
-    data.month - 1,
-    data.days[data.days.length - 1].date - 1
-  );
+  const lastDayDate = new Date(record[record.length - 1].date);
+  lastDayDate.setDate(firstDayDate.getDate() - 1);
   const lastDayOfWeek = lastDayDate.getDay();
 
   const emptyDaysAtStart = [];
@@ -47,7 +182,7 @@ const addEmptyDays = (data) => {
     emptyDaysAtEnd.push({ isEmpty: true });
   }
 
-  return [...emptyDaysAtStart, ...data.days, ...emptyDaysAtEnd];
+  return [...emptyDaysAtStart, ...record, ...emptyDaysAtEnd];
 };
 
 const splitIntoChunks = (array, chunkSize) => {
@@ -58,36 +193,51 @@ const splitIntoChunks = (array, chunkSize) => {
   return chunks;
 };
 
-const getLast7Days = (data) => {
+const getLast7Days = (records) => {
   const today = new Date();
 
-  const index = data.days.findIndex(
-    (elem) => elem.date - 1 === today.getDate()
+  const index = records.findIndex(
+    (elem) => new Date(elem.date).getDate() === today.getDate()
   );
-
-  return data.days.slice(index - 7, index);
+  return records.slice(index - 7, index);
 };
 
 const Calendar = () => {
-  const [data, setData] = useState(buildData);
+  const [data, setData] = useState(() => {
+    const data = buildData();
+
+    const aggregated = {};
+
+    data.waterRecords.forEach((record) => {
+      const { date, quantity } = record;
+      const dateStump = new Date(date);
+      dateStump.setDate(dateStump.getDate() + 1);
+      const dateString = dateStump.toISOString().split("T")[0]; // Use YYYY-MM-DD format
+
+      if (aggregated[dateString]) {
+        aggregated[dateString] += quantity;
+      } else {
+        aggregated[dateString] = quantity;
+      }
+    });
+
+    return {
+      ownerId: data.ownerId,
+      waterRecords: Object.keys(aggregated).map((date) => ({
+        userWaterGoal: 2000,
+        date: new Date(date).toISOString(),
+        quantity: aggregated[date],
+      })),
+    };
+  });
+
   const [showStatistics, setShowStatistc] = useState(false);
 
-  const chunks = splitIntoChunks(addEmptyDays(data), 7);
+  const chunks = splitIntoChunks(addEmptyDays(data.waterRecords), 7);
 
   const changeMonth = ({ next, prev }) => {
-    if (next)
-      setData({
-        ...data,
-        month: data.month === 12 ? 1 : data.month + 1,
-        year: data.month === 12 ? data.year + 1 : data.year,
-      });
-    else if (prev) {
-      setData({
-        ...data,
-        month: data.month === 1 ? 12 : data.month - 1,
-        year: data.month === 1 ? data.year - 1 : data.year,
-      });
-    }
+    //To Do
+    setData({ ...data, next, prev });
   };
 
   const showStatisticsCallback = () => {
@@ -99,24 +249,19 @@ const Calendar = () => {
       <div className={css["pagination-container"]}>
         <h3 className={css.header}>Month</h3>
         <CalendarPagination
-          data={data}
+          data={data.waterRecords}
           changeMonth={changeMonth}
-          isActiveBtn={!showStatistics}
+          inActiveBtn={!showStatistics}
           showStatistics={showStatisticsCallback}
         />
       </div>
       {showStatistics ? (
-        <Statistics data={getLast7Days(data)}></Statistics>
+        <Statistics data={getLast7Days(data.waterRecords)}></Statistics>
       ) : (
         <table className={css.container}>
           <tbody className={css["container-line"]}>
             {chunks.map((elem, i) => (
-              <CalendarLine
-                key={i}
-                items={elem}
-                month={data.month}
-                year={data.year}
-              />
+              <CalendarLine key={i} items={elem} />
             ))}
           </tbody>
         </table>

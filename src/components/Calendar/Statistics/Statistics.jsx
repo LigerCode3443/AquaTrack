@@ -65,7 +65,7 @@ const Statistics = ({ data }) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={500}>
         <AreaChart data={data} margin={{ top: 12, right: 12 }}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -77,6 +77,7 @@ const Statistics = ({ data }) => {
             className={css.XAxis}
             dataKey="date"
             tick={{ dy: 11 }}
+            tickFormatter={(tick) => new Date(tick).getDate() + 1}
             axisLine={false}
             tickLine={false}
           />
@@ -84,11 +85,19 @@ const Statistics = ({ data }) => {
             className={css.YAxis}
             height={150}
             tick={{ dx: -11 }}
+            tickFormatter={(tick) => {
+              let value = "";
+              if (tick >= 500) value = tick / 1000 + "L";
+              else if (tick === 0) value = "0%";
+              else value = tick + "ml";
+
+              return value;
+            }}
             axisLine={false}
             tickLine={false}
           />
           <Area
-            dataKey="precent"
+            dataKey="quantity"
             stroke="#9BE1A0"
             strokeWidth={strokeWidth}
             fillOpacity={1}
@@ -114,7 +123,7 @@ const Statistics = ({ data }) => {
             }}
           >
             <div className={css["dialog-arrow"]} />
-            <p>{activePayload.precent}%</p>
+            <p>{activePayload.quantity}ml</p>
           </div>
         )}
       </div>

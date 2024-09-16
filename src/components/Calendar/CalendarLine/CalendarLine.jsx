@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./CalendarLine.module.css";
 
-const isToday = (year, month, date) => {
+const isToday = (date) => {
   const today = new Date();
-  const givenDate = new Date(year, month - 1, date);
+  const givenDate = new Date(date);
   return today.toDateString() === givenDate.toDateString();
 };
 
-const CalendarLine = ({ items, month, year }) => {
+const CalendarLine = ({ items }) => {
   return (
     <tr className={css.line}>
       {items.map((elem, index) => {
@@ -16,7 +16,7 @@ const CalendarLine = ({ items, month, year }) => {
           <CalendarItem
             key={`${elem.date}-${index}`}
             item={elem}
-            isToday={isToday(year, month, elem.date)}
+            isToday={isToday(elem.date)}
           />
         );
       })}

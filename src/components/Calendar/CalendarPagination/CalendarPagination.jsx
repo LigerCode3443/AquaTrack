@@ -23,7 +23,7 @@ const CalendarPagination = ({
       "December",
     ];
 
-    return months[monthNumber - 1] || "Invalid month";
+    return months[monthNumber] || "Invalid month";
   };
 
   const prevMonth = () => {
@@ -39,18 +39,18 @@ const CalendarPagination = ({
   return (
     <div className={css.container}>
       <button
-        disabled={!isActiveBtn}
+        disabled={isActiveBtn}
         className={css["month-back"]}
         onClick={prevMonth}
       ></button>
       <p className={css.date}>
         {isActiveBtn
-          ? getMonthName(data.month)
-          : getMonthName(new Date().getMonth() + 1)}
-        , {data.year}
+          ? getMonthName(new Date(data[0].date).getMonth())
+          : getMonthName(new Date().getMonth())}
+        , {new Date(data[0].date).getFullYear()}
       </p>
       <button
-        disabled={!isActiveBtn}
+        disabled={isActiveBtn}
         className={css["month-next"]}
         onClick={nextMonth}
       ></button>
@@ -60,7 +60,7 @@ const CalendarPagination = ({
 };
 
 CalendarPagination.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   changeMonth: PropTypes.func,
   showStatistics: PropTypes.func,
 };
