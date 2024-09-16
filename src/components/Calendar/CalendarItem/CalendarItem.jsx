@@ -15,13 +15,19 @@ const CalendarItem = ({ item, isToday }) => {
       <button
         className={concaniteClasses(
           css.ball,
-          isToday ? css.today : item.precent === 100 ? css.done : css.notDone
+          isToday
+            ? css.today
+            : item.quantity === item.userWaterGoal
+            ? css.done
+            : css.notDone
         )}
         onClick={() => showStat(item.date)}
       >
         {new Date(item.date).getDate().toString()}
       </button>
-      <span className={css.precentage}>{item.quantity}</span>
+      <span className={css.quantity}>
+        {parseInt((item.quantity / item.userWaterGoal) * 100)}%
+      </span>
     </th>
   );
 };

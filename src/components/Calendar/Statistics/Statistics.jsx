@@ -65,7 +65,7 @@ const Statistics = ({ data }) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <ResponsiveContainer width="100%" height={500}>
+      <ResponsiveContainer width="100%" height={350}>
         <AreaChart data={data} margin={{ top: 12, right: 12 }}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

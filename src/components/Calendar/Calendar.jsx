@@ -81,7 +81,7 @@ const buildData = () => {
       {
         userWaterGoal: 2000,
         date: "2024-09-14T21:00:00.000Z",
-        quantity: 945,
+        quantity: 2000,
       },
       {
         userWaterGoal: 2000,
@@ -247,7 +247,9 @@ const Calendar = () => {
   return (
     <div>
       <div className={css["pagination-container"]}>
-        <h3 className={css.header}>Month</h3>
+        <h3 className={css.header}>
+          {showStatistics ? "Statistics" : "Month"}
+        </h3>
         <CalendarPagination
           data={data.waterRecords}
           changeMonth={changeMonth}
