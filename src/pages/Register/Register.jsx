@@ -3,7 +3,10 @@ import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSect
 const Register = () => {
   return (
     <div>
-      Register <AdvantagesSection />
+      Register
+      <MediaQuery minWidth={1440}>
+        <AdvantagesSection />
+      </MediaQuery>
     </div>
   );
 };
