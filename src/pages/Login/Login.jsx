@@ -1,14 +1,16 @@
-import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
 import MediaQuery from "react-responsive";
+
+import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
+import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/WrapperForPublicRoutes";
 
 const Login = () => {
   return (
-    <div>
+    <WrapperForPublicRoutes>
       Login
       <MediaQuery minWidth={1440}>
         <AdvantagesSection />
       </MediaQuery>
-    </div>
+    </WrapperForPublicRoutes>
   );
 };
 export default Login;

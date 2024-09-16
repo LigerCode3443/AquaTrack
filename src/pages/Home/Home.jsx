@@ -1,14 +1,13 @@
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
 import WelcomeSection from "../../components/WelcomeSection/WelcomeSection";
-
-import css from "./Home.module.css";
+import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/WrapperForPublicRoutes";
 
 const Home = () => {
   return (
-    <div className={css.wrapper}>
+    <WrapperForPublicRoutes>
       <WelcomeSection />
       <AdvantagesSection />
-    </div>
+    </WrapperForPublicRoutes>
   );
 };
 export default Home;

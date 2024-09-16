@@ -1,13 +1,15 @@
+import MediaQuery from "react-responsive";
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
+import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/WrapperForPublicRoutes";
 
 const Register = () => {
   return (
-    <div>
+    <WrapperForPublicRoutes>
       Register
       <MediaQuery minWidth={1440}>
         <AdvantagesSection />
       </MediaQuery>
-    </div>
+    </WrapperForPublicRoutes>
   );
 };
 export default Register;
