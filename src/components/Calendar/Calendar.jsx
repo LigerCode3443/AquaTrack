@@ -61,7 +61,7 @@ const buildData = () => {
       {
         userWaterGoal: 2000,
         date: "2024-09-10T21:00:00.000Z",
-        quantity: 622,
+        quantity: 2000,
       },
       {
         userWaterGoal: 2000,
@@ -106,7 +106,7 @@ const buildData = () => {
       {
         userWaterGoal: 2000,
         date: "2024-09-19T21:00:00.000Z",
-        quantity: 1565,
+        quantity: 2000,
       },
       {
         userWaterGoal: 2000,
@@ -197,9 +197,9 @@ const getLast7Days = (records) => {
   const today = new Date();
 
   const index = records.findIndex(
-    (elem) => new Date(elem.date).getDate() === today.getDate()
+    (elem) => new Date(elem.date).toDateString() === today.toDateString()
   );
-  return records.slice(index - 7, index);
+  return records.slice(index - 6, index + 1);
 };
 
 const Calendar = () => {

@@ -77,7 +77,7 @@ const Statistics = ({ data }) => {
             className={css.XAxis}
             dataKey="date"
             tick={{ dy: 11 }}
-            tickFormatter={(tick) => new Date(tick).getDate() + 1}
+            tickFormatter={(tick) => new Date(tick).getDate()}
             axisLine={false}
             tickLine={false}
           />
