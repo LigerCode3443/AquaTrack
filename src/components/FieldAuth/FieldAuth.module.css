@@ -41,3 +41,7 @@ input {
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.6);
 }
+
+.field__icon {
+  position: relative;
+}
