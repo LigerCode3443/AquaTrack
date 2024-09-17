@@ -1,8 +1,8 @@
 import css from "./IconPassword.module.css";
 
-const IconPasswordIsVisible = () => {
+const IconPasswordIsVisible = ({onClick}) => {
   return (
-    <span className={css.icon}>
+    <span className={css.icon} onClick={onClick}>
       <svg
         width="20"
         height="20"
