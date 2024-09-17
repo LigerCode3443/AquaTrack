@@ -12,19 +12,24 @@
   letter-spacing: -0.01em;
   text-align: center;
 }
-.month-back {
+.month-btn {
   width: 18px;
   height: 18px;
+  transform: translateY(0px);
+  transition: opacity, transform 0.3s ease 0.1s;
 }
-.month-next {
+.month-btn-disable {
   width: 18px;
   height: 18px;
+  opacity: 0.5;
+  transform: translateY(1px);
+  transition: opacity, transform 0.3s ease 0.1s;
 }
 .statistics {
   width: 20px;
   height: 20px;
   transform: translateY(-2px);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease 0.1s;
 }
 .statistics-is-close {
   opacity: 0.4;

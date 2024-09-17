@@ -59,7 +59,7 @@ const CalendarPagination = ({
     <div className={css.container}>
       <button
         disabled={!isActiveBtn}
-        className={css["month-back"]}
+        className={!isActiveBtn ? css["month-btn-disable"] : css["month-btn"]}
         onClick={prevMonth}
       >
         <SvgIcon id="arrow-left" width={18} height={18} />
@@ -72,7 +72,7 @@ const CalendarPagination = ({
       </p>
       <button
         disabled={!isActiveBtn}
-        className={css["month-next"]}
+        className={!isActiveBtn ? css["month-btn-disable"] : css["month-btn"]}
         onClick={nextMonth}
       >
         <SvgIcon id="arrow-right" width={18} height={18} />
