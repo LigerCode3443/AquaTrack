@@ -1,11 +1,24 @@
 .waterTracker {
   width: 343px;
   height: 415px;
+
+  border-radius: 30px;
+  background-color: var(--Accent, #9be1a0);
+
+  background-image: url("/images/bottle.png");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .waterTracker h2 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 1.8rem;
-  font-weight: bold;
+  padding-left: 16px;
+  padding-top: 24px;
+
+  color: #323f47;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.18px;
+  text-transform: uppercase;
 }
