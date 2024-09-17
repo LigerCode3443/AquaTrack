@@ -25,7 +25,9 @@ const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors}) =
           ))}
         </ul>
 
-        <button type="submit">{title}</button>
+        <button type="submit" className={css.btn}>
+          {title}
+        </button>
       </form>
 
       <span className={css.info}>

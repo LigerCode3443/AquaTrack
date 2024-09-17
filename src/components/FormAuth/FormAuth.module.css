@@ -70,3 +70,26 @@
   letter-spacing: -0.01em;
   color: #ef5050;
 }
+
+.btn {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  width: 100%;
+  border-radius: 30px;
+  padding: 16px 0;
+  background-color: #9be1a0;
+
+  &:hover,
+  &:focus {
+    background-color: #87d28d;
+  }
+
+  @media only screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 18px 0;
+  }
+}
