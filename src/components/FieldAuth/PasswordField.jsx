@@ -1,6 +1,7 @@
 import {useState} from "react";
-import IconPasswordIsVisible from "../IconPassword/IconPasswordIsVisible";
-import IconPasswordNotVisible from "../IconPassword/IconPasswordNotVisible";
+
+import SvgIcon from "../SvgIcon/SvgIcon";
+
 import css from "./FieldAuth.module.css";
 
 const PasswordField = ({label, placeholder, register, errorMessage}) => {
@@ -21,11 +22,13 @@ const PasswordField = ({label, placeholder, register, errorMessage}) => {
           {...register}
         />
 
-        {isShowPassword ? (
-          <IconPasswordIsVisible onClick={toggleShowPassword} />
-        ) : (
-          <IconPasswordNotVisible onClick={toggleShowPassword} />
-        )}
+        <button type="button" onClick={toggleShowPassword} className={css.icon}>
+          {isShowPassword ? (
+            <SvgIcon id="eye" width={20} height={20} />
+          ) : (
+            <SvgIcon id="hide" width={20} height={20} />
+          )}
+        </button>
       </span>
     </label>
   );
