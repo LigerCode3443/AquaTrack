@@ -1,39 +1,35 @@
 .waterProgressBar {
+  width: 198px;
+  height: 70px;
+
+  margin-top: 49px;
+  margin-left: 73px;
+  padding: 12px;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  gap: 8px;
+
+  border-radius: 15px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
 }
 
-.waterProgressBar label {
-  font-size: 1rem;
-  margin-bottom: 10px;
+.waterProgressBar h3 {
+  font-size: 14px;
+  line-height: 14px;
 }
 
-input[type="range"] {
-  width: 100%;
-  appearance: none;
-  height: 8px;
-  background-color: #ddd;
-  border-radius: 5px;
-  outline: none;
-  overflow: hidden;
+.waterProcent span:nth-child(2) {
+  margin-left: 66px;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #4caf50;
-  cursor: pointer;
+.waterProcent span:nth-child(3) {
+  margin-left: 49px;
 }
 
-.waterProgressBar p {
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: bold;
+.waterProcent span {
+  color: rgba(47, 47, 47, 0.6);
+  font-size: 10px;
+  line-height: 10px;
 }
