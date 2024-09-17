@@ -5,12 +5,16 @@ import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import Logo from "../../components/Logo/Logo";
 import HomeAuthSidebar from "../../components/HomeAuthSidebar/HomeAuthSidebar";
 
+import css from "./Register.module.css";
+
 const Register = () => {
   return (
     <WrapperForPublicRoutes>
       <HomeAuthSidebar>
-        <Logo />
-        <SignUpForm />
+        <div className={css.wrapper}>
+          <Logo />
+          <SignUpForm />
+        </div>
       </HomeAuthSidebar>
 
       <MediaQuery minWidth={1440}>
