@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import mob1x from "../../img/homeLoginRegister/mobile/women@1x.png";
-import mob2x from "../../img/homeLoginRegister/mobile/women@2x.png";
-import tab1x from "../../img/homeLoginRegister/tablet/women@1x.png";
-import tab2x from "../../img/homeLoginRegister/tablet/women@2x.png";
-import desk1x from "../../img/homeLoginRegister/desk/women@1x.png";
-import desk2x from "../../img/homeLoginRegister/desk/women@2x.png";
+import mob1x from "../../images/homeLoginRegister/mobile/women@1x.png";
+import mob2x from "../../images/homeLoginRegister/mobile/women@2x.png";
+import tab1x from "../../images/homeLoginRegister/tablet/women@1x.png";
+import tab2x from "../../images/homeLoginRegister/tablet/women@2x.png";
+import desk1x from "../../images/homeLoginRegister/desk/women@1x.png";
+import desk2x from "../../images/homeLoginRegister/desk/women@2x.png";
 
 const WrapperAdvantages = styled.div`
   background-image: url(${mob1x});

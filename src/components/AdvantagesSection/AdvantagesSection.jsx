@@ -1,9 +1,9 @@
 import WrapperAdvantages from "../WrapperAdvantages/WrapperAdvantages";
 import css from "./AdvantagesSection.module.css";
 
-import user1 from "../../img/homeLoginRegister/users/user1.png";
-import user2 from "../../img/homeLoginRegister/users/user2.png";
-import user3 from "../../img/homeLoginRegister/users/user3.png";
+import user1 from "../../images/homeLoginRegister/users/user1.png";
+import user2 from "../../images/homeLoginRegister/users/user2.png";
+import user3 from "../../images/homeLoginRegister/users/user3.png";
 
 const AdvantagesSection = () => {
   return (
