@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 import s from "./AddWaterForm.module.css";
 
-import Modal from "react-modal";
-Modal.setAppElement("#root");
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-  overlay: {
-    backgroundColor: "rgba(47, 47, 47, 0.60)",
-  },
-};
+//!У разі наявності не валідних значень, причина помилки повинна бути відображена користувачеві, а дані - не відправлятися на backend. У разі, якщо всі значення валідні, - на backend слід відправити відповідний запит для додавання/редагування запису про порцію спожитої води.Якщо backend повернув помилку - необхідно її опрацювати і відобразити користувачеві у вигляді спливаючого вікна-notification. Якщо запит на backend пройшов успішно - модальне вікно WaterModal слід закрити, а дані у WaterProgressBar, WaterList та Calendar - актуалізувати за допомогою redux
 
-const AddWaterForm = ({ modalIsOpen, closeModal }) => {
-  const [counter, setCounter] = useState(0);
+const validationSchema = Yup.object().shape({
+  waterAmount: Yup.number()
+    .min(50, "Мінімальна кількість води — 50 мл")
+    .max(5000, "Максимальна кількість води — 5000 мл")
+    .required("Кількість води обов'язкова"),
+  time: Yup.string().required("Час запису обов'язковий"),
+});
+
+const AddWaterForm = () => {
+  const [counter, setCounter] = useState(50);
   const [time, setTime] = useState("");
-  const [waterAmount, setWaterAmount] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      waterAmount: 50,
+      time: "",
+    },
+  });
 
   useEffect(() => {
     const now = new Date();
@@ -29,82 +38,107 @@ const AddWaterForm = ({ modalIsOpen, closeModal }) => {
       minute: "2-digit",
     });
     setTime(formattedTime);
-  }, []);
+    setValue("time", formattedTime);
+  }, [setValue]);
 
   const decreaseCounter = () => {
-    if (counter > 0) setCounter(counter - 50);
+    if (counter > 50) {
+      const newValue = counter - 50;
+      setCounter(newValue);
+      setValue("waterAmount", newValue);
+    }
   };
 
   const increaseCounter = () => {
-    setCounter(counter + 50);
+    if (counter < 5000) {
+      const newValue = counter + 50;
+      setCounter(newValue);
+      setValue("waterAmount", newValue);
+    }
   };
 
-  const handleSave = () => {
-    const data = {
-      counter,
-      time,
-      waterAmount,
-    };
+  const onSubmit = (data) => {
     console.log("Збережені дані:", data);
     alert("Дані збережені!");
   };
 
   return (
-    <div>
-      <Modal
-        isOpen="true" //ЗМІНИТИ
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div className={s.container}>
-          <h2 className="header">Add water</h2>
-          <div className="form">
-            <h3 className="form_header">Choose a value</h3>
-            <label htmlFor="counter" className="counter_label">
-              Amount of water:
-            </label>
-            <div className="counter">
-              <button onClick={decreaseCounter} className="decrease_btn">
-                -
-              </button>
-              <input type="number" value={counter} readOnly /> мл
-              <button onClick={increaseCounter} className="increase_btn">
-                +
-              </button>
-            </div>
-            <div className="time_input">
-              <label htmlFor="time" className="time_label">
-                Recording time:
-              </label>
-              <input
-                type="time"
-                id="time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                className="time_input"
-              />
-            </div>
-            <div className="water_amount">
-              <label htmlFor="waterAmount" className="water_label">
-                Enter the value of the water used:
-              </label>
-              <input
-                type="number"
-                id="waterAmount"
-                value={waterAmount}
-                onChange={(e) => setWaterAmount(e.target.value)}
-                placeholder="Введіть кількість"
-                className="water_input"
-              />
-            </div>
-            <button onClick={handleSave} className="save_btn">
-              Save
-            </button>
-          </div>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
+      <h2 className={s.header}>Add water</h2>
+      <div className={s.amount_time_container}>
+        <h3 className={s.form_header}>Choose a value</h3>
+
+        <label htmlFor="counter" className={s.counter_label}>
+          Amount of water:
+        </label>
+        <div className={s.counter}>
+          <button
+            type="button"
+            onClick={decreaseCounter}
+            className={s.decrease_btn}
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={counter}
+            readOnly
+            className={s.water_counter}
+          />{" "}
+          мл
+          <button
+            type="button"
+            onClick={increaseCounter}
+            className={s.increase_btn}
+          >
+            +
+          </button>
         </div>
-      </Modal>
-    </div>
+
+        <div className={s.time_container}>
+          <label htmlFor="time" className={s.time_label}>
+            Recording time:
+          </label>
+          <input
+            type="time"
+            id="time"
+            {...register("time")}
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            className={s.time_input}
+          />
+          {errors.time && (
+            <span className={s.error}>{errors.time.message}</span>
+          )}
+        </div>
+      </div>
+
+      <div className={s.water_amount}>
+        <label htmlFor="waterAmount" className={s.water_label}>
+          Enter the value of the water used:
+        </label>
+        <input
+          type="number"
+          id="waterAmount"
+          {...register("waterAmount")}
+          value={counter}
+          onChange={(e) => {
+            const value = parseInt(e.target.value, 10);
+            setCounter(value);
+            setValue("waterAmount", value);
+          }}
+          max="5000"
+          className={s.water_input}
+        />
+        {errors.waterAmount && (
+          <span className={s.error}>{errors.waterAmount.message}</span>
+        )}
+      </div>
+
+      <button type="submit" className={s.save_btn}>
+        Save
+      </button>
+    </form>
   );
 };
 
