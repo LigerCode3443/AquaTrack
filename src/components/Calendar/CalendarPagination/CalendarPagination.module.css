@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  align-items: center;
   gap: 16px;
 }
 .date {
@@ -12,22 +13,44 @@
   text-align: center;
 }
 .month-back {
-  background-color: black;
   width: 18px;
   height: 18px;
 }
 .month-next {
-  background-color: black;
   width: 18px;
   height: 18px;
 }
+.statistics {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+.statistics-is-close {
+  opacity: 0.4;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-1px);
+  transition: opacity, transform 0.3s ease 0.1s;
+}
 
-@media screen and(min-width:768px) {
+@media screen and (min-width: 768px) {
   .date {
     font-size: 16px;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: -0.01em;
     text-align: center;
+  }
+
+  .statistics {
+    width: 24px;
+    height: 24px;
+    transform: translateY(-4px);
+  }
+  .statistics-is-close {
+    width: 24px;
+    height: 24px;
+    transform: translateY(-2px);
   }
 }

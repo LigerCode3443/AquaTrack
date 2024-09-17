@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+
+import SvgIcon from "../../SvgIcon/SvgIcon";
 import css from "./CalendarPagination.module.css";
 
 const CalendarPagination = ({
@@ -7,6 +10,22 @@ const CalendarPagination = ({
   changeMonth,
   showStatistics,
 }) => {
+  const [width, setWidth] = useState(window.innerWidth < 768 ? 20 : 24);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setWidth(20);
+      } else {
+        setWidth(24);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [setWidth]);
+
   const getMonthName = (monthNumber) => {
     const months = [
       "January",
@@ -42,7 +61,9 @@ const CalendarPagination = ({
         disabled={!isActiveBtn}
         className={css["month-back"]}
         onClick={prevMonth}
-      ></button>
+      >
+        <SvgIcon id="arrow-left" width={18} height={18} />
+      </button>
       <p className={css.date}>
         {!isActiveBtn
           ? getMonthName(new Date(data[0].date).getMonth())
@@ -53,8 +74,15 @@ const CalendarPagination = ({
         disabled={!isActiveBtn}
         className={css["month-next"]}
         onClick={nextMonth}
-      ></button>
-      <button className={css["month-next"]} onClick={showStatistics}></button>
+      >
+        <SvgIcon id="arrow-right" width={18} height={18} />
+      </button>
+      <button
+        className={!isActiveBtn ? css.statistics : css["statistics-is-close"]}
+        onClick={showStatistics}
+      >
+        <SvgIcon id="statistics" width={width} height={width} />
+      </button>
     </div>
   );
 };
