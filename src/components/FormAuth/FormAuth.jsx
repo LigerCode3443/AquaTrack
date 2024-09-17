@@ -2,16 +2,25 @@ import {Link} from "react-router-dom";
 import FieldAuth from "../FieldAuth/FieldAuth";
 import css from "./FormAuth.module.css";
 
-const FormAuth = ({title, fields, link, textLink, textInfo}) => {
+const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors}) => {
   return (
     <>
       <h2 className={css.title}>{title}</h2>
 
-      <form className={css.form}>
+      <form className={css.form} onSubmit={onSubmit}>
         <ul className={css.fields}>
           {fields.map((field, i) => (
             <li key={i}>
-              <FieldAuth type={field.type} label={field.label} placeholder={field.placeholder} />
+              <FieldAuth
+                type={field.type}
+                label={field.label}
+                placeholder={field.placeholder}
+                register={field.register}
+                error={errors[field.register.name]}
+              />
+              {errors[field.register.name] && (
+                <p className={css.error}>{errors[field.register.name].message}</p>
+              )}
             </li>
           ))}
         </ul>

@@ -3,7 +3,7 @@ import IconPasswordIsVisible from "../IconPassword/IconPasswordIsVisible";
 import IconPasswordNotVisible from "../IconPassword/IconPasswordNotVisible";
 import css from "./FieldAuth.module.css";
 
-const PasswordField = ({label, placeholder}) => {
+const PasswordField = ({label, placeholder, register, errorMessage}) => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -16,9 +16,9 @@ const PasswordField = ({label, placeholder}) => {
       <span className={css.field__icon}>
         <input
           type={isShowPassword ? "text" : "password"}
-          className={css.field}
+          className={errorMessage ? css.errorField : css.field}
           placeholder={placeholder}
-          required
+          {...register}
         />
 
         {isShowPassword ? (

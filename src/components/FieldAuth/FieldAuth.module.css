@@ -29,6 +29,8 @@ input {
   background-color: transparent;
   font-size: 14px;
 
+  transition: all 250ms ease-in-out;
+
   @media only screen and (min-width: 768px) {
     width: 436px;
     height: 56px;
@@ -44,4 +46,9 @@ input {
 
 .field__icon {
   position: relative;
+}
+
+.errorField {
+  composes: field;
+  border: 1px solid #ef5050;
 }
