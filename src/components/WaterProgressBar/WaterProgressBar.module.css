@@ -1,0 +1,39 @@
+.waterProgressBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.waterProgressBar label {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  background-color: #ddd;
+  border-radius: 5px;
+  outline: none;
+  overflow: hidden;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  cursor: pointer;
+}
+
+.waterProgressBar p {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}

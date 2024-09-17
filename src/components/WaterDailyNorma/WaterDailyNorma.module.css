@@ -1,0 +1,15 @@
+.waterDailyNorma {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.waterDailyNorma p:first-child {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.waterDailyNorma p:last-child {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
