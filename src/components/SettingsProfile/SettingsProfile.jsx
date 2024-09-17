@@ -1,5 +1,5 @@
-import Button from "../../components/Button/Button"; 
-import ModalWindow from "../../components/ModalWindow/ModalWindow"; 
+import Button from "../../components/Button/Button";
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import css from "./SettingsProfile.module.css";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -15,6 +15,7 @@ const SettingsProfile = () => {
   const [wantWater, setWantWater] = useState("");
   const [time, setTime] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -49,7 +50,8 @@ const SettingsProfile = () => {
   const handleSave = (e) => {
     e.preventDefault();
     toast.success("Settings saved!");
-    setIsModalOpen(true); 
+    setModalContent("Settings have been saved successfully!");
+    setIsModalOpen(true);
   };
 
   return (
@@ -57,7 +59,13 @@ const SettingsProfile = () => {
       <div className={css.avatarSettingWrapper}>
         <h2>Setting</h2>
         <img src={userAvatar} alt="user avatar" />
-        <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            setModalContent("Upload a photo modal content");
+            setIsModalOpen(true);
+          }}
+        >
           Upload a photo
         </Button>
       </div>
@@ -170,7 +178,7 @@ const SettingsProfile = () => {
         Save
       </Button>
       <ModalWindow isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <p>Settings have been saved successfully!</p>
+        <p>{modalContent}</p> 
       </ModalWindow>
     </form>
   );
