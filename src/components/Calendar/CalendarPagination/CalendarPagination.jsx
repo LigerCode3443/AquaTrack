@@ -39,18 +39,18 @@ const CalendarPagination = ({
   return (
     <div className={css.container}>
       <button
-        disabled={isActiveBtn}
+        disabled={!isActiveBtn}
         className={css["month-back"]}
         onClick={prevMonth}
       ></button>
       <p className={css.date}>
-        {isActiveBtn
+        {!isActiveBtn
           ? getMonthName(new Date(data[0].date).getMonth())
           : getMonthName(new Date().getMonth())}
         , {new Date(data[0].date).getFullYear()}
       </p>
       <button
-        disabled={isActiveBtn}
+        disabled={!isActiveBtn}
         className={css["month-next"]}
         onClick={nextMonth}
       ></button>

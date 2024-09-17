@@ -253,7 +253,7 @@ const Calendar = () => {
         <CalendarPagination
           data={data.waterRecords}
           changeMonth={changeMonth}
-          inActiveBtn={!showStatistics}
+          isActiveBtn={!showStatistics}
           showStatistics={showStatisticsCallback}
         />
       </div>
