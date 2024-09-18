@@ -8,9 +8,22 @@ import Register from "./pages/Register/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import Tracker from "./pages/Tracker/Tracker";
 import Container from "./components/Container/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsRefresh } from "./redux/auth/selectors";
+import { useEffect } from "react";
+import { refreshThunk } from "./redux/auth/operations";
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefresh);
+
+  useEffect(() => {
+    dispatch(refreshThunk());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <p>Loading</p>
+  ) : (
     <Container>
       <Routes>
         <Route
