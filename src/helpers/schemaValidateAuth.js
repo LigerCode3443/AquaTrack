@@ -1,7 +1,9 @@
 import * as Yup from "yup";
 
 export const schemaRegister = Yup.object({
-  userEmail: Yup.string().email("Invalid email address").required("Email is required"),
+  userEmail: Yup.string()
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid email address")
+    .required("Email is required"),
   userPassword: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .max(12, "Password must not exceed 12 characters")
@@ -16,6 +18,8 @@ export const schemaRegister = Yup.object({
 });
 
 export const schemaLogin = Yup.object({
-  userEmail: Yup.string().email("Invalid email address").required("Email is required"),
+  userEmail: Yup.string()
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid email address")
+    .required("Email is required"),
   userPassword: Yup.string().required("Password is required"),
 });
