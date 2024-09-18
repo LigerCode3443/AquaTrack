@@ -1,3 +1,5 @@
+import Button from "../../components/Button/Button";
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import css from "./SettingsProfile.module.css";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -12,6 +14,8 @@ const SettingsProfile = () => {
   const [requiredWater, setRequiredWater] = useState(1.5);
   const [wantWater, setWantWater] = useState("");
   const [time, setTime] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -46,124 +50,137 @@ const SettingsProfile = () => {
   const handleSave = (e) => {
     e.preventDefault();
     toast.success("Settings saved!");
+    setModalContent("Settings have been saved successfully!");
+    setIsModalOpen(true);
   };
 
   return (
-    <>
-      <form onSubmit={handleSave}>
-        <div className={css.avatarSettingWrapper}>
-          <h2>Setting</h2>
-          <img src={userAvatar} alt="user avatar" />
-          <button type="button">Upload a photo</button>
-        </div>
+    <form onSubmit={handleSave}>
+      <div className={css.avatarSettingWrapper}>
+        <h2>Setting</h2>
+        <img src={userAvatar} alt="user avatar" />
+        <Button
+          variant="primary"
+          onClick={() => {
+            setModalContent("Upload a photo modal content");
+            setIsModalOpen(true);
+          }}
+        >
+          Upload a photo
+        </Button>
+      </div>
 
-        <div className={css.userSettingWrapper}>
-          <div className={css.genderInputWrapper}>
-            <label>Your gender identity</label>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  value="female"
-                  checked={gender === "female"}
-                  onChange={() => setGender("female")}
-                />
-                Female
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value="male"
-                  checked={gender === "male"}
-                  onChange={() => setGender("male")}
-                />
-                Male
-              </label>
-            </div>
-          </div>
-          <div className={css.userDataWrapper}>
-            <div className={css.userNameWrapper}>
-              <label htmlFor="name">Your Name</label>
+      <div className={css.userSettingWrapper}>
+        <div className={css.genderInputWrapper}>
+          <label>Your gender identity</label>
+          <div>
+            <label>
               <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                type="radio"
+                value="female"
+                checked={gender === "female"}
+                onChange={() => setGender("female")}
               />
-            </div>
-            <div className={css.userEmailWrapper}>
-              <label htmlFor="email">Email</label>
+              Female
+            </label>
+            <label>
               <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="radio"
+                value="male"
+                checked={gender === "male"}
+                onChange={() => setGender("male")}
               />
-            </div>
+              Male
+            </label>
           </div>
-          <div className={css.dailyNormaWrapper}>
-            <h2>My daily norm</h2>
-            <div className={css.mathWrapper}>
-              <div className={css.formulaWrapper}>
-                <p>For women:</p>
-                <p>V = (M * 0.03) + (T * 0.4)</p>
+        </div>
+        <div className={css.userDataWrapper}>
+          <div className={css.userNameWrapper}>
+            <label htmlFor="name">Your Name</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className={css.userEmailWrapper}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className={css.dailyNormaWrapper}>
+          <h2>My daily norm</h2>
+          <div className={css.mathWrapper}>
+            <div className={css.formulaWrapper}>
+              <p>For women:</p>
+              <p>V = (M * 0.03) + (T * 0.4)</p>
+            </div>
+            <div className={css.formulaWrapper}>
+              <p>For men:</p>
+              <p>V = (M * 0.04) + (T * 0.6)</p>
+            </div>
+            <p className={css.howItWorks}>
+              * V is the volume of the water norm in liters per day, M is your
+              body weight, T is the time of active sports, or another type of
+              activity commensurate in terms of loads (in the absence of these,
+              you must set 0)
+            </p>
+            <p className={css.warning}>Active time in hours</p>
+            <div className={css.weightTimeWrapper}>
+              <div className={css.weightWrapper}>
+                <label htmlFor="weight">Your weight in kilograms</label>
+                <input
+                  type="text"
+                  id="weight"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                />
               </div>
-              <div className={css.formulaWrapper}>
-                <p>For men:</p>
-                <p>V = (M * 0.04) + (T * 0.6)</p>
+              <div className={css.timeWrapper}>
+                <label htmlFor="time">
+                  The time of active participation in sports:
+                </label>
+                <input
+                  type="text"
+                  id="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                />
               </div>
-              <p className={css.howItWorks}>
-                * V is the volume of the water norm in liters per day, M is your
-                body weight, T is the time of active sports, or another type of
-                activity commensurate in terms of loads (in the absence of
-                these, you must set 0)
-              </p>
-              <p className={css.warning}>Active time in hours</p>
-              <div className={css.weightTimeWrapper}>
-                <div className={css.weightWrapper}>
-                  <label htmlFor="weight">Your weight in kilograms</label>
-                  <input
-                    type="text"
-                    id="weight"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                  />
-                </div>
-                <div className={css.timeWrapper}>
-                  <label htmlFor="time">
-                    The time of active participation in sports:
-                  </label>
-                  <input
-                    type="text"
-                    id="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                  />
-                </div>
+            </div>
+            <div className={css.waterNeedsWrapper}>
+              <div className={css.requiredWater}>
+                <p>The required amount of water in liters per day:</p>
+                <p>{requiredWater}</p>
               </div>
-              <div className={css.waterNeedsWrapper}>
-                <div className={css.requiredWater}>
-                  <p>The required amount of water in liters per day:</p>
-                  <p>{requiredWater}</p>
-                </div>
-                <div className={css.requiredWater}>
-                  <label htmlFor="waterNeed">
-                    Write down how much water you will drink:
-                  </label>
-                  <input
-                    type="text"
-                    id="waterNeed"
-                    value={wantWater}
-                    onChange={(e) => setWantWater(e.target.value)}
-                  />
-                </div>
+              <div className={css.requiredWater}>
+                <label htmlFor="waterNeed">
+                  Write down how much water you will drink:
+                </label>
+                <input
+                  type="text"
+                  id="waterNeed"
+                  value={wantWater}
+                  onChange={(e) => setWantWater(e.target.value)}
+                />
               </div>
             </div>
           </div>
         </div>
-        <button type="submit">Save</button>
-      </form>
-    </>
+      </div>
+      <Button type="submit" variant="primary">
+        Save
+      </Button>
+      <ModalWindow isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <p>{modalContent}</p> 
+      </ModalWindow>
+    </form>
   );
 };
 

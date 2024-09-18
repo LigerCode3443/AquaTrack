@@ -1,5 +1,4 @@
 import styles from "./Button.module.scss";
-import Icon from "../../Icon/Icon";
 
 const Button = ({ variant, children, className = "", icon, ...props }) => {
   const buttonClass = `
@@ -10,7 +9,12 @@ const Button = ({ variant, children, className = "", icon, ...props }) => {
 
   return (
     <button className={buttonClass} {...props}>
-      {icon && <Icon iconName={icon} />}
+      {icon && (
+        <span
+          className={styles.icon}
+          style={{ backgroundImage: `url('/src/images/sprite.svg#${icon}')` }}
+        ></span>
+      )}
       {children && <span className={styles["btn-text"]}>{children}</span>}
     </button>
   );

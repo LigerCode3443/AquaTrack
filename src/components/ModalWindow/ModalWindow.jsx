@@ -1,22 +1,7 @@
 import ReactModal from "react-modal";
 import css from "./Modal.module.css";
-import * as Icons from "../../../static-assets/icons";
 
-export default function ModalWindow({
-  isOpen,
-  onClose,
-  children,
-  iconName = "Close",
-}) {
-  const renderIcon = () => {
-    if (Icons[iconName]) {
-      const CustomIcon = Icons[iconName];
-      return <CustomIcon width={28} height={28} />;
-    }
-
-    return <span>No Icon</span>;
-  };
-
+export default function ModalWindow({ isOpen, onClose, children }) {
   return (
     <ReactModal
       isOpen={isOpen}
@@ -26,7 +11,10 @@ export default function ModalWindow({
       overlayClassName={css.overlay}
     >
       <div className={css.closeIcon} onClick={() => onClose()}>
-        {renderIcon()}
+        <span
+          className={css.icon}
+          style={{ backgroundImage: `url('/src/images/sprite.svg#close')` }}
+        ></span>
       </div>
       {children}
     </ReactModal>
