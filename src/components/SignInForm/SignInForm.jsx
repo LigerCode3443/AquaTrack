@@ -1,8 +1,8 @@
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useDispatch} from "react-redux";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
 
-import FormAuth from "../FormAuth/FormAuth";
+import FormAuth from "../FormAuth/FormAuth.jsx";
 
 import * as schemaValidate from "../../helpers/schemaValidateAuth.js";
 import * as authThunk from "../../redux/auth/operations.js";
@@ -14,8 +14,8 @@ const SignInForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: {errors},
-  } = useForm({resolver: yupResolver(schemaValidate.schemaLogin)});
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schemaValidate.schemaLogin) });
 
   const dispatch = useDispatch();
 
