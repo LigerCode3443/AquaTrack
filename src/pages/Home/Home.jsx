@@ -1,13 +1,13 @@
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
 import WelcomeSection from "../../components/WelcomeSection/WelcomeSection";
+import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/WrapperForPublicRoutes";
 
 const Home = () => {
   return (
-    <div>
-      Home
+    <WrapperForPublicRoutes>
       <WelcomeSection />
       <AdvantagesSection />
-    </div>
+    </WrapperForPublicRoutes>
   );
 };
 export default Home;
