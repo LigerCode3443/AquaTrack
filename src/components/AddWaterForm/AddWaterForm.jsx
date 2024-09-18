@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
 
 //!У разі наявності не валідних значень, причина помилки повинна бути відображена користувачеві, а дані - не відправлятися на backend. У разі, якщо всі значення валідні, - на backend слід відправити відповідний запит для додавання/редагування запису про порцію спожитої води.Якщо backend повернув помилку - необхідно її опрацювати і відобразити користувачеві у вигляді спливаючого вікна-notification. Якщо запит на backend пройшов успішно - модальне вікно WaterModal слід закрити, а дані у WaterProgressBar, WaterList та Calendar - актуалізувати за допомогою redux
@@ -65,36 +66,39 @@ const AddWaterForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
       <h2 className={s.header}>Add water</h2>
-      <div className={s.amount_time_container}>
+      <div className={s.wrapper}>
         <h3 className={s.form_header}>Choose a value</h3>
+        <div className={s.counter_container}>
+          <label htmlFor="counter" className={s.counter_label}>
+            Amount of water:
+          </label>
+          <div className={s.counter}>
+            <button
+              type="button"
+              onClick={decreaseCounter}
+              className={s.decrease_btn}
+            >
+              <SvgIcon id="minus" width="25" height="25" />
+            </button>
+            <div className={s.counter_input_wrapper}>
+              <input
+                type="number"
+                value={counter}
+                readOnly
+                className={s.water_counter}
+              />
+              <span className={s.unit}>ml</span>
+            </div>
 
-        <label htmlFor="counter" className={s.counter_label}>
-          Amount of water:
-        </label>
-        <div className={s.counter}>
-          <button
-            type="button"
-            onClick={decreaseCounter}
-            className={s.decrease_btn}
-          >
-            -
-          </button>
-          <input
-            type="number"
-            value={counter}
-            readOnly
-            className={s.water_counter}
-          />{" "}
-          мл
-          <button
-            type="button"
-            onClick={increaseCounter}
-            className={s.increase_btn}
-          >
-            +
-          </button>
+            <button
+              type="button"
+              onClick={increaseCounter}
+              className={s.increase_btn}
+            >
+              <SvgIcon id="plus" width="25" height="25" />
+            </button>
+          </div>
         </div>
-
         <div className={s.time_container}>
           <label htmlFor="time" className={s.time_label}>
             Recording time:
@@ -112,7 +116,6 @@ const AddWaterForm = () => {
           )}
         </div>
       </div>
-
       <div className={s.water_amount}>
         <label htmlFor="waterAmount" className={s.water_label}>
           Enter the value of the water used:
@@ -134,7 +137,6 @@ const AddWaterForm = () => {
           <span className={s.error}>{errors.waterAmount.message}</span>
         )}
       </div>
-
       <button type="submit" className={s.save_btn}>
         Save
       </button>
