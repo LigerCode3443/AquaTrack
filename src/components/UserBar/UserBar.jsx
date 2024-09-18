@@ -30,9 +30,14 @@ const UserBar = () => {
 
   return (
     <div>
-      <button ref={userBarRef} onClick={togglePopover}>
+      <button className={s.bar} ref={userBarRef} onClick={togglePopover}>
         <h2 className={s.name}></h2>
         <img src="" alt="avatar" className={s.img} />
+        <img
+          src="../../images/sprite.svg#hide"
+          alt="acardion"
+          className={s.accardion}
+        />
       </button>
       {isPopoverOpen && (
         <UserBarPopover
