@@ -15,13 +15,15 @@
 .month-btn {
   width: 18px;
   height: 18px;
+  cursor: pointer;
   transform: translateY(0px);
   transition: opacity, transform 0.3s ease 0.1s;
 }
 .month-btn-disable {
   width: 18px;
   height: 18px;
-  opacity: 0.5;
+  opacity: 0.4;
+  cursor: default;
   transform: translateY(1px);
   transition: opacity, transform 0.3s ease 0.1s;
 }
