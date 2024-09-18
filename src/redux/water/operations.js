@@ -1,21 +1,38 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { setAuthHeader, trackerApi } from "../../config/trackerApi";
 
-const ApiServer = "https://water-tracker-be-production.up.railway.app/api/";
+setAuthHeader(
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZWFiMWI5NDIwOGZiYmU5OTk0MzdmYiIsImlhdCI6MTcyNjY1Njk4MywiZXhwIjoxNzI3MjYxNzgzfQ.ndoySftcVTGeHkx0BGtJd12ug05HGaUawL3OIjmHivo"
+);
 
 export const getRecordsThunk = createAsyncThunk(
   "getRecords",
   async ({ year, month, day }, thunkApi) => {
     try {
-      const data = await axios.get(ApiServer, {
-        year,
-        month,
-        day: day !== undefined ? day : undefined,
+      const data = await trackerApi.get("/water/", {
+        params: {
+          year,
+          month,
+          day: day !== undefined ? day : undefined,
+        },
       });
-      console.log(data);
 
-      return data;
+      return data.data;
+    } catch (error) {
+      toast.error(error.message);
+      thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getOneRecordThunk = createAsyncThunk(
+  "getOneRecord",
+  async (id, thunkApi) => {
+    try {
+      const data = await trackerApi.get(`/water/${id}`);
+
+      return data.data[0];
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -27,18 +44,14 @@ export const createWaterThunk = createAsyncThunk(
   "createWater",
   async ({ userWaterGoal, date, quantity }, thunkApi) => {
     try {
-      const data = await axios.post(ApiServer, {
-        userWaterGoal,
-        date,
-        quantity,
+      const data = await trackerApi.post("/water/", {
+        waterRecords: [{ userWaterGoal, date, quantity }],
       });
 
       const props = new Date(date);
       thunkApi.dispatch(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
-
-      console.log(data);
 
       return data;
     } catch (error) {
@@ -52,7 +65,7 @@ export const updateWaterThunk = createAsyncThunk(
   "updateWater",
   async ({ id, data: { userWaterGoal, date, quantity } }, thunkApi) => {
     try {
-      const data = await axios.put(`${ApiServer}${id}`, {
+      const data = await trackerApi.put(`/water/${id}`, {
         userWaterGoal,
         date,
         quantity,
@@ -62,8 +75,6 @@ export const updateWaterThunk = createAsyncThunk(
       thunkApi.dispatch(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
-
-      console.log(data);
 
       return data;
     } catch (error) {
@@ -75,13 +86,16 @@ export const updateWaterThunk = createAsyncThunk(
 
 export const updateDayNormThunk = createAsyncThunk(
   "updateDayNorm",
-  async ({ year, month, day }, thunkApi) => {
+  async ({ date: { year, month, day }, userWaterGoal }, thunkApi) => {
     try {
-      const data = await axios.put(ApiServer, { year, month, day });
+      const data = await trackerApi.patch(
+        `/water?year=${year}&month=${month}&day=${day}`,
+        {
+          userWaterGoal,
+        }
+      );
 
       thunkApi.dispatch(getRecordsThunk({ year, month }));
-
-      console.log(data);
 
       return data;
     } catch (error) {
@@ -95,14 +109,12 @@ export const deleteWaterThunk = createAsyncThunk(
   "deleteWater",
   async (id, thunkApi) => {
     try {
-      const data = await axios.put(`${ApiServer}${id}`);
+      const data = await trackerApi.delete(`/water/${id}`);
 
       const props = new Date(data.date);
       thunkApi.dispatch(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
-
-      console.log(data);
 
       return data;
     } catch (error) {
