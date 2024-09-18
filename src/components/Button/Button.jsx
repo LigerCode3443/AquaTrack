@@ -1,4 +1,4 @@
-import styles from "./Button.module.scss";
+import styles from "./Button.module.css";
 
 const Button = ({ variant, children, className = "", icon, ...props }) => {
   const buttonClass = `
