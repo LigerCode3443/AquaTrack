@@ -1,7 +1,7 @@
 import { useState } from "react";
 import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
-// import AddWaterBtn from "../AddWaterBtn/AddWaterBtn";
+import Button from "../Button/Button";
 import css from "./WaterMainInfo.module.css";
 
 const WaterMainInfo = () => {
@@ -13,7 +13,9 @@ const WaterMainInfo = () => {
       <h2>AquaTrack</h2>
       <WaterDailyNorma dailyNorma={dailyNorma} />
       <WaterProgressBar progress={progress} />
-      {/* <AddWaterBtn onAddWater={handleAddWater} /> */}
+      <Button variant="secondary" className={css.btnAddForm} icon="plus">
+        Add water
+      </Button>
     </div>
   );
 };

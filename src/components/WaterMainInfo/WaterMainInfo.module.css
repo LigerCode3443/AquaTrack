@@ -22,9 +22,25 @@
   text-transform: uppercase;
 }
 
+.btnAddForm {
+  width: 140px;
+  height: 46px;
+  padding: 14px 20px;
+
+  margin-left: 187px;
+  margin-top: 47px;
+}
+
+@media (max-width: 374px) {
+  .btnAddForm {
+    margin-left: 160px;
+  }
+}
+
 @media (min-width: 768px) {
   .waterTracker {
-    max-width: 704px;
+    max-width: unset;
+    width: 704px;
     height: 578px;
 
     background-image: url("/images/bottle_tablet.png");
@@ -39,15 +55,29 @@
     padding-left: 33px;
     padding-top: 32px;
   }
+
+  .btnAddForm {
+    width: 178px;
+    height: 60px;
+    padding: 18px 30px;
+
+    margin-left: 494px;
+    margin-top: 26px;
+  }
 }
 
 @media (min-width: 1440px) {
   .waterTracker {
-    max-width: 672px;
+    width: 672px;
     height: 736px;
 
     background-image: url("/images/bottle_desktop.png");
     background-position: center 92px;
     background-size: 472px 604px;
+  }
+
+  .btnAddForm {
+    margin-left: 462px;
+    margin-top: 56px;
   }
 }
