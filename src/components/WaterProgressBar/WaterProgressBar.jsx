@@ -22,7 +22,7 @@ const WaterProgressBar = ({ value, setValue }) => {
           borderWidth: 1,
         }}
         railStyle={{ backgroundColor: "#FFFFFF", height: 6 }}
-        disabled={true}
+        // disabled={true}
       />
       <div className={css.waterProcent}>
         <span>0%</span>

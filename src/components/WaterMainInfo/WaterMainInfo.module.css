@@ -1,13 +1,14 @@
 .waterTracker {
-  width: 343px;
+  max-width: 343px;
   height: 415px;
 
   border-radius: 30px;
   background-color: var(--Accent, #9be1a0);
 
-  background-image: url("/images/bottle.png");
-  background-position: center;
+  background-image: url("/images/bottle_mobile.png");
   background-repeat: no-repeat;
+  background-position: center 50px;
+  background-size: 262px 335px;
 }
 
 .waterTracker h2 {
@@ -19,4 +20,34 @@
   line-height: 20px;
   letter-spacing: -0.18px;
   text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .waterTracker {
+    max-width: 704px;
+    height: 578px;
+
+    background-image: url("/images/bottle_tablet.png");
+    background-position: center 69px;
+    background-size: 374px 477px;
+  }
+
+  .waterTracker h2 {
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    padding-left: 33px;
+    padding-top: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .waterTracker {
+    max-width: 672px;
+    height: 736px;
+
+    background-image: url("/images/bottle_desktop.png");
+    background-position: center 92px;
+    background-size: 472px 604px;
+  }
 }

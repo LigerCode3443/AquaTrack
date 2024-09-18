@@ -5,8 +5,8 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
 import css from "./WaterMainInfo.module.css";
 
 const WaterMainInfo = () => {
-  const [progress, setProgress] = useState(50);
-  const [dailyNorma] = useState(1.5);
+  const [progress, setProgress] = useState(0);
+  const [dailyNorma, setDailyNorma] = useState(1.5);
 
   return (
     <div className={css.waterTracker}>
