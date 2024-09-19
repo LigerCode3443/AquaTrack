@@ -1,0 +1,31 @@
+getRecordsThunk({year, month, day?})
+
+якщо вам треба отримати данні за місяць вказуйте {year, month}
+якщо вам треба данні за один день вказуйте {year, month, day}
+
+getOneRecordThunk(id)
+
+щоб отримати якийсь один елемент води вказуйте id води
+
+createWaterThunk({ userWaterGoal, date, quantity })
+
+створення води де
+{ 
+    userWaterGoal, // ціль на цей день
+    date, // дата коли була випита вода
+    quantity // кількість випитої води в мл
+}
+
+updateWaterThunk({ id, data: { userWaterGoal, date, quantity } })
+
+для оновлення данних вказуйте id води і в data прописуєте змінені поля
+
+
+updateDayNormThunk({ date: { year, month, day }, userWaterGoal })
+
+де вказуєте дату коли треба змінити ціль в { year, month, day } і userWaterGoal ціль в мл
+
+
+deleteWaterThunk(id)
+
+для видалення данних вказуєте id води
