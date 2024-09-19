@@ -1,5 +1,5 @@
 import ReactModal from "react-modal";
-import css from "./Modal.module.css";
+import css from "./ModalWindow.module.css";
 
 export default function ModalWindow({ isOpen, onClose, children }) {
   return (
