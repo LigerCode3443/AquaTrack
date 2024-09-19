@@ -5,7 +5,7 @@ import SvgIcon from "../../SvgIcon/SvgIcon";
 import css from "./CalendarPagination.module.css";
 
 const CalendarPagination = ({
-  data,
+  selectedDate,
   isActiveBtn,
   changeMonth,
   showStatistics,
@@ -65,10 +65,12 @@ const CalendarPagination = ({
         <SvgIcon id="arrow-left" width={18} height={18} />
       </button>
       <p className={css.date}>
-        {!isActiveBtn
-          ? getMonthName(new Date(data[0].date).getMonth())
+        {isActiveBtn
+          ? getMonthName(
+              new Date(selectedDate.year, selectedDate.month + 1, 0).getMonth()
+            )
           : getMonthName(new Date().getMonth())}
-        , {new Date(data[0].date).getFullYear()}
+        , {selectedDate.year}
       </p>
       <button
         disabled={!isActiveBtn}

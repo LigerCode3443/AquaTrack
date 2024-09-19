@@ -42,7 +42,7 @@ export const convertData = (rawData, date) => {
   const countDays = new Date(date.year, date.month + 1, 0).getDate();
 
   const newData = Array.from({ length: countDays }, (_, index) => {
-    const currentDate = new Date(date.year, date.month, index + 1);
+    const currentDate = new Date(date.year, date.month, index + 2);
 
     let dailyData = {
       userWaterGoal: 0,
@@ -50,9 +50,11 @@ export const convertData = (rawData, date) => {
       quantity: 0,
     };
 
-    const filtered = rawData.filter(
-      (item) => item.date.toISOString().split("T")[0] === dailyData.date
-    );
+    const filtered = rawData.filter((item) => {
+      const itemDate = new Date(item.date);
+
+      return itemDate.toISOString().split("T")[0] === dailyData.date;
+    });
 
     filtered.forEach((e) => {
       dailyData = {

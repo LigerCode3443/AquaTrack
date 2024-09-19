@@ -30,7 +30,10 @@ const Calendar = () => {
 
   useEffect(() => {
     dispatch(
-      getRecordsThunk({ year: selectedDate.year, month: selectedDate.month })
+      getRecordsThunk({
+        year: selectedDate.year,
+        month: selectedDate.month + 1,
+      })
     );
   }, [dispatch, selectedDate.year, selectedDate.month]);
 
@@ -67,7 +70,7 @@ const Calendar = () => {
           {showStatistics ? "Statistics" : "Month"}
         </h3>
         <CalendarPagination
-          data={data}
+          selectedDate={selectedDate}
           changeMonth={changeMonth}
           isActiveBtn={!showStatistics}
           showStatistics={showStatisticsCallback}

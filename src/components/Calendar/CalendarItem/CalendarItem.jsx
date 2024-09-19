@@ -17,7 +17,7 @@ const CalendarItem = ({ item, isToday }) => {
           css.ball,
           isToday
             ? css.today
-            : item.quantity === item.userWaterGoal && item.userWaterGoal !== 0
+            : item.quantity >= item.userWaterGoal && item.userWaterGoal !== 0
             ? css.done
             : css.notDone
         )}
