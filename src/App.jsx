@@ -1,17 +1,16 @@
-// import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-// import PublicRoute from "./routes/PublicRoute";
-// import Home from "./pages/Home/Home";
-// import Login from "./pages/Login/Login";
-// import Register from "./pages/Register/Register";
-// import PrivateRoute from "./routes/PrivateRoute";
-// import Tracker from "./pages/Trecker/Tracker";
+import PublicRoute from "./routes/PublicRoute";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import PrivateRoute from "./routes/PrivateRoute";
+import Tracker from "./pages/Trecker/Tracker";
 import Container from "./components/Container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import { useEffect } from "react";
 import { refreshThunk } from "./redux/auth/operations";
-import AddWaterForm from "./components/AddWaterForm/AddWaterForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +24,7 @@ function App() {
     <p>Loading</p>
   ) : (
     <Container>
-      <AddWaterForm />
-      {/* <Routes>
+      <Routes>
         <Route
           path="/"
           element={
@@ -59,7 +57,7 @@ function App() {
             </PrivateRoute>
           }
         />
-      </Routes> */}
+      </Routes>
     </Container>
   );
 }
