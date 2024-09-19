@@ -1,10 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { setAuthHeader, trackerApi } from "../../config/trackerApi";
-
-setAuthHeader(
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZWFiMWI5NDIwOGZiYmU5OTk0MzdmYiIsImlhdCI6MTcyNjY1Njk4MywiZXhwIjoxNzI3MjYxNzgzfQ.ndoySftcVTGeHkx0BGtJd12ug05HGaUawL3OIjmHivo"
-);
+import { trackerApi } from "../../config/trackerApi";
 
 export const getRecordsThunk = createAsyncThunk(
   "getRecords",

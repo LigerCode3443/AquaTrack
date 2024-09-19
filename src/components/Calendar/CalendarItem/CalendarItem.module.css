@@ -10,6 +10,7 @@
 }
 .ball {
   border-radius: 50%;
+  margin: 0;
 
   display: flex;
   justify-content: center;
@@ -38,7 +39,7 @@
   font-size: 10px;
   font-weight: 400;
   line-height: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {

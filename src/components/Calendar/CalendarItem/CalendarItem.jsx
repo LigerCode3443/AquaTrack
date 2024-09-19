@@ -26,7 +26,10 @@ const CalendarItem = ({ item, isToday }) => {
         {new Date(item.date).getDate().toString()}
       </button>
       <span className={css.quantity}>
-        {parseInt((item.quantity / item.userWaterGoal) * 100)}%
+        {item.quantity !== 0
+          ? parseInt((item.quantity / item.userWaterGoal) * 100)
+          : 0}
+        %
       </span>
     </th>
   );
