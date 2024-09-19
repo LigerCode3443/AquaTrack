@@ -2,15 +2,14 @@ import css from "./WaterProgressBar.module.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-const WaterProgressBar = ({ value, setValue }) => {
+const WaterProgressBar = ({ progress }) => {
   return (
     <div className={css.waterProgressBar}>
       <h3>Today</h3>
       <Slider
         min={0}
         max={100}
-        value={value}
-        onChange={setValue}
+        value={progress}
         trackStyle={{ backgroundColor: "#9BE1A0", height: 6 }}
         handleStyle={{
           borderColor: "#9BE1A0",
