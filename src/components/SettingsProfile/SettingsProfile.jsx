@@ -1,34 +1,39 @@
-import Button from "../../components/Button/Button";
-import ModalWindow from "../../components/ModalWindow/ModalWindow";
-import css from "./SettingsProfile.module.css";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import css from "./SettingsProfile.module.css";
+import SvgIcon from "../SvgIcon/SvgIcon";
 
-const SettingsProfile = () => {
+export const SettingsProfile = () => {
+  const { t } = useTranslation();
+  const [userData, setUserData] = useState(null);
   const [userAvatar, setUserAvatar] = useState(null);
-  const [gender, setGender] = useState("female");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [weight, setWeight] = useState("");
-  const [requiredWater, setRequiredWater] = useState(1.5);
-  const [wantWater, setWantWater] = useState("");
-  const [time, setTime] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState("");
+  const [formValues, setFormValues] = useState({
+    gender: "female",
+    name: "",
+    email: "",
+    weight: null,
+    requiredWater: 1.5,
+    wantWater: null,
+    time: null,
+    amount: "",
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("/users/???");
-        setUserAvatar(response.data.avatar);
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setWeight(response.data.weight);
-        setTime(response.data.time);
-        setGender(response.data.gender);
+        const response = await axios.get("/users/profile");
+        setUserData(response.data);
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          name: response.data.name || prevValues.name,
+          email: response.data.email || prevValues.email,
+        }));
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -36,151 +41,226 @@ const SettingsProfile = () => {
   }, []);
 
   useEffect(() => {
+    const { gender, weight, time } = formValues;
     if (weight && time) {
-      let waterAmount = 1.5;
-      if (gender === "female") {
-        waterAmount = weight * 0.03 + time * 0.4;
-      } else {
-        waterAmount = weight * 0.04 + time * 0.6;
+      let newAmount;
+      if (gender === "male") {
+        newAmount = weight * 0.04 + time * 0.6;
+      } else if (gender === "female") {
+        newAmount = weight * 0.03 + time * 0.4;
       }
-      setRequiredWater(waterAmount.toFixed(2));
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        amount: (Math.ceil(newAmount * 10) / 10).toFixed(1),
+      }));
     }
-  }, [weight, time, gender]);
+  }, [formValues.gender, formValues.time, formValues.weight]);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    toast.success("Settings saved!");
-    setModalContent("Settings have been saved successfully!");
-    setIsModalOpen(true);
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setUserAvatar(URL.createObjectURL(file));
+    }
   };
 
-  return (
-    <form onSubmit={handleSave}>
-      <div className={css.avatarSettingWrapper}>
-        <h2>Setting</h2>
-        <img src={userAvatar} alt="user avatar" />
-        <Button
-          variant="primary"
-          onClick={() => {
-            setModalContent("Upload a photo modal content");
-            setIsModalOpen(true);
-          }}
-        >
-          Upload a photo
-        </Button>
-      </div>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
-      <div className={css.userSettingWrapper}>
-        <div className={css.genderInputWrapper}>
-          <label>Your gender identity</label>
-          <div>
-            <label>
-              <input
-                type="radio"
-                value="female"
-                checked={gender === "female"}
-                onChange={() => setGender("female")}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div className={css.wrapper}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.userPic}>
+          <h2>{t("modals.UserSettingsForm.setting")}</h2>
+          <div className={css.picWrapper}>
+            <div className={css.pic}>
+              <img
+                className={css.avatar}
+                src={userAvatar || userData?.avatar}
+                alt="avatar"
               />
-              Female
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="male"
-                checked={gender === "male"}
-                onChange={() => setGender("male")}
-              />
-              Male
-            </label>
-          </div>
-        </div>
-        <div className={css.userDataWrapper}>
-          <div className={css.userNameWrapper}>
-            <label htmlFor="name">Your Name</label>
+            </div>
+            <div className={css.uploadWrapper}>
+              <SvgIcon id="upload" width={24} height={24} />
+              <p className={css.textRegular}>
+                {t("modals.UserSettingsForm.uploadPhotoBtn")}
+              </p>
+            </div>
             <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className={css.userEmailWrapper}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="file"
+              style={{ display: "none" }}
+              accept=".jpg,.jpeg,.png,.webp"
+              onChange={handleAvatarChange}
             />
           </div>
         </div>
-        <div className={css.dailyNormaWrapper}>
-          <h2>My daily norm</h2>
-          <div className={css.mathWrapper}>
-            <div className={css.formulaWrapper}>
-              <p>For women:</p>
-              <p>V = (M * 0.03) + (T * 0.4)</p>
+
+        <div className={css.inputs}>
+          <div className={css.wrapperInputsForm}>
+            <div className={css.midContainer}>
+              <h3>{t("modals.UserSettingsForm.yourGenderLabel")}</h3>
+              <div className={css.radioContainer}>
+                <div className={css.radioButton}>
+                  <input
+                    className={css.radio}
+                    type="radio"
+                    name="gender"
+                    id="woman"
+                    checked={formValues.gender === "female"}
+                    onChange={() =>
+                      setFormValues((prev) => ({ ...prev, gender: "female" }))
+                    }
+                  />
+                  <label className={css.radioLabel} htmlFor="woman">
+                    {t("modals.UserSettingsForm.femaleGenderLabel")}
+                  </label>
+                </div>
+                <div className={css.radioButton}>
+                  <input
+                    className={css.radio}
+                    type="radio"
+                    name="gender"
+                    id="man"
+                    checked={formValues.gender === "male"}
+                    onChange={() =>
+                      setFormValues((prev) => ({ ...prev, gender: "male" }))
+                    }
+                  />
+                  <label className={css.radioLabel} htmlFor="man">
+                    {t("modals.UserSettingsForm.femaleGenderMale")}
+                  </label>
+                </div>
+              </div>
             </div>
-            <div className={css.formulaWrapper}>
-              <p>For men:</p>
-              <p>V = (M * 0.04) + (T * 0.6)</p>
-            </div>
-            <p className={css.howItWorks}>
-              * V is the volume of the water norm in liters per day, M is your
-              body weight, T is the time of active sports, or another type of
-              activity commensurate in terms of loads (in the absence of these,
-              you must set 0)
-            </p>
-            <p className={css.warning}>Active time in hours</p>
-            <div className={css.weightTimeWrapper}>
-              <div className={css.weightWrapper}>
-                <label htmlFor="weight">Your weight in kilograms</label>
+
+            <div className={css.midContainer}>
+              <div className={css.userInfoInputContainer}>
+                {t("modals.UserSettingsForm.yourNameLabel")}
                 <input
+                  className={css.userInfoInput}
                   type="text"
+                  name="name"
+                  id="name"
+                  value={formValues.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className={css.userInfoInputContainer}>
+                <h3>{t("modals.UserSettingsForm.labelEmail")}</h3>
+                <input
+                  className={css.userInfoInput}
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  value={formValues.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className={css.midContainer}>
+              <h3>{t("modals.UserSettingsForm.dailyNormah")}</h3>
+              <div className={css.formulaContainer}>
+                <div className={css.formula}>
+                  <p className={css.textRegular}>
+                    {t("modals.UserSettingsForm.forWomanP")}
+                  </p>
+                  <p className={css.textAccent}>V=(M*0,03) + (T*0,4)</p>
+                </div>
+                <div className={css.formula}>
+                  <p className={css.textRegular}>
+                    {t("modals.UserSettingsForm.forManP")}
+                  </p>
+                  <p className={css.textAccent}>V=(M*0,04) + (T*0,6)</p>
+                </div>
+              </div>
+              <div className={css.textarea}>
+                <span className={css.textAccent}>*</span>{" "}
+                {t("modals.UserSettingsForm.starText")}
+              </div>
+              <div className={css.note}>
+                <SvgIcon id="note-icon" width={18} height={18} />
+                <p className={css.textRegular}>
+                  {t("modals.UserSettingsForm.activeText")}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className={css.wrapperInputsForm}>
+            <div className={css.midContainer}>
+              <div className={`${css.userInfoInputContainer} ${css.down}`}>
+                <p className={css.textRegular}>
+                  {t("modals.UserSettingsForm.infoUser")}
+                </p>
+                <input
+                  className={css.userInfoInput}
+                  type="number"
+                  name="weight"
                   id="weight"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
+                  step=".1"
+                  value={formValues.weight || ""}
+                  onChange={handleChange}
                 />
               </div>
-              <div className={css.timeWrapper}>
-                <label htmlFor="time">
-                  The time of active participation in sports:
-                </label>
+              <div className={css.userInfoInputContainer}>
+                <p className={css.textRegular}>
+                  {t("modals.UserSettingsForm.TheTimeSportsLabel")}
+                </p>
                 <input
-                  type="text"
+                  className={css.userInfoInput}
+                  type="number"
+                  name="time"
                   id="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
+                  step=".1"
+                  value={formValues.time || ""}
+                  onChange={handleChange}
                 />
               </div>
             </div>
-            <div className={css.waterNeedsWrapper}>
-              <div className={css.requiredWater}>
-                <p>The required amount of water in liters per day:</p>
-                <p>{requiredWater}</p>
+
+            <div className={css.midContainer}>
+              <div className={`${css.userInfoInputContainer} ${css.amount}`}>
+                <p className={css.textRegular}>
+                  {t("modals.UserSettingsForm.requiredWater")}
+                </p>
+                <p className={css.textAccent}>{formValues.amount}</p>
               </div>
-              <div className={css.requiredWater}>
-                <label htmlFor="waterNeed">
-                  Write down how much water you will drink:
-                </label>
-                <input
-                  type="text"
-                  id="waterNeed"
-                  value={wantWater}
-                  onChange={(e) => setWantWater(e.target.value)}
-                />
-              </div>
+            </div>
+
+            <div className={css.userInfoInputContainer}>
+              <h3>{t("modals.UserSettingsForm.writeDownLabel")}</h3>
+              <input
+                className={css.userInfoInput}
+                type="number"
+                name="wantWater"
+                id="wantWater"
+                step=".1"
+                value={formValues.wantWater || ""}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
-      </div>
-      <Button type="submit" variant="primary">
-        Save
-      </Button>
-      <ModalWindow isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <p>{modalContent}</p> 
-      </ModalWindow>
-    </form>
+
+        <div className={css.buttonContainer}>
+          <button className={css.saveButton} type="submit">
+            {t("modals.UserSettingsForm.saveBtn")}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
