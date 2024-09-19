@@ -6,6 +6,13 @@ label {
   letter-spacing: -0.14px;
 }
 
+@media (min-width: 768px) {
+  label {
+    font-size: 16px;
+    letter-spacing: -0.16px;
+  }
+}
+
 input {
   padding: 14px 16px;
   align-items: flex-start;
@@ -18,6 +25,15 @@ input {
   color: #2f2f2f;
   font-weight: 400;
 }
+
+@media (min-width: 768px) {
+  input {
+    padding: 16px;
+    font-size: 16px;
+    height: 56px;
+  }
+}
+
 /* Для WebKit браузерів (Chrome, Safari, Edge) */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -29,6 +45,7 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -37,15 +54,32 @@ input[type="number"] {
   gap: 24px;
   width: 100%;
 }
+
 .header {
+  font-size: 20px;
   letter-spacing: -0.28px;
 }
+
+@media (min-width: 768px) {
+  .header {
+    font-size: 28px;
+  }
+}
+
 .form_header {
   margin-bottom: 20px;
   color: #323f47;
   font-size: 16px;
   letter-spacing: -0.16px;
 }
+
+@media (min-width: 768px) {
+  .form_header {
+    font-size: 18px;
+    letter-spacing: -0.18px;
+  }
+}
+
 .wrapper {
   width: 100%;
 }
@@ -70,6 +104,14 @@ input[type="number"] {
   text-align: left;
   font-weight: 700;
 }
+
+@media (min-width: 768px) {
+  .water_counter {
+    font-size: 15px;
+    height: 43px;
+  }
+}
+
 .counter_input_wrapper {
   position: relative;
   display: inline-block;
@@ -86,6 +128,13 @@ input[type="number"] {
   color: #fff;
   font-weight: 700;
 }
+
+@media (min-width: 768px) {
+  .unit {
+    font-size: 15px;
+  }
+}
+
 .decrease_btn,
 .increase_btn {
   border: 2px solid #2f2f2f;
@@ -95,6 +144,14 @@ input[type="number"] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .decrease_btn,
+  .increase_btn {
+    width: 43px;
+    height: 43px;
+  }
 }
 
 .time_container {
@@ -110,6 +167,14 @@ input[type="number"] {
   font-weight: 700;
   letter-spacing: -0.16px;
 }
+
+@media (min-width: 768px) {
+  .water_label {
+    font-size: 18px;
+    letter-spacing: -0.18px;
+  }
+}
+
 .save_btn {
   width: 116px;
   height: 46px;
@@ -124,4 +189,19 @@ input[type="number"] {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.14px;
+}
+
+.save_btn:hover,
+.save_btn:active {
+  background: #87d28d;
+}
+
+@media (min-width: 768px) {
+  .save_btn {
+    width: 141px;
+    height: 60px;
+    padding: 18px 50px;
+    font-size: 16px;
+    letter-spacing: -0.16px;
+  }
 }
