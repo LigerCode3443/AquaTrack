@@ -5,7 +5,7 @@
   border-radius: 30px;
   background-color: var(--Accent, #9be1a0);
 
-  background-image: url("/images/bottle_mobile.png");
+  background-image: url("/src/images/waterMainInfo/bottle_mobile.png");
   background-repeat: no-repeat;
   background-position: center 50px;
   background-size: 262px 335px;
@@ -43,7 +43,7 @@
     width: 704px;
     height: 578px;
 
-    background-image: url("/images/bottle_tablet.png");
+    background-image: url("/src/images/waterMainInfo/bottle_tablet.png");
     background-position: center 69px;
     background-size: 374px 477px;
   }
@@ -71,7 +71,7 @@
     width: 672px;
     height: 736px;
 
-    background-image: url("/images/bottle_desktop.png");
+    background-image: url("/src/images/waterMainInfo/bottle_desktop.png");
     background-position: center 92px;
     background-size: 472px 604px;
   }
