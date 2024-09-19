@@ -27,7 +27,7 @@ const Calendar = () => {
     () => convertData(rawData, selectedDate),
     [rawData, selectedDate]
   );
-  console.log(rawData);
+
   useEffect(() => {
     dispatch(
       getRecordsThunk({ year: selectedDate.year, month: selectedDate.month })
