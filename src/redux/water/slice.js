@@ -34,7 +34,6 @@ const waterSlice = createSlice({
           month: new Date().getMonth(),
         });
         const today = new Date();
-        console.log(records);
 
         const index = records.findIndex(
           (elem) => new Date(elem.date).toDateString() === today.toDateString()

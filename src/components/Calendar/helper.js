@@ -14,7 +14,7 @@ export const addEmptyDays = (record) => {
     emptyDaysAtStart.push({ isEmpty: true });
   }
 
-  for (let i = lastDayOfWeek + 1; i < 7; i++) {
+  for (let i = lastDayOfWeek; i < 7; i++) {
     emptyDaysAtEnd.push({ isEmpty: true });
   }
 

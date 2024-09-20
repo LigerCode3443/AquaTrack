@@ -45,22 +45,12 @@ const CalendarPagination = ({
     return months[monthNumber] || "Invalid month";
   };
 
-  const prevMonth = () => {
-    console.log("Change to prev month");
-    changeMonth({ prev: true });
-  };
-
-  const nextMonth = () => {
-    console.log("Change to next month");
-    changeMonth({ next: true });
-  };
-
   return (
     <div className={css.container}>
       <button
         disabled={!isActiveBtn}
         className={!isActiveBtn ? css["month-btn-disable"] : css["month-btn"]}
-        onClick={prevMonth}
+        onClick={() => changeMonth({ prev: true })}
       >
         <SvgIcon id="arrow-left" width={18} height={18} />
       </button>
@@ -75,7 +65,7 @@ const CalendarPagination = ({
       <button
         disabled={!isActiveBtn}
         className={!isActiveBtn ? css["month-btn-disable"] : css["month-btn"]}
-        onClick={nextMonth}
+        onClick={() => changeMonth({ next: true })}
       >
         <SvgIcon id="arrow-right" width={18} height={18} />
       </button>
