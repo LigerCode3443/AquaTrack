@@ -22,6 +22,25 @@ export const getRecordsThunk = createAsyncThunk(
   }
 );
 
+export const getLast7DaysThunk = createAsyncThunk(
+  "getLast7Days",
+  async (_, thunkApi) => {
+    try {
+      const data = await trackerApi.get("/water/", {
+        params: {
+          year: new Date().getFullYear(),
+          month: new Date().getMonth(),
+        },
+      });
+
+      return data.data;
+    } catch (error) {
+      toast.error(error.message);
+      thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const getOneRecordThunk = createAsyncThunk(
   "getOneRecord",
   async (id, thunkApi) => {
