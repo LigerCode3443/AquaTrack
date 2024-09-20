@@ -29,15 +29,6 @@ export const splitIntoChunks = (array, chunkSize) => {
   return chunks;
 };
 
-export const getLast7Days = (records) => {
-  const today = new Date();
-
-  const index = records.findIndex(
-    (elem) => new Date(elem.date).toDateString() === today.toDateString()
-  );
-  return records.slice(index - 6, index + 1);
-};
-
 export const convertData = (rawData, date) => {
   const countDays = new Date(date.year, date.month + 1, 0).getDate();
 

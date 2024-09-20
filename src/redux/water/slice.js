@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 
+import { convertData } from "../../components/Calendar/helper.js";
 import {
   createWaterThunk,
   deleteWaterThunk,
@@ -28,8 +29,12 @@ const waterSlice = createSlice({
         state.selectedRecord = action.payload;
       })
       .addCase(getLast7DaysThunk.fulfilled, (state, action) => {
-        const records = action.payload;
+        const records = convertData(action.payload, {
+          year: new Date().getFullYear(),
+          month: new Date().getMonth(),
+        });
         const today = new Date();
+        console.log(records);
 
         const index = records.findIndex(
           (elem) => new Date(elem.date).toDateString() === today.toDateString()

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { AreaChart, XAxis, YAxis, Area, ResponsiveContainer } from "recharts";
 
 import css from "./Statistics.module.css";
+import { useSelector } from "react-redux";
+import { selectLast7Days } from "../../../redux/water/selectors";
 
 const CustomDot = ({
   cx,
@@ -46,14 +48,12 @@ const CustomDot = ({
   );
 };
 
-// const MyXAxis = (props) => <XAxis {...props} />;
-// const MyYAxis = (props) => <YAxis {...props} />;
-
-const Statistics = ({ data }) => {
+const Statistics = () => {
   const [activePayload, setActivePayload] = useState(null);
   const [strokeWidth, setStrokeWidth] = useState(
     window.innerWidth < 768 ? 2 : 3
   );
+  const data = useSelector(selectLast7Days);
 
   const handleMouseEnter = (payload) => {
     setActivePayload(payload);

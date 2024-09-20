@@ -6,13 +6,11 @@ import css from "./Calendar.module.css";
 import Statistics from "./Statistics/Statistics";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoading, selectRecords } from "../../redux/water/selectors";
-import { getRecordsThunk } from "../../redux/water/operations";
 import {
-  addEmptyDays,
-  splitIntoChunks,
-  getLast7Days,
-  convertData,
-} from "./helper";
+  getLast7DaysThunk,
+  getRecordsThunk,
+} from "../../redux/water/operations";
+import { addEmptyDays, splitIntoChunks, convertData } from "./helper";
 
 const Calendar = () => {
   const [showStatistics, setShowStatistc] = useState(false);
@@ -35,6 +33,7 @@ const Calendar = () => {
         month: selectedDate.month + 1,
       })
     );
+    dispatch(getLast7DaysThunk());
   }, [dispatch, selectedDate.year, selectedDate.month]);
 
   const changeMonth = ({ next, prev }) => {
@@ -50,7 +49,7 @@ const Calendar = () => {
         ...selectedDate,
         year:
           selectedDate.month !== 0 ? selectedDate.year : selectedDate.year - 1,
-        month: selectedDate.month !== 0 ? selectedDate.month - 1 : 0,
+        month: selectedDate.month !== 0 ? selectedDate.month - 1 : 11,
       });
     }
   };
@@ -77,7 +76,7 @@ const Calendar = () => {
         />
       </div>
       {showStatistics ? (
-        <Statistics data={getLast7Days(data)}></Statistics>
+        <Statistics />
       ) : (
         <table className={css.container}>
           <tbody className={css["container-line"]}>

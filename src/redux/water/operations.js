@@ -29,7 +29,7 @@ export const getLast7DaysThunk = createAsyncThunk(
       const data = await trackerApi.get("/water/", {
         params: {
           year: new Date().getFullYear(),
-          month: new Date().getMonth(),
+          month: new Date().getMonth() + 1,
         },
       });
 
