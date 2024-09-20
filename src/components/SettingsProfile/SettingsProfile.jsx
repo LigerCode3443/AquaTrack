@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useTranslation } from "react-i18next";
+
 import css from "./SettingsProfile.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { useTranslation } from 'react-i18next';
 
 export const SettingsProfile = () => {
   const { t } = useTranslation();
@@ -81,7 +82,7 @@ export const SettingsProfile = () => {
     <div className={css.wrapper}>
       <form className={css.form} onSubmit={handleSubmit}>
         <div className={css.userPic}>
-          <h2>{t("modals.UserSettingsForm.setting")}</h2>
+          <h2>{t("modals.SettingsProfile.setting")}</h2>
           <div className={css.picWrapper}>
             <div className={css.pic}>
               <img
@@ -93,7 +94,7 @@ export const SettingsProfile = () => {
             <div className={css.uploadWrapper}>
               <SvgIcon id="upload" width={24} height={24} />
               <p className={css.textRegular}>
-                {t("modals.UserSettingsForm.uploadPhotoBtn")}
+                {t("modals.SettingsProfileForm.uploadPhotoBtn")}
               </p>
             </div>
             <input
@@ -108,7 +109,7 @@ export const SettingsProfile = () => {
         <div className={css.inputs}>
           <div className={css.wrapperInputsForm}>
             <div className={css.midContainer}>
-              <h3>{t("modals.UserSettingsForm.yourGenderLabel")}</h3>
+              <h3>{t("modals.SettingsProfileForm.yourGenderLabel")}</h3>
               <div className={css.radioContainer}>
                 <div className={css.radioButton}>
                   <input
@@ -122,7 +123,7 @@ export const SettingsProfile = () => {
                     }
                   />
                   <label className={css.radioLabel} htmlFor="woman">
-                    {t("modals.UserSettingsForm.femaleGenderLabel")}
+                    {t("modals.SettingsProfileForm.femaleGenderLabel")}
                   </label>
                 </div>
                 <div className={css.radioButton}>
@@ -137,7 +138,7 @@ export const SettingsProfile = () => {
                     }
                   />
                   <label className={css.radioLabel} htmlFor="man">
-                    {t("modals.UserSettingsForm.femaleGenderMale")}
+                    {t("modals.SettingsProfileForm.femaleGenderMale")}
                   </label>
                 </div>
               </div>
@@ -145,7 +146,7 @@ export const SettingsProfile = () => {
 
             <div className={css.midContainer}>
               <div className={css.userInfoInputContainer}>
-                {t("modals.UserSettingsForm.yourNameLabel")}
+                {t("modals.SettingsProfileForm.yourNameLabel")}
                 <input
                   className={css.userInfoInput}
                   type="text"
@@ -156,7 +157,7 @@ export const SettingsProfile = () => {
                 />
               </div>
               <div className={css.userInfoInputContainer}>
-                <h3>{t("modals.UserSettingsForm.labelEmail")}</h3>
+                <h3>{t("modals.SettingsProfileForm.labelEmail")}</h3>
                 <input
                   className={css.userInfoInput}
                   type="email"
@@ -170,29 +171,29 @@ export const SettingsProfile = () => {
             </div>
 
             <div className={css.midContainer}>
-              <h3>{t("modals.UserSettingsForm.dailyNormah")}</h3>
+              <h3>{t("modals.SettingsProfileForm.dailyNorma")}</h3>
               <div className={css.formulaContainer}>
                 <div className={css.formula}>
                   <p className={css.textRegular}>
-                    {t("modals.UserSettingsForm.forWomanP")}
+                    {t("modals.SettingsProfileForm.forWomanP")}
                   </p>
                   <p className={css.textAccent}>V=(M*0,03) + (T*0,4)</p>
                 </div>
                 <div className={css.formula}>
                   <p className={css.textRegular}>
-                    {t("modals.UserSettingsForm.forManP")}
+                    {t("modals.SettingsProfileForm.forManP")}
                   </p>
                   <p className={css.textAccent}>V=(M*0,04) + (T*0,6)</p>
                 </div>
               </div>
               <div className={css.textarea}>
                 <span className={css.textAccent}>*</span>{" "}
-                {t("modals.UserSettingsForm.starText")}
+                {t("modals.SettingsProfileForm.starText")}
               </div>
               <div className={css.note}>
                 <SvgIcon id="note-icon" width={18} height={18} />
                 <p className={css.textRegular}>
-                  {t("modals.UserSettingsForm.activeText")}
+                  {t("modals.SettingsProfileForm.activeText")}
                 </p>
               </div>
             </div>
@@ -202,7 +203,7 @@ export const SettingsProfile = () => {
             <div className={css.midContainer}>
               <div className={`${css.userInfoInputContainer} ${css.down}`}>
                 <p className={css.textRegular}>
-                  {t("modals.UserSettingsForm.infoUser")}
+                  {t("modals.SettingsProfileForm.infoUser")}
                 </p>
                 <input
                   className={css.userInfoInput}
@@ -216,7 +217,7 @@ export const SettingsProfile = () => {
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
-                  {t("modals.UserSettingsForm.TheTimeSportsLabel")}
+                  {t("modals.SettingsProfileForm.TheTimeSportsLabel")}
                 </p>
                 <input
                   className={css.userInfoInput}
@@ -233,14 +234,14 @@ export const SettingsProfile = () => {
             <div className={css.midContainer}>
               <div className={`${css.userInfoInputContainer} ${css.amount}`}>
                 <p className={css.textRegular}>
-                  {t("modals.UserSettingsForm.requiredWater")}
+                  {t("modals.SettingsProfileForm.requiredWater")}
                 </p>
                 <p className={css.textAccent}>{formValues.amount}</p>
               </div>
             </div>
 
             <div className={css.userInfoInputContainer}>
-              <h3>{t("modals.UserSettingsForm.writeDownLabel")}</h3>
+              <h3>{t("modals.SettingsProfileForm.writeDownLabel")}</h3>
               <input
                 className={css.userInfoInput}
                 type="number"
@@ -256,7 +257,7 @@ export const SettingsProfile = () => {
 
         <div className={css.buttonContainer}>
           <button className={css.saveButton} type="submit">
-            {t("modals.UserSettingsForm.saveBtn")}
+            {t("modals.SettingsProfileForm.saveBtn")}
           </button>
         </div>
       </form>
