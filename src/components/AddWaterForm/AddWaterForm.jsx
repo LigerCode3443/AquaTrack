@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
-
-//!У разі наявності не валідних значень, причина помилки повинна бути відображена користувачеві, а дані - не відправлятися на backend. У разі, якщо всі значення валідні, - на backend слід відправити відповідний запит для додавання/редагування запису про порцію спожитої води.Якщо backend повернув помилку - необхідно її опрацювати і відобразити користувачеві у вигляді спливаючого вікна-notification. Якщо запит на backend пройшов успішно - модальне вікно WaterModal слід закрити, а дані у WaterProgressBar, WaterList та Calendar - актуалізувати за допомогою redux
+import { createWaterThunk } from "../../redux/water/operations.js";
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -18,6 +19,7 @@ const validationSchema = Yup.object().shape({
 const AddWaterForm = () => {
   const [counter, setCounter] = useState(50);
   const [time, setTime] = useState("");
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -58,9 +60,34 @@ const AddWaterForm = () => {
     }
   };
 
-  const onSubmit = (data) => {
-    console.log("Збережені дані:", data);
-    alert("Дані збережені!");
+  // ! WTH??
+  // ! ЗВІДКИ БРАТИ USER WATER GOAL
+  // ! ЯК ПЕРЕДАВАТИ ЧАС ЗАПИСУ СПОЖИТОЇ ВОДИ
+
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(
+        createWaterThunk({
+          userWaterGoal: 2000,
+          date: new Date(),
+          quantity: data.waterAmount,
+        })
+      ).unwrap();
+
+      toast.success("Запис про воду успішно створено!");
+    } catch (error) {
+      if (error.status === 400) {
+        toast.error(
+          "Некоректні дані! Перевірте введену кількість води або дату."
+        );
+      } else if (error.status === 404) {
+        toast.error("Ресурс не знайдено.");
+      } else {
+        toast.error(
+          "Сталася помилка під час збереження запису. Спробуйте ще раз."
+        );
+      }
+    }
   };
 
   return (
