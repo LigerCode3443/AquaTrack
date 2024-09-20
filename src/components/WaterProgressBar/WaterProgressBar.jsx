@@ -21,7 +21,7 @@ const WaterProgressBar = ({ progress }) => {
           borderWidth: 1,
         }}
         railStyle={{ backgroundColor: "#FFFFFF", height: 6 }}
-        style={{ pointerEvents: "none" }}
+        style={{ pointerEvents: "none", padding: "0 0 6px 0", height: 6 }}
       />
       <div className={css.waterProcent}>
         <span>0%</span>
