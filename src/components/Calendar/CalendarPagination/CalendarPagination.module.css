@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.date {
+  color: #323f47;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.month-btn {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  transform: translateY(0px);
+  transition: opacity, transform 0.3s ease 0.1s;
+}
+.month-btn-disable {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  opacity: 0.4;
+  cursor: default;
+  transform: translateY(1px);
+  transition: opacity, transform 0.3s ease 0.1s;
+}
+.statistics {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  transform: translateY(-2px);
+  transition: all 0.3s ease 0.1s;
+}
+.statistics-is-close {
+  opacity: 0.4;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  transform: translateY(-1px);
+  transition: opacity, transform 0.3s ease 0.1s;
+}
+
+@media screen and (min-width: 768px) {
+  .date {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  .statistics {
+    width: 24px;
+    height: 24px;
+    transform: translateY(-4px);
+  }
+  .statistics-is-close {
+    width: 24px;
+    height: 24px;
+    transform: translateY(-2px);
+  }
+}

@@ -1,0 +1,68 @@
+.container {
+  color: #323f47;
+
+  text-align: center;
+  width: 28px;
+}
+.empty-container {
+  width: 28px;
+  visibility: hidden;
+}
+.ball {
+  border-radius: 50%;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 28px;
+  height: 28px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.today {
+  background: #323f47;
+  color: #9be1a0;
+}
+.done {
+  background: #fff;
+}
+.notDone {
+  background: #323f4733;
+}
+.quantity {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 10px;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 38px;
+  }
+  .empty-container {
+    width: 38px;
+  }
+  .ball {
+    width: 38px;
+    height: 38px;
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+  .precentage {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 22.4px;
+    text-align: left;
+  }
+}
