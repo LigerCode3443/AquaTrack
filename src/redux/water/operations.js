@@ -41,6 +41,26 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
   }
 );
 
+export const getLast7DaysThunk = createAsyncThunk(
+  "getOneDayRecords",
+  async ({ year, month, day }, thunkApi) => {
+    try {
+      const data = await trackerApi.get("/water/", {
+        params: {
+          year,
+          month,
+          day: day !== undefined ? day : undefined,
+        },
+      });
+
+      return data.data;
+    } catch (error) {
+      toast.error(error.message);
+      thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const getOneRecordThunk = createAsyncThunk(
   "getOneRecord",
   async (id, thunkApi) => {

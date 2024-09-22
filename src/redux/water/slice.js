@@ -7,6 +7,7 @@ import {
   getOneRecordThunk,
   getByOneDayRecordsThunk,
   getRecordsThunk,
+  getLast7DaysThunk,
   updateDayNormThunk,
   updateWaterThunk,
 } from "./operations.js";
@@ -24,6 +25,15 @@ const waterSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(getRecordsThunk.fulfilled, (state, action) => {
+        state.records = action.payload;
+      })
+      .addCase(getOneRecordThunk.fulfilled, (state, action) => {
+        state.selectedRecord = action.payload;
+      })
+      .addCase(getByOneDayRecordsThunk.fulfilled, (state, action) => {
+        state.oneDayRecords = action.payload;
+      })
+      .addCase(getLast7DaysThunk.fulfilled, (state, action) => {
         const records = convertData(action.payload, {
           year: new Date().getFullYear(),
           month: new Date().getMonth(),
@@ -35,18 +45,12 @@ const waterSlice = createSlice({
         );
 
         state.last7Days = records.slice(index - 6, index + 1);
-        state.records = action.payload;
-      })
-      .addCase(getOneRecordThunk.fulfilled, (state, action) => {
-        state.selectedRecord = action.payload;
-      })
-      .addCase(getByOneDayRecordsThunk.fulfilled, (state, action) => {
-        state.oneDayRecords = action.payload;
       })
       .addMatcher(
         isAnyOf(
           getRecordsThunk.fulfilled,
           getByOneDayRecordsThunk.fulfilled,
+          getLast7DaysThunk.fulfilled,
           getOneRecordThunk.fulfilled,
           createWaterThunk.fulfilled,
           updateWaterThunk.fulfilled,
@@ -61,6 +65,7 @@ const waterSlice = createSlice({
         isAnyOf(
           getRecordsThunk.pending,
           getByOneDayRecordsThunk.pending,
+          getLast7DaysThunk.pending,
           getOneRecordThunk.pending,
           createWaterThunk.pending,
           updateWaterThunk.pending,
@@ -76,6 +81,7 @@ const waterSlice = createSlice({
         isAnyOf(
           getRecordsThunk.rejected,
           getByOneDayRecordsThunk.rejected,
+          getLast7DaysThunk.rejected,
           getOneRecordThunk.rejected,
           createWaterThunk.rejected,
           updateWaterThunk.rejected,
