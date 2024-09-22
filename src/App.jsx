@@ -1,17 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+// import { Route, Routes } from "react-router-dom";
+// import { Toaster } from "react-hot-toast";
 import "./App.css";
-import PublicRoute from "./routes/PublicRoute";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import PrivateRoute from "./routes/PrivateRoute";
-import Tracker from "./pages/Tracker/Tracker";
+// import PublicRoute from "./routes/PublicRoute";
+// import Home from "./pages/Home/Home";
+// import Login from "./pages/Login/Login";
+// import Register from "./pages/Register/Register";
+// import PrivateRoute from "./routes/PrivateRoute";
+// import Tracker from "./pages/Tracker/Tracker";
 import Container from "./components/Container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import { useEffect } from "react";
 import { refreshThunk } from "./redux/auth/operations";
+import EditWaterForm from "./components/EditWaterForm/EditWaterForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ function App() {
     <p>Loading</p>
   ) : (
     <Container>
-      <Routes>
+      <EditWaterForm />
+      {/* <Routes>
         <Route
           path="/"
           element={
@@ -59,7 +61,7 @@ function App() {
           }
         />
       </Routes>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} /> */}
     </Container>
   );
 }
