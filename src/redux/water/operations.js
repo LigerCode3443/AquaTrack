@@ -4,13 +4,12 @@ import { trackerApi } from "../../config/trackerApi";
 
 export const getRecordsThunk = createAsyncThunk(
   "getRecords",
-  async ({ year, month, day }, thunkApi) => {
+  async ({ year, month }, thunkApi) => {
     try {
       const data = await trackerApi.get("/water/", {
         params: {
           year,
           month,
-          day: day !== undefined ? day : undefined,
         },
       });
 
@@ -22,14 +21,15 @@ export const getRecordsThunk = createAsyncThunk(
   }
 );
 
-export const getLast7DaysThunk = createAsyncThunk(
-  "getLast7Days",
-  async (_, thunkApi) => {
+export const getByOneDayRecordsThunk = createAsyncThunk(
+  "getOneDayRecords",
+  async ({ year, month, day }, thunkApi) => {
     try {
       const data = await trackerApi.get("/water/", {
         params: {
-          year: new Date().getFullYear(),
-          month: new Date().getMonth() + 1,
+          year,
+          month,
+          day: day !== undefined ? day : undefined,
         },
       });
 

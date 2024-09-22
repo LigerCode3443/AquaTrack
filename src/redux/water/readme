@@ -1,6 +1,9 @@
-getRecordsThunk({year, month, day?})
+getRecordsThunk({year, month})
 
 якщо вам треба отримати данні за місяць вказуйте {year, month}
+
+getOneDayRecords({year, month, day})
+
 якщо вам треба данні за один день вказуйте {year, month, day}
 
 getOneRecordThunk(id)

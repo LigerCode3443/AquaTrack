@@ -5,7 +5,7 @@ import {
   createWaterThunk,
   deleteWaterThunk,
   getOneRecordThunk,
-  getLast7DaysThunk,
+  getByOneDayRecordsThunk,
   getRecordsThunk,
   updateDayNormThunk,
   updateWaterThunk,
@@ -15,6 +15,7 @@ const waterSlice = createSlice({
   name: "water",
   initialState: {
     records: [],
+    oneDayRecords: [],
     last7Days: [],
     selectedRecord: null,
     isLoading: false,
@@ -23,12 +24,6 @@ const waterSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(getRecordsThunk.fulfilled, (state, action) => {
-        state.records = action.payload;
-      })
-      .addCase(getOneRecordThunk.fulfilled, (state, action) => {
-        state.selectedRecord = action.payload;
-      })
-      .addCase(getLast7DaysThunk.fulfilled, (state, action) => {
         const records = convertData(action.payload, {
           year: new Date().getFullYear(),
           month: new Date().getMonth(),
@@ -40,11 +35,18 @@ const waterSlice = createSlice({
         );
 
         state.last7Days = records.slice(index - 6, index + 1);
+        state.records = action.payload;
+      })
+      .addCase(getOneRecordThunk.fulfilled, (state, action) => {
+        state.selectedRecord = action.payload;
+      })
+      .addCase(getByOneDayRecordsThunk.fulfilled, (state, action) => {
+        state.oneDayRecords = action.payload;
       })
       .addMatcher(
         isAnyOf(
           getRecordsThunk.fulfilled,
-          getLast7DaysThunk.fulfilled,
+          getByOneDayRecordsThunk.fulfilled,
           getOneRecordThunk.fulfilled,
           createWaterThunk.fulfilled,
           updateWaterThunk.fulfilled,
@@ -58,7 +60,7 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           getRecordsThunk.pending,
-          getLast7DaysThunk.pending,
+          getByOneDayRecordsThunk.pending,
           getOneRecordThunk.pending,
           createWaterThunk.pending,
           updateWaterThunk.pending,
@@ -73,7 +75,7 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           getRecordsThunk.rejected,
-          getLast7DaysThunk.rejected,
+          getByOneDayRecordsThunk.rejected,
           getOneRecordThunk.rejected,
           createWaterThunk.rejected,
           updateWaterThunk.rejected,
