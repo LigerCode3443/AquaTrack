@@ -1,6 +1,6 @@
 import Logout from "../Logout/Logout";
 import s from "./UserBarPopover.module.css";
-import { SettingsProfile } from "../UserBar/SettingsProfile";
+import { SettingsProfile } from "../SettingsProfile/SettingsProfile";
 
 export const UserBarPopover = ({
   isLogOutModalOpen,
