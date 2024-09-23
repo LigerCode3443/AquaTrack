@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
-import { createWaterThunk } from "../../redux/water/operations.js";
+import {
+  createWaterThunk,
+  getRecordsThunk,
+} from "../../redux/water/operations.js";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 
 const validationSchema = Yup.object().shape({
@@ -76,6 +79,15 @@ const AddWaterForm = () => {
           quantity: data.waterAmount,
         })
       ).unwrap();
+
+      const currentDate = new Date();
+      dispatch(
+        getRecordsThunk({
+          year: currentDate.getFullYear(),
+          month: currentDate.getMonth() + 1,
+          day: currentDate.getDate(),
+        })
+      );
 
       toast.success("Запис про воду успішно створено!");
     } catch (error) {
