@@ -77,9 +77,7 @@ const EditWaterForm = ({ waterId }) => {
   const onSubmit = async (data) => {
     try {
       const date = new Date(waterRecord.date);
-
       const [hours, minutes] = data.time.split(":");
-
       date.setHours(hours);
       date.setMinutes(minutes);
 
@@ -94,11 +92,11 @@ const EditWaterForm = ({ waterId }) => {
         })
       ).unwrap();
 
-      toast.success("Запис про воду успішно оновлено!");
+      toast.success("Запис про воду успішно створено!");
     } catch (error) {
       if (error.status === 400) {
         toast.error(
-          "Некоректні дані! Перевірте введену кількість води або час."
+          "Некоректні дані! Перевірте введену кількість води або дату."
         );
       } else if (error.status === 404) {
         toast.error("Запис не знайдено.");
