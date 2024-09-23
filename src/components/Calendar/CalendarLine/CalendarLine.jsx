@@ -8,7 +8,19 @@ const isToday = (date) => {
   return today.toDateString() === givenDate.toDateString();
 };
 
-const CalendarLine = ({ items }) => {
+const CalendarLine = ({ items, isHead }) => {
+  if (isHead)
+    return (
+      <tr className={css.line}>
+        {items.map((elem) => {
+          return (
+            <th key={elem}>
+              <div className={css.head}>{elem}</div>
+            </th>
+          );
+        })}
+      </tr>
+    );
   return (
     <tr className={css.line}>
       {items.map((elem, index) => {
@@ -26,8 +38,7 @@ const CalendarLine = ({ items }) => {
 
 CalendarLine.propTypes = {
   items: PropTypes.array,
-  month: PropTypes.number,
-  year: PropTypes.number,
+  isHead: PropTypes.bool,
 };
 
 export default CalendarLine;
