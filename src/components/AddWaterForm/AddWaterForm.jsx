@@ -60,10 +60,6 @@ const AddWaterForm = () => {
     }
   };
 
-  // ! WTH??
-  // ! ЗВІДКИ БРАТИ USER WATER GOAL
-  // ! ЯК ПЕРЕДАВАТИ ЧАС ЗАПИСУ СПОЖИТОЇ ВОДИ
-
   const onSubmit = async (data) => {
     try {
       await dispatch(
