@@ -5,8 +5,9 @@ import {
   createWaterThunk,
   deleteWaterThunk,
   getOneRecordThunk,
-  getLast7DaysThunk,
+  getByOneDayRecordsThunk,
   getRecordsThunk,
+  getLast7DaysThunk,
   updateDayNormThunk,
   updateWaterThunk,
 } from "./operations.js";
@@ -15,6 +16,7 @@ const waterSlice = createSlice({
   name: "water",
   initialState: {
     records: [],
+    oneDayRecords: [],
     last7Days: [],
     selectedRecord: null,
     isLoading: false,
@@ -27,6 +29,9 @@ const waterSlice = createSlice({
       })
       .addCase(getOneRecordThunk.fulfilled, (state, action) => {
         state.selectedRecord = action.payload;
+      })
+      .addCase(getByOneDayRecordsThunk.fulfilled, (state, action) => {
+        state.oneDayRecords = action.payload;
       })
       .addCase(getLast7DaysThunk.fulfilled, (state, action) => {
         const records = convertData(action.payload, {
@@ -44,6 +49,7 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           getRecordsThunk.fulfilled,
+          getByOneDayRecordsThunk.fulfilled,
           getLast7DaysThunk.fulfilled,
           getOneRecordThunk.fulfilled,
           createWaterThunk.fulfilled,
@@ -58,6 +64,7 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           getRecordsThunk.pending,
+          getByOneDayRecordsThunk.pending,
           getLast7DaysThunk.pending,
           getOneRecordThunk.pending,
           createWaterThunk.pending,
@@ -73,6 +80,7 @@ const waterSlice = createSlice({
       .addMatcher(
         isAnyOf(
           getRecordsThunk.rejected,
+          getByOneDayRecordsThunk.rejected,
           getLast7DaysThunk.rejected,
           getOneRecordThunk.rejected,
           createWaterThunk.rejected,

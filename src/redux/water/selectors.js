@@ -5,6 +5,8 @@ export const selectTotalConsumed = (state) => {
 };
 export const selectLast7Days = (state) => state.water.last7Days;
 
+export const selectOneDayRecords = (state) => state.water.oneDayRecords;
+
 export const selectOneRecord = (state) => state.water.selectedRecord;
 
 export const selectisError = (state) => state.water.isError;
