@@ -1,107 +1,141 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-
 import css from "./SettingsProfile.module.css";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
+import { useModalContext } from "../../context/useContext.js";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from "react-redux";
+import { calculateRequiredWater, setDailyWaterNorm } from "./store";
 
 export const SettingsProfile = () => {
   const { t } = useTranslation();
+  const { closeModal } = useModalContext();
+  const dispatch = useDispatch();
+  const { userWeight, dailyWaterNorm } = useSelector((state) => state.water);
+
   const [userData, setUserData] = useState(null);
   const [userAvatar, setUserAvatar] = useState(null);
-  const [formValues, setFormValues] = useState({
-    gender: "female",
-    name: "",
-    email: "",
-    weight: null,
-    requiredWater: 1.5,
-    wantWater: null,
-    time: null,
-    amount: "",
+  const [gender, setGender] = useState("woman");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [weight, setWeight] = useState(userWeight || null);
+  const [time, setTime] = useState(0);
+  const hiddenInputUpload = useRef(null);
+
+  const UserSchema = Yup.object().shape({
+    gender: Yup.string().required("is required!"),
+    name: Yup.string()
+      .trim()
+      .min(3, "Min 3 chars!")
+      .max(50, "Max 50 chars!")
+      .required("is required!"),
+    email: Yup.string().email().required("is required!"),
+    weight: Yup.number("must be a number").required("is required!"),
+    time: Yup.number("must be a number").required("is required!"),
   });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
         const response = await axios.get("/users/profile");
         setUserData(response.data);
-        setFormValues((prevValues) => ({
-          ...prevValues,
-          name: response.data.name || prevValues.name,
-          email: response.data.email || prevValues.email,
-        }));
+        setGender(response.data.gender);
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setWeight(response.data.weight);
+        setTime(response.data.dailyActivityTime || 0);
+        dispatch(setDailyWaterNorm(response.data.dailyWaterNorm));
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
-    }
+    };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    const { gender, weight, time } = formValues;
-    if (weight && time) {
-      let newAmount;
-      if (gender === "male") {
-        newAmount = weight * 0.04 + time * 0.6;
-      } else if (gender === "female") {
-        newAmount = weight * 0.03 + time * 0.4;
-      }
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        amount: (Math.ceil(newAmount * 10) / 10).toFixed(1),
-      }));
+    if (weight && gender) {
+      const newAmount =
+        gender === "man"
+          ? weight * 0.04 + time * 0.6
+          : weight * 0.03 + time * 0.4;
+      dispatch(calculateRequiredWater(newAmount));
     }
-  }, [formValues.gender, formValues.time, formValues.weight]);
+  }, [gender, time, weight, dispatch]);
 
-  const handleAvatarChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setUserAvatar(URL.createObjectURL(file));
-    }
+  const handleClick = (e) => {
+    e.preventDefault();
+    hiddenInputUpload.current?.click();
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    if (e.target.files) {
+      setUserAvatar(e.target.files[0]);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  };
+    const dataForValidation = {
+      gender,
+      name,
+      email,
+      weight,
+      time,
+    };
 
-  if (loading) return <div>Loading...</div>;
+    try {
+      await UserSchema.validate(dataForValidation, {
+        abortEarly: false,
+      });
+
+      await axios.put("/users/profile", dataForValidation);
+      toast.success("User settings updated successfully!");
+      closeModal();
+    } catch (validationErrors) {
+      validationErrors.inner.forEach((error) => {
+        toast.error(error.message);
+      });
+    }
+  };
 
   return (
     <div className={css.wrapper}>
       <form className={css.form} onSubmit={handleSubmit}>
         <div className={css.userPic}>
-          <h2>{t("modals.SettingsProfile.setting")}</h2>
+          <h2>{t("modals.UserSettingsForm.setting")}</h2>
           <div className={css.picWrapper}>
             <div className={css.pic}>
               <img
+                src={
+                  userAvatar
+                    ? URL.createObjectURL(userAvatar)
+                    : userData?.avatar ||
+                      "https://default-avatar-url.com/avatar.jpg"
+                }
                 className={css.avatar}
-                src={userAvatar || userData?.avatar}
                 alt="avatar"
               />
             </div>
-            <div className={css.uploadWrapper}>
-              <SvgIcon id="upload" width={24} height={24} />
+            <div className={css.uploadWrapper} onClick={handleClick}>
+              <SvgIcon
+                id="upload"
+                width={24}
+                height={24}
+                className={css.iconUpload}
+              />
               <p className={css.textRegular}>
-                {t("modals.SettingsProfileForm.uploadPhotoBtn")}
+                {t("modals.UserSettingsForm.uploadPhotoBtn")}
               </p>
             </div>
             <input
               type="file"
               style={{ display: "none" }}
               accept=".jpg,.jpeg,.png,.webp"
-              onChange={handleAvatarChange}
+              onChange={handleChange}
+              ref={hiddenInputUpload}
             />
           </div>
         </div>
@@ -109,7 +143,7 @@ export const SettingsProfile = () => {
         <div className={css.inputs}>
           <div className={css.wrapperInputsForm}>
             <div className={css.midContainer}>
-              <h3>{t("modals.SettingsProfileForm.yourGenderLabel")}</h3>
+              <h3>{t("modals.UserSettingsForm.yourGenderLabel")}</h3>
               <div className={css.radioContainer}>
                 <div className={css.radioButton}>
                   <input
@@ -117,13 +151,12 @@ export const SettingsProfile = () => {
                     type="radio"
                     name="gender"
                     id="woman"
-                    checked={formValues.gender === "female"}
-                    onChange={() =>
-                      setFormValues((prev) => ({ ...prev, gender: "female" }))
-                    }
+                    value="woman"
+                    onChange={(e) => setGender(e.target.value)}
+                    checked={gender === "woman"}
                   />
                   <label className={css.radioLabel} htmlFor="woman">
-                    {t("modals.SettingsProfileForm.femaleGenderLabel")}
+                    {t("modals.UserSettingsForm.femaleGenderLabel")}
                   </label>
                 </div>
                 <div className={css.radioButton}>
@@ -132,13 +165,12 @@ export const SettingsProfile = () => {
                     type="radio"
                     name="gender"
                     id="man"
-                    checked={formValues.gender === "male"}
-                    onChange={() =>
-                      setFormValues((prev) => ({ ...prev, gender: "male" }))
-                    }
+                    value="man"
+                    onChange={(e) => setGender(e.target.value)}
+                    checked={gender === "man"}
                   />
                   <label className={css.radioLabel} htmlFor="man">
-                    {t("modals.SettingsProfileForm.femaleGenderMale")}
+                    {t("modals.UserSettingsForm.femaleGenderMale")}
                   </label>
                 </div>
               </div>
@@ -146,119 +178,73 @@ export const SettingsProfile = () => {
 
             <div className={css.midContainer}>
               <div className={css.userInfoInputContainer}>
-                {t("modals.SettingsProfileForm.yourNameLabel")}
+                <h3>{t("modals.UserSettingsForm.yourNameLabel")}</h3>
                 <input
                   className={css.userInfoInput}
                   type="text"
                   name="name"
                   id="name"
-                  value={formValues.name}
-                  onChange={handleChange}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
               <div className={css.userInfoInputContainer}>
-                <h3>{t("modals.SettingsProfileForm.labelEmail")}</h3>
+                <h3>{t("modals.UserSettingsForm.labelEmail")}</h3>
                 <input
                   className={css.userInfoInput}
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
-                  value={formValues.email}
-                  onChange={handleChange}
                 />
               </div>
             </div>
 
             <div className={css.midContainer}>
-              <h3>{t("modals.SettingsProfileForm.dailyNorma")}</h3>
-              <div className={css.formulaContainer}>
-                <div className={css.formula}>
-                  <p className={css.textRegular}>
-                    {t("modals.SettingsProfileForm.forWomanP")}
-                  </p>
-                  <p className={css.textAccent}>V=(M*0,03) + (T*0,4)</p>
-                </div>
-                <div className={css.formula}>
-                  <p className={css.textRegular}>
-                    {t("modals.SettingsProfileForm.forManP")}
-                  </p>
-                  <p className={css.textAccent}>V=(M*0,04) + (T*0,6)</p>
-                </div>
-              </div>
-              <div className={css.textarea}>
-                <span className={css.textAccent}>*</span>{" "}
-                {t("modals.SettingsProfileForm.starText")}
-              </div>
-              <div className={css.note}>
-                <SvgIcon id="note-icon" width={18} height={18} />
-                <p className={css.textRegular}>
-                  {t("modals.SettingsProfileForm.activeText")}
-                </p>
-              </div>
+              <h3>{t("modals.UserSettingsForm.dailyNormah")}</h3>
+              <p>{`${dailyWaterNorm || "N/A"} liters`}</p>
             </div>
           </div>
 
           <div className={css.wrapperInputsForm}>
             <div className={css.midContainer}>
-              <div className={`${css.userInfoInputContainer} ${css.down}`}>
-                <p className={css.textRegular}>
-                  {t("modals.SettingsProfileForm.infoUser")}
-                </p>
+              <div className={css.userInfoInputContainer}>
+                <p>{t("modals.UserSettingsForm.infoUser")}</p>
                 <input
                   className={css.userInfoInput}
                   type="number"
                   name="weight"
                   id="weight"
                   step=".1"
-                  value={formValues.weight || ""}
-                  onChange={handleChange}
+                  value={weight || ""}
+                  onChange={(e) => setWeight(e.target.value)}
+                  required
                 />
               </div>
               <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>
-                  {t("modals.SettingsProfileForm.TheTimeSportsLabel")}
-                </p>
+                <p>{t("modals.UserSettingsForm.TheTimeSportsLabel")}</p>
                 <input
                   className={css.userInfoInput}
                   type="number"
                   name="time"
                   id="time"
                   step=".1"
-                  value={formValues.time || ""}
-                  onChange={handleChange}
+                  value={time || ""}
+                  onChange={(e) => setTime(e.target.value)}
+                  required
                 />
               </div>
             </div>
 
-            <div className={css.midContainer}>
-              <div className={`${css.userInfoInputContainer} ${css.amount}`}>
-                <p className={css.textRegular}>
-                  {t("modals.SettingsProfileForm.requiredWater")}
-                </p>
-                <p className={css.textAccent}>{formValues.amount}</p>
-              </div>
-            </div>
-
-            <div className={css.userInfoInputContainer}>
-              <h3>{t("modals.SettingsProfileForm.writeDownLabel")}</h3>
-              <input
-                className={css.userInfoInput}
-                type="number"
-                name="wantWater"
-                id="wantWater"
-                step=".1"
-                value={formValues.wantWater || ""}
-                onChange={handleChange}
-              />
+            <div className={css.buttonContainer}>
+              <button className={css.saveButton} type="submit">
+                {t("modals.UserSettingsForm.saveBtn")}
+              </button>
             </div>
           </div>
-        </div>
-
-        <div className={css.buttonContainer}>
-          <button className={css.saveButton} type="submit">
-            {t("modals.SettingsProfileForm.saveBtn")}
-          </button>
         </div>
       </form>
     </div>
