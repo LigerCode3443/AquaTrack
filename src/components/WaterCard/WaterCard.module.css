@@ -1,0 +1,57 @@
+.waterCard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 9px;
+  width: 148px;
+  height: 74px;
+  padding: 18px 14px;
+  border-radius: 15px;
+  background-color: #fff;
+  backdrop-filter: blur(33.599998474121094px);
+}
+
+.waterIcon svg {
+  width: 38px;
+  height: 38px;
+  fill: #76c7c0;
+}
+
+.waterInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.quantity {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  color: #323f47;
+}
+
+.time {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.waterActions {
+  display: flex;
+}
+
+.editIcon {
+  width: 14px;
+  height: 14px;
+  fill: #76c7c0;
+}
+
+.deleteIcon {
+  width: 14px;
+  height: 14px;
+  fill: #76c7c0;
+}

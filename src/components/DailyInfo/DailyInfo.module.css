@@ -1,0 +1,14 @@
+.dailyInfo {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.plusIcon {
+  width: 14px;
+  height: 14px;
+}

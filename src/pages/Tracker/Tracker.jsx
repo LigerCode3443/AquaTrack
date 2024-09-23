@@ -2,11 +2,11 @@ import WaterDetailedInfo from "../../components/WaterDetailedInfo/WaterDetailedI
 import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo";
 import s from "./Tracker.module.css";
 
-const Tracker = () => {
+const Tracker = ({ waterData, selectedDate }) => {
   return (
     <div className={s.wrapper}>
       <WaterMainInfo />
-      <WaterDetailedInfo />
+      <WaterDetailedInfo date={selectedDate} waterData={waterData} />
     </div>
   );
 };

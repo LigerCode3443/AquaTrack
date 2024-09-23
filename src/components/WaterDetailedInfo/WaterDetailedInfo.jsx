@@ -1,15 +1,15 @@
-import Calendar from "../Calendar/Calendar";
 import DailyInfo from "../DailyInfo/DailyInfo";
 import UserBar from "../UserBar/UserBar";
-import s from "./WaterDetailedInfo.module.css";
+import Calendar from "../Calendar/Calendar";
 
-const WaterDetailedInfo = () => {
+const WaterDetailedInfo = ({ date, waterData }) => {
   return (
-    <div className={s.wrapper}>
+    <div>
       <UserBar />
-      <DailyInfo />
+      <DailyInfo date={date} waterData={waterData} />
       <Calendar />
     </div>
   );
 };
+
 export default WaterDetailedInfo;
