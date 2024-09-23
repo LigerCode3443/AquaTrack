@@ -1,7 +1,12 @@
 export const selectRecords = (state) => state.water.records;
 
 export const selectTotalConsumed = (state) => {
-  return state.water.records.reduce((sum, record) => sum + record.quantity, 0);
+  const todayRecords = state.water.last7Days.filter(
+    (elem) =>
+      new Date(elem.date).toLocaleDateString() ===
+      new Date().toLocaleDateString()
+  );
+  return todayRecords.reduce((sum, record) => sum + record.quantity, 0);
 };
 export const selectLast7Days = (state) => state.water.last7Days;
 
