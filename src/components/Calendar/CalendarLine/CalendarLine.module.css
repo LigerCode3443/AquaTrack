@@ -2,3 +2,13 @@
   display: flex;
   justify-content: space-between;
 }
+.head {
+  width: 36px;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  .head {
+    font-size: 16px;
+  }
+}
