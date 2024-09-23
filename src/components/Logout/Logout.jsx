@@ -3,12 +3,11 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import { logoutThunk } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
 
-const Logout = ({ isOpen, onRequestClose }) => {
+const Logout = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
-  //   const { isMobile } = useResponse();
 
   return (
-    <ModalWindow isOpen={isOpen} onClose={onRequestClose}>
+    <ModalWindow isOpen={isOpen} onClose={onClose}>
       <div className={s.box}>
         <h4 className={s.title}>Log out</h4>
 
@@ -16,7 +15,7 @@ const Logout = ({ isOpen, onRequestClose }) => {
         <button onClick={() => dispatch(logoutThunk())} className={s.logout}>
           logout
         </button>
-        <button onClick={onRequestClose} className={s.cancel}>
+        <button onClick={onClose} className={s.cancel}>
           cancel
         </button>
       </div>
