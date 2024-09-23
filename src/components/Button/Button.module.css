@@ -13,17 +13,36 @@
   cursor: not-allowed;
 }
 
+.icon {
+  display: flex;
+  align-items: center;
+}
+
 .btn svg {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 768px) {
+  .btn svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .btn span {
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 18px;
   font-weight: 700;
-  line-height: 24px;
   letter-spacing: -0.01em;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .btn span {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .btn--primary {
@@ -52,13 +71,16 @@
   background-color: #323f47;
 }
 
-.btn--secondary:hover .btn-text {
+.btn--secondary .icon svg {
+  color: white;
+}
+
+.btn--secondary:hover .icon svg {
   color: #9be1a0;
 }
 
-.btn--secondary:hover path {
-  fill: #9be1a0;
-  stroke: #9be1a0;
+.btn--secondary:hover .btn-text {
+  color: #9be1a0;
 }
 
 .btn--secondary .btn-text {
@@ -95,4 +117,3 @@
   border: none;
   color: inherit;
 }
-
