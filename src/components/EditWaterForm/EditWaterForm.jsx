@@ -10,6 +10,7 @@ import {
   getOneRecordThunk,
 } from "../../redux/water/operations";
 import { selectOneRecord } from "../../redux/water/selectors";
+import { selectUserWaterGoal } from "../../redux/auth/selectors";
 import s from "./EditWaterForm.module.css";
 
 const validationSchema = Yup.object().shape({
@@ -26,6 +27,7 @@ const EditWaterForm = ({ waterId }) => {
   const dispatch = useDispatch();
 
   const waterRecord = useSelector(selectOneRecord);
+  const userWaterGoal = useSelector(selectUserWaterGoal);
 
   const {
     register,
@@ -47,9 +49,12 @@ const EditWaterForm = ({ waterId }) => {
   useEffect(() => {
     if (waterRecord) {
       setCounter(waterRecord.quantity);
-      setTime(waterRecord.time);
+      setTime(new Date(waterRecord.date).toISOString().substring(11, 16));
       setValue("waterAmount", waterRecord.quantity);
-      setValue("time", waterRecord.time);
+      setValue(
+        "time",
+        new Date(waterRecord.date).toISOString().substring(11, 16)
+      );
     }
   }, [waterRecord, setValue]);
 
@@ -71,12 +76,17 @@ const EditWaterForm = ({ waterId }) => {
 
   const onSubmit = async (data) => {
     try {
+      const date = new Date(waterRecord.date);
+      const [hours, minutes] = data.time.split(":");
+      date.setHours(hours);
+      date.setMinutes(minutes);
+
       await dispatch(
         updateWaterThunk({
           id: waterId,
           data: {
-            userWaterGoal: 2000,
-            date: new Date(),
+            userWaterGoal: userWaterGoal,
+            date: date.toISOString(),
             quantity: data.waterAmount,
           },
         })
