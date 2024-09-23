@@ -2,8 +2,11 @@
   width: 198px;
   height: 70px;
 
-  margin-top: 44px;
-  margin-left: 73px;
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  transform: translateX(-50%);
+
   padding: 12px;
 
   display: flex;
@@ -38,8 +41,6 @@
   .waterProgressBar {
     width: 295px;
     height: 106px;
-    margin-top: 87px;
-    margin-left: 204px;
     padding: 20px;
     /* gap: 6px; */
   }
@@ -64,8 +65,4 @@
 }
 
 @media (min-width: 1440px) {
-  .waterProgressBar {
-    margin-top: 215px;
-    margin-left: 188px;
-  }
 }
