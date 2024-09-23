@@ -4,10 +4,10 @@ import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
-import { useModalContext } from "../../context/useContext.js";
+import { useModalContext } from "../../context/useContext.jsx";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateRequiredWater, setDailyWaterNorm } from "./store";
+// import { calculateRequiredWater, setDailyWaterNorm } from "./store";
 
 export const SettingsProfile = () => {
   const { t } = useTranslation();
