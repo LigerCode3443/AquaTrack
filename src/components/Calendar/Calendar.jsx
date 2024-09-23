@@ -5,7 +5,7 @@ import CalendarPagination from "./CalendarPagination/CalendarPagination";
 import css from "./Calendar.module.css";
 import Statistics from "./Statistics/Statistics";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoading, selectRecords } from "../../redux/water/selectors";
+import { selectRecords } from "../../redux/water/selectors";
 import {
   getLast7DaysThunk,
   getRecordsThunk,
@@ -19,7 +19,6 @@ const Calendar = () => {
     month: new Date().getMonth(),
   });
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
   const rawData = useSelector(selectRecords);
   const data = useMemo(
     () => convertData(rawData, selectedDate),
@@ -60,6 +59,8 @@ const Calendar = () => {
 
   const chunks = splitIntoChunks(addEmptyDays(data), 7);
 
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
   return (
     <div>
       <div className={css["pagination-container"]}>
@@ -75,16 +76,17 @@ const Calendar = () => {
       </div>
       {showStatistics ? (
         <Statistics />
-      ) : !isLoading ? (
+      ) : (
         <table className={css.container}>
+          <thead className={css["container-head"]}>
+            <CalendarLine items={daysOfWeek} isHead={true} />
+          </thead>
           <tbody className={css["container-line"]}>
             {chunks.map((elem, i) => (
               <CalendarLine key={i} items={elem} />
             ))}
           </tbody>
         </table>
-      ) : (
-        <p>Loading...</p>
       )}
     </div>
   );
