@@ -1,0 +1,207 @@
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #2f2f2f;
+  letter-spacing: -0.14px;
+}
+
+@media (min-width: 768px) {
+  label {
+    font-size: 16px;
+    letter-spacing: -0.16px;
+  }
+}
+
+input {
+  padding: 14px 16px;
+  align-items: flex-start;
+  font-size: 14px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  height: 46px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #2f2f2f;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  input {
+    padding: 16px;
+    font-size: 16px;
+    height: 56px;
+  }
+}
+
+/* Для WebKit браузерів (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Для Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.header {
+  font-size: 20px;
+  letter-spacing: -0.28px;
+}
+
+@media (min-width: 768px) {
+  .header {
+    font-size: 28px;
+  }
+}
+
+.form_header {
+  margin-bottom: 20px;
+  color: #323f47;
+  font-size: 16px;
+  letter-spacing: -0.16px;
+}
+
+@media (min-width: 768px) {
+  .form_header {
+    font-size: 18px;
+    letter-spacing: -0.18px;
+  }
+}
+
+.wrapper {
+  width: 100%;
+}
+.counter_container {
+  margin-bottom: 16px;
+}
+.counter {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.water_counter {
+  border-radius: 30px;
+  background: #323f47;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  height: 40px;
+  padding: 11px 40px 11px 20px; /* Паддінги: 11px зверху/знизу і 20px зліва, 40px справа для 'ml' */
+  width: calc(1ch * (3 + 1) + 60px);
+  text-align: left;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .water_counter {
+    font-size: 15px;
+    height: 43px;
+  }
+}
+
+.counter_input_wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.unit {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .unit {
+    font-size: 15px;
+  }
+}
+
+.decrease_btn,
+.increase_btn {
+  border: 2px solid #2f2f2f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .decrease_btn,
+  .increase_btn {
+    width: 43px;
+    height: 43px;
+  }
+}
+
+.time_container {
+  width: 100%;
+}
+.water_amount {
+  width: 100%;
+}
+.water_label {
+  color: #323f47;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.16px;
+}
+
+@media (min-width: 768px) {
+  .water_label {
+    font-size: 18px;
+    letter-spacing: -0.18px;
+  }
+}
+
+.save_btn {
+  width: 116px;
+  height: 46px;
+  border-radius: 30px;
+  background: #9be1a0;
+  display: flex;
+  padding: 14px 40px;
+  justify-content: center;
+  align-items: center;
+  color: #323f47;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.14px;
+}
+
+.save_btn:hover,
+.save_btn:active {
+  background: #87d28d;
+}
+
+@media (min-width: 768px) {
+  .save_btn {
+    width: 141px;
+    height: 60px;
+    padding: 18px 50px;
+    font-size: 16px;
+    letter-spacing: -0.16px;
+  }
+}
