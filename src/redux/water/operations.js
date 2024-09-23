@@ -28,8 +28,8 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
       const data = await trackerApi.get("/water/", {
         params: {
           year,
-          month,
-          day: day !== undefined ? day : undefined,
+          month: month + 1,
+          day,
         },
       });
 
