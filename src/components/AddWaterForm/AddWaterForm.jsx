@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
 import { createWaterThunk } from "../../redux/water/operations.js";
+import { selectUserWaterGoal } from "../../redux/auth/selectors";
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -20,6 +21,7 @@ const AddWaterForm = () => {
   const [counter, setCounter] = useState(50);
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
+  const userWaterGoal = useSelector(selectUserWaterGoal);
 
   const {
     register,
@@ -62,10 +64,15 @@ const AddWaterForm = () => {
 
   const onSubmit = async (data) => {
     try {
+      const now = new Date();
+      const [hours, minutes] = data.time.split(":");
+      now.setHours(hours);
+      now.setMinutes(minutes);
+
       await dispatch(
         createWaterThunk({
-          userWaterGoal: 2000,
-          date: new Date(),
+          userWaterGoal: userWaterGoal,
+          date: now.toISOString(),
           quantity: data.waterAmount,
         })
       ).unwrap();
