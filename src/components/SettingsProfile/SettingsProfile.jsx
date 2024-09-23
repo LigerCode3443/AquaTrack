@@ -7,7 +7,10 @@ import * as Yup from "yup";
 import { useModalContext } from "../../context/useContext.jsx";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
-// import { calculateRequiredWater, setDailyWaterNorm } from "./store";
+/*import {
+  calculateRequiredWater,
+  setDailyWaterNorm,
+} from "../../redux/store.js";*/
 
 export const SettingsProfile = () => {
   const { t } = useTranslation();
@@ -46,7 +49,7 @@ export const SettingsProfile = () => {
         setEmail(response.data.email);
         setWeight(response.data.weight);
         setTime(response.data.dailyActivityTime || 0);
-        dispatch(setDailyWaterNorm(response.data.dailyWaterNorm));
+        //dispatch(setDailyWaterNorm(response.data.dailyWaterNorm));
       } catch (error) {
         console.log(error);
       }
@@ -55,7 +58,7 @@ export const SettingsProfile = () => {
     fetchData();
   }, [dispatch]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (weight && gender) {
       const newAmount =
         gender === "man"
@@ -63,7 +66,7 @@ export const SettingsProfile = () => {
           : weight * 0.03 + time * 0.4;
       dispatch(calculateRequiredWater(newAmount));
     }
-  }, [gender, time, weight, dispatch]);
+  }, [gender, time, weight, dispatch]);*/
 
   const handleClick = (e) => {
     e.preventDefault();

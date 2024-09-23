@@ -1,13 +1,24 @@
 import PropTypes from "prop-types";
 import css from "./CalendarItem.module.css";
+import { useDispatch } from "react-redux";
+import { getByOneDayRecordsThunk } from "../../../redux/water/operations";
 
 const concaniteClasses = (str1, str2) => {
   return `${str1} ${str2}`;
 };
 
 const CalendarItem = ({ item, isToday }) => {
-  const showStat = (date) => {
-    console.log(`Show more about ${date} date`);
+  const dispatch = useDispatch();
+
+  const setStat = (dateStr) => {
+    const date = new Date(dateStr);
+    dispatch(
+      getByOneDayRecordsThunk({
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.gatDate(),
+      })
+    );
   };
 
   return (
@@ -21,7 +32,7 @@ const CalendarItem = ({ item, isToday }) => {
             ? css.done
             : css.notDone
         )}
-        onClick={() => showStat(item.date)}
+        onClick={() => setStat(item.date)}
       >
         {new Date(item.date).getDate().toString()}
       </button>
