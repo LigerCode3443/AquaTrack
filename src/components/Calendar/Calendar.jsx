@@ -58,8 +58,6 @@ const Calendar = () => {
     setShowStatistc(!showStatistics);
   };
 
-  if (isLoading || data[0] === undefined) return <p>Loading</p>;
-
   const chunks = splitIntoChunks(addEmptyDays(data), 7);
 
   return (
@@ -77,7 +75,7 @@ const Calendar = () => {
       </div>
       {showStatistics ? (
         <Statistics />
-      ) : (
+      ) : !isLoading ? (
         <table className={css.container}>
           <tbody className={css["container-line"]}>
             {chunks.map((elem, i) => (
@@ -85,6 +83,8 @@ const Calendar = () => {
             ))}
           </tbody>
         </table>
+      ) : (
+        <p>Loading...</p>
       )}
     </div>
   );
