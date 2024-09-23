@@ -1,5 +1,5 @@
 import styles from "./Button.module.css";
-import SvgIcon from "../SvgIcon";
+import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 const Button = ({
   variant,
   children,

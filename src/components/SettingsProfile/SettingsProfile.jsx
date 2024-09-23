@@ -7,7 +7,10 @@ import * as Yup from "yup";
 import { useModalContext } from "../../context/useContext.js";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateRequiredWater, setDailyWaterNorm } from "./store";
+import {
+  calculateRequiredWater,
+  setDailyWaterNorm,
+} from "../../redux/store.js";
 
 export const SettingsProfile = () => {
   const { t } = useTranslation();
