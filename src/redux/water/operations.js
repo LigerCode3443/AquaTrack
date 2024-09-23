@@ -33,7 +33,10 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
         },
       });
 
-      return data.data;
+      return {
+        records: data.data,
+        date: new Date(year, month, day).toLocaleDateString(),
+      };
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
