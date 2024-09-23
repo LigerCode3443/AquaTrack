@@ -2,8 +2,9 @@
   width: 102px;
   height: 54px;
 
-  margin-top: 78px;
-  margin-left: 16px;
+  position: absolute;
+  left: 16px;
+  top: 122px;
 
   padding: 12px;
 
@@ -31,8 +32,10 @@
   .waterDailyNorma {
     width: 129px;
     height: 78px;
-    margin-top: 101px;
-    margin-left: 31px;
+
+    left: 32px;
+    top: 157px;
+
     padding: 14px 18px;
     gap: 4px;
   }
@@ -50,6 +53,6 @@
 
 @media (min-width: 1440px) {
   .waterDailyNorma {
-    margin-left: 64px;
+    left: 64px;
   }
 }

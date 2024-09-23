@@ -1,5 +1,8 @@
 .waterTracker {
-  max-width: 343px;
+  max-width: 100%;
+  min-height: 415px;
+
+  position: relative;
 
   border-radius: 30px;
   background-color: var(--Accent, #9be1a0);
@@ -26,9 +29,9 @@
   height: 46px;
   padding: 14px 20px;
 
-  margin-left: 187px;
-  margin-top: 47px;
-  margin-bottom: 32px;
+  position: absolute;
+  right: 16px;
+  bottom: 32px;
 }
 
 @media (max-width: 374px) {
@@ -39,8 +42,7 @@
 
 @media (min-width: 768px) {
   .waterTracker {
-    max-width: 704px;
-
+    min-height: 578px;
     background-image: url("/src/images/waterMainInfo/bottle_tablet.png");
     background-position: center 69px;
     background-size: 374px 477px;
@@ -59,25 +61,16 @@
     height: 60px;
     padding: 18px 30px;
 
-    margin-left: 494px;
-    margin-right: 32px;
-    margin-top: 26px;
-    margin-bottom: 64px;
+    right: 32px;
+    bottom: 64px;
   }
 }
 
 @media (min-width: 1440px) {
   .waterTracker {
-    max-width: 672px;
-
+    min-width: calc(50% - 16px);
     background-image: url("/src/images/waterMainInfo/bottle_desktop.png");
     background-position: center 92px;
     background-size: 472px 604px;
-  }
-
-  .btnAddForm {
-    margin-left: 462px;
-    margin-right: 32px;
-    margin-top: 56px;
   }
 }
