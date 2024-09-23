@@ -4,6 +4,7 @@ import AddWaterForm from "../AddWaterForm/AddWaterForm";
 import EditWaterForm from "../EditWaterForm/EditWaterForm";
 import DeleteWaterForm from "../DeleteWater/DeleteWater";
 import s from "./DailyInfo.module.css";
+import SvgIcon from "../SvgIcon/SvgIcon";
 
 const DailyInfo = ({ date, waterData }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
@@ -41,9 +42,7 @@ const DailyInfo = ({ date, waterData }) => {
       <div className={s.header}>
         <h2>{isToday ? "Today" : new Date(date).toLocaleDateString()}</h2>
         <button onClick={handleAddWater}>
-          <svg className={s.plusIcon}>
-            <use href="/src/images/sprite.svg#plus" />
-          </svg>
+          <SvgIcon className={s.plusIcon} id="plus" />
           Add water
         </button>
       </div>
