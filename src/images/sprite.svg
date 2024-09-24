@@ -59,10 +59,8 @@
   </symbol>
 
   <!-- Symbol 7 (close icon) -->
-  <symbol id="close" width="28" height="28" viewBox="0 0 28 28" fill="none">
-    <path d="M21 7L7 21" stroke="#2F2F2F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M7 7L21 21" stroke="#2F2F2F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
+
+<symbol id="close" viewBox="0 0 32 32"><path stroke-linejoin="round" stroke-linecap="round" stroke-width="3.4" d="M24 8 8 24M8 8l16 16"/></symbol>
 
   <!-- Symbol 8 (upload icon) -->
   <symbol id="upload" width="20" height="20" viewBox="0 0 20 20" fill="none">
