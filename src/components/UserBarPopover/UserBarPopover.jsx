@@ -13,13 +13,13 @@ export const UserBarPopover = ({
     <div className={s.wrapper}>
       <div className={s.btn}>
         <button className={s.setting} onClick={onSettingsClick}>
-          <SvgIcon id="settings" />
+          <SvgIcon id="settings" className={s.svg} />
           Settings
         </button>
       </div>
       <div className={s.btn}>
         <button onClick={onLogOutClick} className={s.exit} type="button">
-          <SvgIcon id="log-out" />
+          <SvgIcon id="log-out" className={s.svg} />
           Log-out
         </button>
         {isSettingsModalOpen && (
