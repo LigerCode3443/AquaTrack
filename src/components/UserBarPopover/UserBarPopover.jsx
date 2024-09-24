@@ -2,6 +2,7 @@ import Logout from "../Logout/Logout";
 import s from "./UserBarPopover.module.css";
 import SettingsProfile from "../SettingsProfile/SettingsProfile";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 export const UserBarPopover = ({
@@ -9,6 +10,7 @@ export const UserBarPopover = ({
   isSettingsModalOpen,
   onSettingsClick,
   onLogOutClick,
+  onPopoverClose,
 }) => {
   const { t } = useTranslation();
   return (
@@ -24,18 +26,20 @@ export const UserBarPopover = ({
           <SvgIcon id="log-out" className={s.svg} />
           {t("description.userBar.logOutText")}
         </button>
-        {isSettingsModalOpen && (
+        {/* {isSettingsModalOpen && (
           <SettingsProfile
+            onPopoverClose={onPopoverClose}
             isOpen={isSettingsModalOpen}
             onClose={() => onSettingsClick(false)}
           />
         )}
         {isLogOutModalOpen && (
           <Logout
+            onPopoverClose={onPopoverClose}
             isOpen={isLogOutModalOpen}
             onClose={() => onLogOutClick(false)}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
   monthNames,
   daysOfWeek,
   calendarTitles,
-} from "./localization";
+} from "./localization.js";
 
 i18n
   .use(LanguageDetector)
