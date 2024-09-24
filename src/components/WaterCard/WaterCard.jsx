@@ -1,19 +1,55 @@
+import MediaQuery from "react-responsive";
 import s from "./WaterCard.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { format } from "date-fns";
 
 const WaterCard = ({ quantity, time, onEdit, onDelete }) => {
+  let formattedTime;
+
+  try {
+    const parsedDate = new Date(time);
+
+    if (!isNaN(parsedDate.getTime())) {
+      formattedTime = format(parsedDate, "hh:mm a");
+    } else {
+      throw new Error("Invalid Date");
+    }
+  } catch (error) {
+    console.error("Invalid date format:", time, error);
+    formattedTime = "Invalid date";
+  }
+
   return (
     <div className={s.waterCard}>
-      <SvgIcon className={s.waterIcon} id="water" />
+      <MediaQuery maxWidth={767}>
+        <SvgIcon id="water" width={38} height={38} />
+      </MediaQuery>
+      <MediaQuery minWidth={768}>
+        <SvgIcon id="water" width={44} height={45} />
+      </MediaQuery>
 
       <div className={s.waterInfo}>
-        <p className={s.quantity}>{quantity} мл</p>
-        <p className={s.time}>{time}</p>
+        <p className={s.quantity}>{quantity} ml</p>
+        <p className={s.time}>{formattedTime}</p>
       </div>
 
       <div className={s.waterActions}>
-        <SvgIcon className={s.editIcon} onClick={onEdit} id="edit" />
-        <SvgIcon className={s.deleteIcon} onClick={onDelete} id="trash" />
+        <button onClick={onEdit}>
+          <MediaQuery maxWidth={767}>
+            <SvgIcon id="edit" width={14} height={14} />
+          </MediaQuery>
+          <MediaQuery minWidth={768}>
+            <SvgIcon id="edit" width={16} height={16} />
+          </MediaQuery>
+        </button>
+        <button onClick={onDelete}>
+          <MediaQuery maxWidth={767}>
+            <SvgIcon id="trash" width={14} height={14} />
+          </MediaQuery>
+          <MediaQuery minWidth={768}>
+            <SvgIcon id="trash" width={16} height={16} />
+          </MediaQuery>
+        </button>
       </div>
     </div>
   );

@@ -41,9 +41,11 @@ const DailyInfo = ({ date, waterData }) => {
     <div className={s.dailyInfo}>
       <div className={s.header}>
         <h2>{isToday ? "Today" : new Date(date).toLocaleDateString()}</h2>
-        <button onClick={handleAddWater}>
-          <SvgIcon className={s.plusIcon} id="plus" />
-          Add water
+        <button className={s.btnPlus} onClick={handleAddWater}>
+          <span className={s.circle}>
+            <SvgIcon className={s.plusIcon} id="plus" />
+          </span>
+          <span className={s.textAdd}>Add water</span>
         </button>
       </div>
 
