@@ -1,6 +1,6 @@
 import Logout from "../Logout/Logout";
 import s from "./UserBarPopover.module.css";
-import { SettingsProfile } from "../SettingsProfile/SettingsProfile";
+import SettingsProfile from "../SettingsProfile/SettingsProfile";
 import SvgIcon from "../SvgIcon/SvgIcon";
 
 export const UserBarPopover = ({
