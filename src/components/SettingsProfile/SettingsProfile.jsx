@@ -1,314 +1,265 @@
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
-import * as Yup from "yup";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import ModalWindow from "../ModalWindow/ModalWindow";
-import SvgIcon from "../SvgIcon/SvgIcon";
 import css from "./SettingsProfile.module.css";
-import { updateUserThunk } from "../../redux/auth/operations";
-import { updateWaterThunk } from "../../redux/water/operations";
+import toast, { LoaderIcon } from "react-hot-toast";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors.js";
+import { updateUserThunk } from "../../redux/auth/operations.js";
+import SvgIcon from "../SvgIcon/SvgIcon";
 
-const UserSchema = Yup.object().shape({
-  avatar: Yup.mixed().required("Avatar is required"),
-  gender: Yup.string().required("Gender is required"),
-  name: Yup.string()
-    .trim()
-    .min(3, "Min 3 chars!")
-    .max(50, "Max 50 chars!")
-    .required("Name is required!"),
-  email: Yup.string().email().required("Email is required!"),
-  weight: Yup.number("Must be a number").required("Weight is required!"),
-  time: Yup.number("Must be a number").required("Active time is required!"),
-  waterGoal: Yup.number("Must be a number"),
-});
-
-const SettingsProfile = ({ isOpen, onClose }) => {
+const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { dailyWaterNorm } = useSelector((state) => state.water);
-  const [userData, setUserData] = useState(null);
+  const user = useSelector(selectUser);
+  const [userData, setUserData] = useState(user);
+  const [name, setName] = useState(userData.name);
+  const [gender, setGender] = useState(userData.gender);
+  const [email, setEmail] = useState(userData.email);
+  const [weight, setWeight] = useState(userData.weight);
   const [userAvatar, setUserAvatar] = useState(null);
-  const hiddenInputUpload = useRef(null);
+  const [requiredWater, setRequiredWater] = useState("1.5");
+  const [willWater, setWillWater] = useState(userData.recommendedWater);
+  const [time, setTime] = useState(userData.activeTime);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm({
-    resolver: yupResolver(UserSchema),
+  const UserSchema = Yup.object().shape({
+    gender: Yup.string(),
+    name: Yup.string()
+      .trim()
+      .min(3, t("modals.UserSettingsForm.validation.nameMin"))
+      .max(50, t("modals.UserSettingsForm.validation.nameMax")),
+    email: Yup.string().email(
+      t("modals.UserSettingsForm.validation.emailInvalid")
+    ),
+    weight: Yup.number().typeError(
+      t("modals.UserSettingsForm.validation.weightNumber")
+    ),
+    activeTime: Yup.number().typeError(
+      t("modals.UserSettingsForm.validation.timeNumber")
+    ),
+    recommendedWater: Yup.number().typeError(
+      t("modals.UserSettingsForm.validation.waterNumber")
+    ),
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("/users/profile");
-        setUserData(response.data);
-        setValue("gender", response.data.gender);
-        setValue("name", response.data.name);
-        setValue("email", response.data.email);
-        setValue("weight", response.data.weight);
-        setValue("time", response.data.dailyActivityTime || 0);
-        setValue("waterGoal", response.data.dailyWaterNorm || 0);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
+    if (weight && gender) {
+      let newAmount;
+      if (gender === "male") {
+        newAmount = weight * 0.04 + time * 0.6;
+      } else if (gender === "female") {
+        newAmount = weight * 0.03 + time * 0.4;
       }
-    };
+      setRequiredWater((Math.ceil(newAmount * 10) / 10).toFixed(1));
+    }
+  }, [gender, time, weight]);
 
-    fetchData();
-  }, [dispatch, setValue]);
+  const hiddenInputUpload = useRef(null);
 
-  const handleChange = (e) => {
-    if (e.target.files) {
-      setUserAvatar(e.target.files[0]);
-      setValue("avatar", e.target.files[0]);
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (hiddenInputUpload.current) {
+      hiddenInputUpload.current.click();
     }
   };
 
-  const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("avatar", userAvatar);
-    formData.append("gender", data.gender);
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("weight", data.weight);
-    formData.append("time", data.time);
-
-    if (data.waterGoal) {
-      formData.append("waterGoal", data.waterGoal);
+  const handleChange = (e) => {
+    if (e.target.files) {
+      const fileUploaded = e.target.files[0];
+      setUserAvatar(fileUploaded);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const dataForValidation = {
+      gender,
+      name,
+      email,
+      weight,
+      activeTime: time,
+      recommendedWater: willWater,
+    };
 
     try {
-      setLoading(true);
-      const response = await axios.put("/users/profile", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const validatedData = await UserSchema.validate(dataForValidation, {
+        abortEarly: false,
       });
-      dispatch(updateUserThunk(response.data));
 
-      if (data.waterGoal) {
-        dispatch(
-          updateWaterThunk({
-            id: 454555,
-            data: {
-              userWaterGoal: data.waterGoal,
-              quantity: 2000,
-            },
-          })
-        );
-      }
+      const formData = new FormData();
+      formData.append("name", validatedData.name);
+      formData.append("photo", userAvatar);
+      formData.append("activeTime", validatedData.activeTime);
+      formData.append("recommendedWater", validatedData.recommendedWater);
+      formData.append("email", validatedData.email);
+      formData.append("gender", validatedData.gender);
+      formData.append("weight", validatedData.weight);
 
-      toast.success("User settings updated successfully!");
-      onClose();
+      const updatedUserData = await dispatch(
+        updateUserThunk(formData)
+      ).unwrap();
+
+      toast.success(t("modals.UserSettingsForm.success"), {
+        position: "top-right",
+      });
+      setUserData(updatedUserData);
+      setIsUserRefreshed(true);
+      closeModal();
     } catch (error) {
-      toast.error(
-        "Error updating user settings: " +
-          (error.response?.data?.message || "Unknown error")
-      );
+      toast.error(error.message, {
+        position: "top-right",
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <ModalWindow isOpen={isOpen} onClose={onClose}>
-      <div className={css.wrapper}>
-        <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={css.userPic}>
-            <h2>{t("modals.UserSettingsForm.setting")}</h2>
-            <div className={css.picWrapper}>
-              <div className={css.pic}>
-                <img
-                  src={
-                    userAvatar
-                      ? URL.createObjectURL(userAvatar)
-                      : userData?.avatar ||
-                        "https://default-avatar-url.com/avatar.jpg"
-                  }
-                  className={css.avatar}
-                  alt="avatar"
-                />
-              </div>
-              <div
-                className={css.uploadWrapper}
-                onClick={() => hiddenInputUpload.current.click()}
-              >
-                <SvgIcon
-                  id="upload"
-                  width={24}
-                  height={24}
-                  className={css.iconUpload}
-                />
-                <p className={css.textRegular}>
-                  {t("modals.UserSettingsForm.uploadPhotoBtn")}
-                </p>
-              </div>
-              <input
-                type="file"
-                style={{ display: "none" }}
-                accept=".jpg,.jpeg,.png,.webp"
-                onChange={handleChange}
-                ref={hiddenInputUpload}
+    <div className={css.wrapper}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.userPic}>
+          <h2>{t("modals.UserSettingsForm.setting")}</h2>
+          <div className={css.picWrapper}>
+            <div className={css.pic}>
+              <img
+                src={
+                  userAvatar ? URL.createObjectURL(userAvatar) : userData?.photo
+                }
+                className={css.avatar}
+                alt="avatar"
               />
-              {errors.avatar && (
-                <p className={css.error}>{errors.avatar.message}</p>
-              )}
             </div>
+            <div className={css.uploadWrapper} onClick={handleClick}>
+              <SvgIcon
+                id="upload"
+                width="24"
+                height="24"
+                className={css.iconUpload}
+              />
+              <p className={css.textRegular}>
+                {t("modals.UserSettingsForm.uploadPhotoBtn")}
+              </p>
+            </div>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept=".jpg,.jpeg,.png,.webp"
+              onChange={handleChange}
+              ref={hiddenInputUpload}
+            />
           </div>
+        </div>
 
-          <div className={css.inputs}>
-            <div className={css.wrapperInputsForm}>
-              <div className={css.midContainer}>
-                <h3>{t("modals.UserSettingsForm.yourGenderLabel")}</h3>
-                <div className={css.radioContainer}>
-                  <Controller
+        <div className={css.inputs}>
+          <div className={css.wrapperInputsForm}>
+            <div className={css.midContainer}>
+              <h3>{t("modals.UserSettingsForm.yourGenderLabel")}</h3>
+              <div className={css.radioContainer}>
+                <div className={css.radioButton}>
+                  <input
+                    className={css.radio}
+                    type="radio"
                     name="gender"
-                    control={control}
-                    render={({ field }) => (
-                      <>
-                        <div className={css.radioButton}>
-                          <input
-                            className={css.radio}
-                            type="radio"
-                            id="woman"
-                            value="woman"
-                            {...field}
-                          />
-                          <label className={css.radioLabel} htmlFor="woman">
-                            {t("modals.UserSettingsForm.femaleGenderLabel")}
-                          </label>
-                        </div>
-                        <div className={css.radioButton}>
-                          <input
-                            className={css.radio}
-                            type="radio"
-                            id="man"
-                            value="man"
-                            {...field}
-                          />
-                          <label className={css.radioLabel} htmlFor="man">
-                            {t("modals.UserSettingsForm.femaleGenderMale")}
-                          </label>
-                        </div>
-                      </>
-                    )}
+                    id="female"
+                    value="female"
+                    onChange={(e) => setGender(e.target.value)}
+                    checked={gender === "female"}
                   />
-                  {errors.gender && (
-                    <p className={css.error}>{errors.gender.message}</p>
-                  )}
+                  <label className={css.radioLabel} htmlFor="female">
+                    {t("modals.UserSettingsForm.femaleGenderLabel")}
+                  </label>
                 </div>
-              </div>
-
-              <div className={css.midContainer}>
-                <div className={css.userInfoInputContainer}>
-                  <h3>{t("modals.UserSettingsForm.yourNameLabel")}</h3>
-                  <Controller
-                    name="name"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        className={css.userInfoInput}
-                        type="text"
-                        {...field}
-                      />
-                    )}
+                <div className={css.radioButton}>
+                  <input
+                    className={css.radio}
+                    type="radio"
+                    name="gender"
+                    id="male"
+                    value="male"
+                    onChange={(e) => setGender(e.target.value)}
+                    checked={gender === "male"}
                   />
-                  {errors.name && (
-                    <p className={css.error}>{errors.name.message}</p>
-                  )}
+                  <label className={css.radioLabel} htmlFor="male">
+                    {t("modals.UserSettingsForm.maleGenderLabel")}
+                  </label>
                 </div>
-                <div className={css.userInfoInputContainer}>
-                  <h3>{t("modals.UserSettingsForm.labelEmail")}</h3>
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        className={css.userInfoInput}
-                        type="email"
-                        {...field}
-                      />
-                    )}
-                  />
-                  {errors.email && (
-                    <p className={css.error}>{errors.email.message}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className={css.midContainer}>
-                <h3>{t("modals.UserSettingsForm.dailyNorma")}</h3>
-                <p>{`${dailyWaterNorm || "N/A"} liters`}</p>
               </div>
             </div>
 
-            <div className={css.wrapperInputsForm}>
-              <div className={css.midContainer}>
-                <div className={css.userInfoInputContainer}>
-                  <h3>{t("modals.UserSettingsForm.waterGoalLabel")}</h3>
-                  <Controller
-                    name="waterGoal"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        className={css.userInfoInput}
-                        type="number"
-                        step=".1"
-                        {...field}
-                        placeholder="Water Goal (ml)"
-                      />
-                    )}
-                  />
-                  {errors.waterGoal && (
-                    <p className={css.error}>{errors.waterGoal.message}</p>
-                  )}
-                </div>
-                <div className={css.userInfoInputContainer}>
-                  <p>{t("modals.UserSettingsForm.TheTimeSportsLabel")}</p>
-                  <Controller
-                    name="time"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        className={css.userInfoInput}
-                        type="number"
-                        step=".1"
-                        {...field}
-                      />
-                    )}
-                  />
-                  {errors.time && (
-                    <p className={css.error}>{errors.time.message}</p>
-                  )}
-                </div>
+            <div className={css.midContainer}>
+              <div className={css.userInfoInputContainer}>
+                {t("modals.UserSettingsForm.yourNameLabel")}
+                <input
+                  className={css.userInfoInput}
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={name || userData.name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
+              <div className={css.userInfoInputContainer}>
+                <h3>{t("modals.UserSettingsForm.labelEmail")}</h3>
+                <input
+                  className={css.userInfoInput}
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className={css.userInfoInputContainer}>
+                <h3>{t("modals.UserSettingsForm.labelWeight")}</h3>
+                <input
+                  className={css.userInfoInput}
+                  type="number"
+                  name="weight"
+                  id="weight"
+                  value={weight || ""}
+                  onChange={(e) => setWeight(e.target.value)}
+                />
+              </div>
+              <div className={css.userInfoInputContainer}>
+                <h3>{t("modals.UserSettingsForm.labelActiveTime")}</h3>
+                <input
+                  className={css.userInfoInput}
+                  type="number"
+                  name="activeTime"
+                  id="activeTime"
+                  value={time || ""}
+                  onChange={(e) => setTime(e.target.value)}
+                />
+              </div>
+            </div>
 
-              <div className={css.buttonContainer}>
-                <button
-                  className={css.saveButton}
-                  type="submit"
-                  disabled={loading}
-                >
-                  {loading
-                    ? t("loading")
-                    : t("modals.UserSettingsForm.saveBtn")}
-                </button>
+            <div className={css.recommendationWrapper}>
+              <h3>{t("modals.UserSettingsForm.labelWater")}</h3>
+              <div className={css.userInfoInputContainer}>
+                <input
+                  className={css.userInfoInput}
+                  type="number"
+                  name="recommendedWater"
+                  id="recommendedWater"
+                  value={willWater || requiredWater}
+                  onChange={(e) => setWillWater(e.target.value)}
+                />
               </div>
+              <p>
+                {t("modals.UserSettingsForm.labelWaterRecommendation")}{" "}
+                {requiredWater} l
+              </p>
             </div>
           </div>
-        </form>
-      </div>
-    </ModalWindow>
+          <button className={css.saveButton} type="submit" disabled={loading}>
+            {loading ? <LoaderIcon /> : t("modals.UserSettingsForm.saveBtn")}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
-
 export default SettingsProfile;

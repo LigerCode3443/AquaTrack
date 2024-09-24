@@ -1,11 +1,13 @@
 import css from "./WaterProgressBar.module.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { useTranslation } from "react-i18next";
 
 const WaterProgressBar = ({ progress }) => {
+  const { t } = useTranslation();
   return (
     <div className={css.waterProgressBar}>
-      <h3>Today</h3>
+      <h3>{t("description.norma.todayText")}</h3>
       <Slider
         min={0}
         max={100}

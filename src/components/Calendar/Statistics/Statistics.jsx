@@ -5,6 +5,7 @@ import { AreaChart, XAxis, YAxis, Area, ResponsiveContainer } from "recharts";
 import css from "./Statistics.module.css";
 import { useSelector } from "react-redux";
 import { selectLast7Days } from "../../../redux/water/selectors";
+import { useTranslation } from "react-i18next";
 
 const CustomDot = ({
   cx,
@@ -49,6 +50,7 @@ const CustomDot = ({
 };
 
 const Statistics = () => {
+  const { t } = useTranslation();
   const [activePayload, setActivePayload] = useState(null);
   const [strokeWidth, setStrokeWidth] = useState(
     window.innerWidth < 768 ? 2 : 3
@@ -89,7 +91,7 @@ const Statistics = () => {
               let value = "";
               if (tick >= 500) value = tick / 1000 + "L";
               else if (tick === 0) value = "0%";
-              else value = tick + "ml";
+              else value = tick + t("description.titles.ml");
 
               return value;
             }}
@@ -123,7 +125,10 @@ const Statistics = () => {
             }}
           >
             <div className={css["dialog-arrow"]} />
-            <p>{activePayload.quantity}ml</p>
+            <p>
+              {activePayload.quantity}
+              {t("description.titles.ml")}
+            </p>
           </div>
         )}
       </div>
