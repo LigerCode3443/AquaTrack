@@ -1,14 +1,31 @@
 .dailyInfo {
-  display: flex;
+  margin: 40px 0 72px;
 }
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plusIconBg {
+  width: 30px;
+  height: 30px;
+  background-color: #9be1a0;
+  border-radius: 50%;
+  position: relative;
 }
 
 .plusIcon {
-  width: 14px;
-  height: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -36,7 +36,7 @@ const UserBar = () => {
   return (
     <div className={s.wrapper}>
       <h2 className={s.name}>
-        Hello,<span>{actualName}</span>
+        Hello, <span>{actualName}</span>
       </h2>
       <div className={s.wrapperBox}>
         <button className={s.bar} ref={userBarRef} onClick={togglePopover}>
