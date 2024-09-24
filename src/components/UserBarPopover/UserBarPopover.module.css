@@ -1,0 +1,42 @@
+.wrapper {
+  position: absolute;
+  bottom: -180%;
+  left: 5%;
+  z-index: 100;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 8px;
+  border-radius: 15px;
+  min-width: 137px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+.setting,
+.exit {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.49333;
+  color: #323f47;
+  background-color: transparent;
+}
+
+.btn button {
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
+.btn button:hover {
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    min-width: 157px;
+    height: 82px;
+    bottom: -160%;
+  }
+}

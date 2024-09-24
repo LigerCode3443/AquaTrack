@@ -1,0 +1,72 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+.name {
+  font-family: "Gilroy", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.05556;
+  letter-spacing: -0.01em;
+  color: #323f47;
+}
+
+.name span {
+  font-weight: 700;
+}
+
+.s_name {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+}
+.img {
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+}
+.bar {
+  border-radius: 30px;
+  padding: 6px 12px;
+  min-width: 157px;
+  width: max-content;
+  height: 50px;
+  background: #323f47;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.wrapperBox {
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+  }
+  .bar {
+    height: 56px;
+  }
+  .name {
+    font-size: 36px;
+  }
+}
+
+.accardion {
+  transition: transform 0.25s ease;
+}
+
+.accardionOpen {
+  transform: rotate(180deg);
+}

@@ -1,5 +1,23 @@
 import WaterCard from "../WaterCard/WaterCard";
 import s from "./WaterList.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { selectOneDayRecords } from "../../redux/water/selectors";
+import { useEffect } from "react";
+import { getByOneDayRecordsThunk } from "../../redux/water/operations";
+const WaterList = ({ onEditWater, onDeleteWater }) => {
+  const data = useSelector(selectOneDayRecords);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const date = new Date();
+    dispatch(
+      getByOneDayRecordsThunk({
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+      })
+    );
+  }, [dispatch]);
 
 const WaterList = ({
   waterData = [
@@ -33,7 +51,7 @@ const WaterList = ({
 }) => {
   return (
     <div className={s.waterList}>
-      {waterData.map((entry) => (
+      {data.records.map((entry) => (
         <WaterCard
           key={entry._id}
           quantity={entry.quantity}

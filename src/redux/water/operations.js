@@ -28,12 +28,15 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
       const data = await trackerApi.get("/water/", {
         params: {
           year,
-          month,
-          day: day !== undefined ? day : undefined,
+          month: month + 1,
+          day,
         },
       });
 
-      return data.data;
+      return {
+        records: data.data,
+        date: new Date(year, month, day).toLocaleDateString(),
+      };
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -87,7 +90,7 @@ export const createWaterThunk = createAsyncThunk(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
 
-      return data;
+      return data.data;
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -110,7 +113,7 @@ export const updateWaterThunk = createAsyncThunk(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
 
-      return data;
+      return data.data;
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -131,7 +134,7 @@ export const updateDayNormThunk = createAsyncThunk(
 
       thunkApi.dispatch(getRecordsThunk({ year, month }));
 
-      return data;
+      return data.data;
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -150,7 +153,7 @@ export const deleteWaterThunk = createAsyncThunk(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
 
-      return data;
+      return data.data;
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
