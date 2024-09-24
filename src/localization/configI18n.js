@@ -6,7 +6,12 @@ import {
   signInText,
   informSectionText,
   welcomeSectionText,
-} from "./localization";
+  dailyNormaText,
+  userBarText,
+  monthNames,
+  daysOfWeek,
+  calendarTitles,
+} from "./localization.js";
 
 i18n
   .use(LanguageDetector)
@@ -22,6 +27,11 @@ i18n
             signIn: signInText.en,
             inform: informSectionText.en,
             hero: welcomeSectionText.en,
+            norma: dailyNormaText.en,
+            userBar: userBarText.en,
+            month: monthNames.en,
+            day: daysOfWeek.en,
+            titles: calendarTitles.en,
           },
         },
       },
@@ -32,6 +42,11 @@ i18n
             signIn: signInText.ukr,
             inform: informSectionText.ukr,
             hero: welcomeSectionText.ukr,
+            norma: dailyNormaText.ukr,
+            userBar: userBarText.ukr,
+            month: monthNames.ukr,
+            day: daysOfWeek.ukr,
+            titles: calendarTitles.ukr,
           },
         },
       },

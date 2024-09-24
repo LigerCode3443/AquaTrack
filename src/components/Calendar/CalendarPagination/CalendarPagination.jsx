@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import SvgIcon from "../../SvgIcon/SvgIcon";
 import css from "./CalendarPagination.module.css";
+import { useTranslation } from "react-i18next";
 
 const CalendarPagination = ({
   selectedDate,
@@ -10,6 +11,7 @@ const CalendarPagination = ({
   changeMonth,
   showStatistics,
 }) => {
+  const { t } = useTranslation();
   const [width, setWidth] = useState(window.innerWidth < 768 ? 20 : 24);
 
   useEffect(() => {
@@ -28,18 +30,18 @@ const CalendarPagination = ({
 
   const getMonthName = (monthNumber) => {
     const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      t("description.month.January"),
+      t("description.month.February"),
+      t("description.month.March"),
+      t("description.month.April"),
+      t("description.month.May"),
+      t("description.month.June"),
+      t("description.month.July"),
+      t("description.month.August"),
+      t("description.month.September"),
+      t("description.month.October"),
+      t("description.month.November"),
+      t("description.month.December"),
     ];
 
     return months[monthNumber] || "Invalid month";
