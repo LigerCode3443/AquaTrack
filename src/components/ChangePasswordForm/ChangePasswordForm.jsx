@@ -28,7 +28,6 @@ const ChangePasswordForm = () => {
       verificationToken,
       userNewPassword: data.userNewPassword,
     };
-    console.log(newData);
     dispatch(recoveryPasswordThunk(newData));
     reset();
     navigate("/signin", {replace: true});
