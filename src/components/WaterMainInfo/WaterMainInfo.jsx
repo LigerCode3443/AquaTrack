@@ -42,7 +42,7 @@ const WaterMainInfo = () => {
       <Button
         variant="secondary"
         className={css.btnAddForm}
-        icon="whitePlus"
+        icon="plusCurrent"
         onClick={openModal}
       >
         Add water

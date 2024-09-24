@@ -71,11 +71,11 @@
   background-color: #323f47;
 }
 
-.btn--secondary .icon svg {
+.btn--secondary svg {
   color: white;
 }
 
-.btn--secondary:hover .icon svg {
+.btn--secondary:hover svg {
   color: #9be1a0;
 }
 
