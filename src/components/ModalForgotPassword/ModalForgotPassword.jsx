@@ -20,7 +20,6 @@ const ModalForgotPassword = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(forgotPasswordThunk(data))
       .unwrap()
       .then((res) => {
