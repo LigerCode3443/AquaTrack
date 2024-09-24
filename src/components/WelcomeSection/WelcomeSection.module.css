@@ -105,3 +105,9 @@
     margin-top: 132px;
   }
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

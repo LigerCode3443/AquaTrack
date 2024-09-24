@@ -5,6 +5,7 @@ import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/Wrap
 import SignInForm from "../../components/SignInForm/SignInForm";
 import Logo from "../../components/Logo/Logo";
 import HomeAuthSidebar from "../../components/HomeAuthSidebar/HomeAuthSidebar";
+import LocalizationSwitcher from "../../components/LocalizationSwitcher/LocalizationSwitcher";
 
 import css from "./Login.module.css";
 
@@ -13,7 +14,11 @@ const Login = () => {
     <WrapperForPublicRoutes>
       <HomeAuthSidebar>
         <div className={css.wrapper}>
-          <Logo />
+          <div className={css.header}>
+            <Logo />
+            <LocalizationSwitcher />
+          </div>
+
           <SignInForm />
         </div>
       </HomeAuthSidebar>
