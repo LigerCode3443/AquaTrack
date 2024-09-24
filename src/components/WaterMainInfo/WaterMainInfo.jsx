@@ -1,6 +1,5 @@
 import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
-import Button from "../Button/Button";
 import AddWaterForm from "../AddWaterForm/AddWaterForm";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import css from "./WaterMainInfo.module.css";
@@ -9,6 +8,7 @@ import { useEffect, useState } from "react";
 import { getRecordsThunk } from "../../redux/water/operations";
 import { selectTotalConsumed } from "../../redux/water/selectors";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
+import SvgIcon from "../SvgIcon/SvgIcon";
 
 const WaterMainInfo = () => {
   const dispatch = useDispatch();
@@ -32,23 +32,19 @@ const WaterMainInfo = () => {
         day: currentDate.getDate(),
       })
     );
-  }, [dispatch, totalConsumed]);
+  }, [dispatch, totalConsumed, userWaterGoal]);
 
   return (
     <div className={css.waterTracker}>
       <h2>AquaTrack</h2>
       <WaterDailyNorma dailyNorma={dailyNorma / 1000} />
       <WaterProgressBar progress={progress} />
-      <Button
-        variant="secondary"
-        className={css.btnAddForm}
-        icon="plusCurrent"
-        onClick={openModal}
-      >
+      <button type="button" className={css.btnAddForm} onClick={openModal}>
+        <SvgIcon className={css.btnAddFormIcon} id="plusCurrent" />
         Add water
-      </Button>
+      </button>
       <ModalWindow isOpen={isModalOpen} onClose={closeModal}>
-        <AddWaterForm />
+        <AddWaterForm onClose={closeModal} />
       </ModalWindow>
     </div>
   );

@@ -20,7 +20,7 @@ const validationSchema = Yup.object().shape({
   time: Yup.string().required("Час запису обов'язковий"),
 });
 
-const AddWaterForm = () => {
+const AddWaterForm = ({ onClose }) => {
   const [counter, setCounter] = useState(50);
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
@@ -81,15 +81,17 @@ const AddWaterForm = () => {
       ).unwrap();
 
       const currentDate = new Date();
-      dispatch(
+      await dispatch(
         getRecordsThunk({
           year: currentDate.getFullYear(),
           month: currentDate.getMonth() + 1,
           day: currentDate.getDate(),
         })
-      );
+      ).unwrap();
 
       toast.success("Запис про воду успішно створено!");
+
+      onClose();
     } catch (error) {
       if (error.status === 400) {
         toast.error(
