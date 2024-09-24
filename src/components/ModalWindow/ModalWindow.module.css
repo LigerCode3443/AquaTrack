@@ -1,58 +1,15 @@
-.modalWindow {
+.wrapper {
   padding: 40px 20px;
-  margin: 30% auto auto;
-  position: relative;
-  border-radius: 15px;
-  background: #ffffff;
-  width: 100%;
-  max-width: 344px;
+
+  @media only screen and (min-width: 768px) {
+    padding: 40px 40px;
+  }
 }
 
-.overlay {
-  position: fixed;
-  padding: 20px;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-  overflow-y: auto;
-  z-index: 999;
-  box-shadow: 0px 4px 50px 0px #0000001a;
-  animation: fadeIn 0.2s ease-in-out forwards;
-}
-
-
-.closeIcon {
+.close {
   position: absolute;
   top: 20px;
-  right: 16px;
-  width: 24px; 
-  height: 24px; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  right: 20px;
+  width: fit-content;
   cursor: pointer;
-}
-
-.icon {
-  width: 12px; 
-  height: 12px; 
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-image: url('/src/images/sprite.svg#close');
-}
-
-
-@media (min-width: 768px) { 
-  .closeIcon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .icon {
-    width: 14px;
-    height: 14px;
-  }
 }

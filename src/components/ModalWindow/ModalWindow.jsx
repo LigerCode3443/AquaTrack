@@ -1,22 +1,40 @@
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 import css from "./ModalWindow.module.css";
+import SvgIcon from "../SvgIcon/SvgIcon";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    boxShadow: "0 4px 50px 0 rgba(0, 0, 0, 0.1)",
+    border: "none",
+    borderRadius: "15px",
+    padding: "0px",
+  },
+  overlay: {
+    backgroundColor: "rgba(47, 47, 47, 0.6)",
+  },
+};
+
+Modal.setAppElement("#root");
 
 export default function ModalWindow({ isOpen, onClose, children }) {
   return (
-    <ReactModal
+    <Modal
       isOpen={isOpen}
-      onRequestClose={() => onClose()}
-      className={css.modalWindow}
-      ariaHideApp={false}
-      overlayClassName={css.overlay}
+      onRequestClose={onClose}
+      style={customStyles}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
     >
-      <div className={css.closeIcon} onClick={() => onClose()}>
-        <span
-          className={css.icon}
-          style={{ backgroundImage: `url('/src/images/sprite.svg#close')` }}
-        ></span>
-      </div>
-      {children}
-    </ReactModal>
+      <button className={css.close} onClick={onClose}>
+        <SvgIcon id="close" width={28} height={28} stroke="#2F2F2F" />
+      </button>
+      <div className={css.wrapper}>{children}</div>
+    </Modal>
   );
 }
