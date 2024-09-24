@@ -1,16 +1,12 @@
-import { Link } from "react-router-dom";
+import {useState} from "react";
+import {Link} from "react-router-dom";
 import FieldAuth from "../FieldAuth/FieldAuth";
 import css from "./FormAuth.module.css";
+import ModalWindow from "../ModalWindow/ModalWindow";
+import ModalForgotPassword from "../ModalForgotPassword/ModalForgotPassword";
 
-const FormAuth = ({
-  title,
-  fields,
-  link,
-  textLink,
-  textInfo,
-  onSubmit,
-  errors,
-}) => {
+const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors, forgotPassword}) => {
+  const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
   return (
     <>
       <h2 className={css.title}>{title}</h2>
@@ -27,9 +23,7 @@ const FormAuth = ({
                 error={errors[field.register.name]}
               />
               {errors[field.register.name] && (
-                <p className={css.error}>
-                  {errors[field.register.name].message}
-                </p>
+                <p className={css.error}>{errors[field.register.name].message}</p>
               )}
             </li>
           ))}
@@ -39,6 +33,16 @@ const FormAuth = ({
           {title}
         </button>
       </form>
+
+      {forgotPassword && (
+        <button className={css.password} onClick={() => setIsOpenForgotPassword(true)}>
+          {forgotPassword}
+        </button>
+      )}
+
+      <ModalWindow isOpen={isOpenForgotPassword} onClose={() => setIsOpenForgotPassword(false)}>
+        <ModalForgotPassword />
+      </ModalWindow>
 
       <span className={css.info}>
         <p className={css.text}>{textInfo}</p>
