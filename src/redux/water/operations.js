@@ -123,6 +123,14 @@ export const updateWaterThunk = createAsyncThunk(
       thunkApi.dispatch(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
       );
+      const state = thunkApi.getState();
+      thunkApi.dispatch(
+        getByOneDayRecordsThunk({
+          year: new Date(state.water.oneDayRecords.date).getFullYear(),
+          month: new Date(state.water.oneDayRecords.date).getMonth(),
+          day: new Date(state.water.oneDayRecords.date).getDate(),
+        })
+      );
 
       return data.data;
     } catch (error) {
@@ -144,6 +152,14 @@ export const updateDayNormThunk = createAsyncThunk(
       );
 
       thunkApi.dispatch(getRecordsThunk({ year, month }));
+      const state = thunkApi.getState();
+      thunkApi.dispatch(
+        getByOneDayRecordsThunk({
+          year: new Date(state.water.oneDayRecords.date).getFullYear(),
+          month: new Date(state.water.oneDayRecords.date).getMonth(),
+          day: new Date(state.water.oneDayRecords.date).getDate(),
+        })
+      );
 
       return data.data;
     } catch (error) {
@@ -162,6 +178,14 @@ export const deleteWaterThunk = createAsyncThunk(
       const props = new Date(data.date);
       thunkApi.dispatch(
         getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
+      );
+      const state = thunkApi.getState();
+      thunkApi.dispatch(
+        getByOneDayRecordsThunk({
+          year: new Date(state.water.oneDayRecords.date).getFullYear(),
+          month: new Date(state.water.oneDayRecords.date).getMonth(),
+          day: new Date(state.water.oneDayRecords.date).getDate(),
+        })
       );
 
       return data.data;
