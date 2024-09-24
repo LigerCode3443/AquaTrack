@@ -1,7 +1,7 @@
 import sprite from "../../images/sprite.svg";
 
-const SvgIcon = ({ id, width, height }) => (
-  <svg width={width} height={height}>
+const SvgIcon = ({ id, width, height, className = { className } }) => (
+  <svg width={width} height={height} className={className}>
     <use xlinkHref={`${sprite}#${id}`} width={width} height={height} />
   </svg>
 );
