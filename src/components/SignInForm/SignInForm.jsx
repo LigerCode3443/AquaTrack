@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 
@@ -10,6 +11,7 @@ import * as authThunk from "../../redux/auth/operations.js";
 import css from "./SignInForm.module.css";
 
 const SignInForm = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -34,24 +36,24 @@ const SignInForm = () => {
       <FormAuth
         onSubmit={handleSubmit(onSubmit)}
         errors={errors}
-        title={"Sign In"}
+        title={t("description.signIn.mainTitle")}
         fields={[
           {
             type: "text",
-            label: "Email",
-            placeholder: "Enter your email",
+            label: t("description.signIn.emailLabel"),
+            placeholder: t("description.signIn.emailPlaceholder"),
             register: register("userEmail"),
           },
           {
             type: "password",
-            label: "Password",
-            placeholder: "Enter your password",
+            label: t("description.signIn.passwordLabel"),
+            placeholder: t("description.signIn.passwordPlaceholder"),
             register: register("userPassword"),
           },
         ]}
         link={"/signup"}
-        textLink={"Sign Up"}
-        textInfo={"Don’t have an account?"}
+        textLink={t("description.signIn.signUpLink")}
+        textInfo={t("description.signIn.alreadyHaveAcc")}
       />
     </div>
   );
