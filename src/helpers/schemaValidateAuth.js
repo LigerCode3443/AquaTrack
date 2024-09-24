@@ -23,3 +23,9 @@ export const schemaLogin = Yup.object({
     .required("Email is required"),
   userPassword: Yup.string().required("Password is required"),
 });
+
+export const schemaEmail = Yup.object({
+  userEmail: Yup.string()
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid email address")
+    .required("Email is required"),
+});
