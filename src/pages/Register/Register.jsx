@@ -4,6 +4,7 @@ import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/Wrap
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import Logo from "../../components/Logo/Logo";
 import HomeAuthSidebar from "../../components/HomeAuthSidebar/HomeAuthSidebar";
+import LocalizationSwitcher from "../../components/LocalizationSwitcher/LocalizationSwitcher";
 
 import css from "./Register.module.css";
 
@@ -12,7 +13,10 @@ const Register = () => {
     <WrapperForPublicRoutes>
       <HomeAuthSidebar>
         <div className={css.wrapper}>
-          <Logo />
+          <div className={css.header}>
+            <Logo />
+            <LocalizationSwitcher />
+          </div>
           <SignUpForm />
         </div>
       </HomeAuthSidebar>

@@ -13,6 +13,8 @@
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.7",
+    "i18next": "^23.15.1",
+    "i18next-browser-languagedetector": "^8.0.0",
     "modern-normalize": "^3.0.1",
     "rc-slider": "^11.1.6",
     "react": "^18.3.1",

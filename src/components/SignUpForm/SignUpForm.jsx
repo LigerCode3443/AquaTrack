@@ -1,6 +1,7 @@
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useDispatch} from "react-redux";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
 
 import FormAuth from "../FormAuth/FormAuth";
 
@@ -10,11 +11,12 @@ import * as authThunk from "../../redux/auth/operations.js";
 import css from "./SignUpForm.module.css";
 
 const SignUpForm = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schemaValidate.schemaRegister),
   });
@@ -36,30 +38,30 @@ const SignUpForm = () => {
       <FormAuth
         onSubmit={handleSubmit(onSubmit)}
         errors={errors}
-        title={"Sign Up"}
+        title={t("description.signUp.mainTitle")}
         fields={[
           {
             type: "text",
-            label: "Email",
-            placeholder: "Enter your email",
+            label: t("description.signUp.emailLabel"),
+            placeholder: t("description.signUp.emailPlaceholder"),
             register: register("userEmail"),
           },
           {
             type: "password",
-            label: "Password",
-            placeholder: "Enter your password",
+            label: t("description.signUp.passwordLabel"),
+            placeholder: t("description.signUp.passwordPlaceholder"),
             register: register("userPassword"),
           },
           {
             type: "password",
-            label: "Repeat password",
-            placeholder: "Repeat password",
+            label: t("description.signUp.repeatPasswordLabel"),
+            placeholder: t("description.signUp.repeatPasswordPlaceholder"),
             register: register("repeatPassword"),
           },
         ]}
         link={"/signin"}
-        textLink={"Sign In"}
-        textInfo={"Already have account?"}
+        textLink={t("description.signUp.signInLink")}
+        textInfo={t("description.signUp.alreadyHaveAcc")}
       />
     </div>
   );

@@ -1,8 +1,16 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import FieldAuth from "../FieldAuth/FieldAuth";
 import css from "./FormAuth.module.css";
 
-const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors}) => {
+const FormAuth = ({
+  title,
+  fields,
+  link,
+  textLink,
+  textInfo,
+  onSubmit,
+  errors,
+}) => {
   return (
     <>
       <h2 className={css.title}>{title}</h2>
@@ -19,7 +27,9 @@ const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors}) =
                 error={errors[field.register.name]}
               />
               {errors[field.register.name] && (
-                <p className={css.error}>{errors[field.register.name].message}</p>
+                <p className={css.error}>
+                  {errors[field.register.name].message}
+                </p>
               )}
             </li>
           ))}
