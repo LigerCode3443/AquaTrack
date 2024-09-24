@@ -52,7 +52,13 @@ input[type="number"] {
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
-  width: 100%;
+  width: 303px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 438px;
+  }
 }
 
 .header {
