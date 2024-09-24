@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.button {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  /* font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center; */
+  color: #323f47;
+}
+
+.button.en {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../images/switcher/United-Kingdom.png");
+  background-size: cover;
+  opacity: 0.5;
+}
+
+.button.ukr {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../images/switcher/Ukraine.png");
+  background-size: cover;
+  opacity: 0.5;
+}
+.active.button {
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+}
