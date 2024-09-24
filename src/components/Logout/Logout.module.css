@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  width: 516px;
-  max-height: 244px;
+  max-width: 304px;
+  height: 267px;
   justify-content: center;
   align-items: center;
 }
@@ -33,7 +33,7 @@
 
 .btn_wrp {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
 }
 .logout {
@@ -71,19 +71,32 @@
 .cancel:hover {
   background: #c9c6d3;
 }
-@media only screen and (max-width: 767px) {
+.cancel,
+.logout {
+  border-radius: 30px;
+  padding: 14px 129px;
+  min-width: 304px;
+  height: 46px;
+}
+
+@media only screen and (min-width: 768px) {
   .box {
-    max-width: 344px;
-    height: 267px;
+    min-width: 480px;
+    max-height: 160px;
   }
+
   .btn_wrp {
-    flex-direction: column;
+    flex-direction: row;
   }
-  .cancel,
   .logout {
-    border-radius: 30px;
-    padding: 14px 129px;
-    min-width: 304px;
-    height: 46px;
+    padding: 18px 57px;
+    min-width: 173px;
+    height: 60px;
+  }
+
+  .cancel {
+    padding: 18px 59px;
+    min-width: 176px;
+    height: 60px;
   }
 }
