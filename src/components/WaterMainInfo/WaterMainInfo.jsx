@@ -9,8 +9,11 @@ import { getRecordsThunk } from "../../redux/water/operations";
 import { selectTotalConsumed } from "../../redux/water/selectors";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { useTranslation } from "react-i18next";
+import LocalizationSwitcher from "../LocalizationSwitcher/LocalizationSwitcher";
 
 const WaterMainInfo = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const userWaterGoal = useSelector(selectUserWaterGoal);
   const totalConsumed = useSelector(selectTotalConsumed);
@@ -36,12 +39,16 @@ const WaterMainInfo = () => {
 
   return (
     <div className={css.waterTracker}>
-      <h2>AquaTrack</h2>
+      <div className={css.header}>
+        <h2>AquaTrack</h2>
+        <LocalizationSwitcher />
+      </div>
+
       <WaterDailyNorma dailyNorma={dailyNorma / 1000} />
       <WaterProgressBar progress={progress} />
       <button type="button" className={css.btnAddForm} onClick={openModal}>
         <SvgIcon className={css.btnAddFormIcon} id="plusCurrent" />
-        Add water
+        {t("description.norma.addButtonText")}
       </button>
       <ModalWindow isOpen={isModalOpen} onClose={closeModal}>
         <AddWaterForm onClose={closeModal} />

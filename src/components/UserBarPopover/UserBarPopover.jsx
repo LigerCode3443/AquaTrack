@@ -3,6 +3,7 @@ import s from "./UserBarPopover.module.css";
 import SettingsProfile from "../SettingsProfile/SettingsProfile";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export const UserBarPopover = ({
   isLogOutModalOpen,
@@ -11,33 +12,19 @@ export const UserBarPopover = ({
   onLogOutClick,
   onPopoverClose,
 }) => {
-  // const userBarRef = useRef(null);
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (userBarRef.current && !userBarRef.current.contains(event.target)) {
-  //       onLogOutClick(false);
-  //       onSettingsClick(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [onLogOutClick, onSettingsClick]);
-
+  const { t } = useTranslation();
   return (
     <div className={s.wrapper}>
       <div className={s.btn}>
         <button className={s.setting} onClick={onSettingsClick}>
           <SvgIcon id="settings" className={s.svg} />
-          Settings
+          {t("description.userBar.settingText")}
         </button>
       </div>
       <div className={s.btn}>
         <button onClick={onLogOutClick} className={s.exit} type="button">
           <SvgIcon id="log-out" className={s.svg} />
-          Log-out
+          {t("description.userBar.logOutText")}
         </button>
         {/* {isSettingsModalOpen && (
           <SettingsProfile
