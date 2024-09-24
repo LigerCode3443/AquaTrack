@@ -78,7 +78,6 @@ export const forgotPasswordThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const {data} = await trackerApi.post("/users/forgot-password", credentials);
-      console.log(data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -86,5 +85,16 @@ export const forgotPasswordThunk = createAsyncThunk(
   }
 );
 
-//! санка на зміну пароля
-//  /change-password/:verificationToken patch
+export const recoveryPasswordThunk = createAsyncThunk(
+  "recoveryPassword",
+  async (credentials, thunkApi) => {
+    const {verificationToken, ...datas} = credentials;
+    try {
+      const {data} = await trackerApi.patch(`/users/change-password/${verificationToken}`, datas);
+      toast.success("Password changed successfully!");
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

@@ -5,8 +5,19 @@ import css from "./FormAuth.module.css";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import ModalForgotPassword from "../ModalForgotPassword/ModalForgotPassword";
 
-const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors, forgotPassword}) => {
+const FormAuth = ({
+  title,
+  fields,
+  link,
+  textLink,
+  textInfo,
+  onSubmit,
+  errors,
+  forgotPassword,
+  btnTitle,
+}) => {
   const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
+  const btnText = btnTitle ? btnTitle : title;
   return (
     <>
       <h2 className={css.title}>{title}</h2>
@@ -30,7 +41,7 @@ const FormAuth = ({title, fields, link, textLink, textInfo, onSubmit, errors, fo
         </ul>
 
         <button type="submit" className={css.btn}>
-          {title}
+          {btnText}
         </button>
       </form>
 
