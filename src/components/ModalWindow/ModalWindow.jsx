@@ -1,7 +1,6 @@
 import Modal from "react-modal";
 import css from "./ModalWindow.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import { useEffect } from "react";
 
 const customStyles = {
   content: {

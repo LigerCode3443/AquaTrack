@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  padding: 40px;
   width: 516px;
   max-height: 244px;
   justify-content: center;
   align-items: center;
 }
+
 .title {
   font-weight: 700;
   font-size: 28px;
@@ -70,4 +70,20 @@
 
 .cancel:hover {
   background: #c9c6d3;
+}
+@media only screen and (max-width: 767px) {
+  .box {
+    max-width: 344px;
+    height: 267px;
+  }
+  .btn_wrp {
+    flex-direction: column;
+  }
+  .cancel,
+  .logout {
+    border-radius: 30px;
+    padding: 14px 129px;
+    min-width: 304px;
+    height: 46px;
+  }
 }
