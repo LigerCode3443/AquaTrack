@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
-import { refreshThunk, updateUserThunk } from "../../redux/auth/operations.js";
+import { updateUserThunk } from "../../redux/auth/operations.js";
 import SvgIcon from "../SvgIcon/SvgIcon";
 
 const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
@@ -22,10 +22,6 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
   const [time, setTime] = useState(userData.activeTime);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(refreshThunk());
-  }, [dispatch]);
 
   const UserSchema = Yup.object().shape({
     gender: Yup.string(),
