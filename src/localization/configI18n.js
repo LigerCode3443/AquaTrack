@@ -11,13 +11,14 @@ import {
   monthNames,
   daysOfWeek,
   calendarTitles,
+  SettingsProfileText,
 } from "./localization.js";
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: false,
+    debug: false, // Enable debug mode
     fallbackLng: "en",
     resources: {
       en: {
@@ -32,6 +33,7 @@ i18n
             month: monthNames.en,
             day: daysOfWeek.en,
             titles: calendarTitles.en,
+            SettingsProfile: SettingsProfileText.en,
           },
         },
       },
@@ -47,8 +49,15 @@ i18n
             month: monthNames.ukr,
             day: daysOfWeek.ukr,
             titles: calendarTitles.ukr,
+            SettingsProfile: SettingsProfileText.ukr,
           },
         },
       },
     },
+  })
+  .then(() => {
+    console.log("Current language:", i18n.language);
+  })
+  .catch((err) => {
+    console.error("i18next initialization error:", err);
   });
