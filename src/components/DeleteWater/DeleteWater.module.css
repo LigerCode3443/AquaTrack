@@ -13,11 +13,11 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 20px; /* Додаємо відступ між текстом і кнопками */
+  margin-top: 20px;
 }
 
 .confirmButton {
-  background-color: red; /* Червоний колір для кнопки видалення */
+  background-color: red;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -25,11 +25,9 @@
 }
 
 .cancelButton {
-  background-color: lightgray; /* Світло-сірий для кнопки скасування */
+  background-color: lightgray;
   color: black;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
 }
-
-/* Можливо, вам знадобляться додаткові стилі для інших елементів */

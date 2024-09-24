@@ -4,22 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 import { useEffect } from "react";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
-const WaterList = ({ onEditWater, onDeleteWater }) => {
-  const data = useSelector(selectOneDayRecords);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const date = new Date();
-    dispatch(
-      getByOneDayRecordsThunk({
-        year: date.getFullYear(),
-        month: date.getMonth(),
-        day: date.getDate(),
-      })
-    );
-  }, [dispatch]);
 
 const WaterList = ({
+  onEditWater,
+  onDeleteWater,
   waterData = [
     {
       userWaterGoal: 1500,
@@ -27,6 +15,7 @@ const WaterList = ({
       quantity: 250,
       _id: "66e9c7ed994cd2e9ea7c177e",
     },
+
     {
       userWaterGoal: 1500,
       date: "2024-09-17T18:09:08.000Z",
@@ -46,12 +35,25 @@ const WaterList = ({
       _id: "66ea7d5efad188b6b5c10cdb",
     },
   ],
-  onEditWater,
-  onDeleteWater,
 }) => {
+  // const data = useSelector(selectOneDayRecords);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   const date = new Date();
+  //   dispatch(
+  //     getByOneDayRecordsThunk({
+  //       year: date.getFullYear(),
+  //       month: date.getMonth(),
+  //       day: date.getDate(),
+  //     })
+  //   );
+  // }, [dispatch]);
+
   return (
     <div className={s.waterList}>
-      {data.records.map((entry) => (
+      {/* {data.records.map((entry) => ( */}
+      {waterData.map((entry) => (
         <WaterCard
           key={entry._id}
           quantity={entry.quantity}
