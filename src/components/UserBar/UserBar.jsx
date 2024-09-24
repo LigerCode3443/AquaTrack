@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 import s from "./UserBar.module.css";
 import avatar from "../../images/avatar/avatars.png";
@@ -6,29 +6,31 @@ import { UserBarPopover } from "../UserBarPopover/UserBarPopover";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import Logout from "../Logout/Logout";
+import SettingsProfile from "../SettingsProfile/SettingsProfile";
+import { useTranslation } from "react-i18next";
 
 const UserBar = () => {
+  const { t } = useTranslation();
   const user = useSelector(selectUser);
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
-  const userBarRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (userBarRef.current && !userBarRef.current.contains(event.target)) {
-        setIsPopoverOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [userBarRef]);
 
   const togglePopover = () => {
     setIsPopoverOpen(!isPopoverOpen);
+  };
+
+  const handleLogoutOpen = () => {
+    setIsLogOutModalOpen(true);
+
+    setIsPopoverOpen(false);
+  };
+  const handleSettingsOpen = () => {
+    setIsSettingsModalOpen(true);
+
+    setIsPopoverOpen(false);
   };
   const userName = user.userEmail?.slice(0, user.userEmail?.indexOf("@"));
   const actualName = user.userName ? user.userName : userName;
@@ -36,26 +38,18 @@ const UserBar = () => {
   return (
     <div className={s.wrapper}>
       <h2 className={s.name}>
-        Hello,<span>{actualName}</span>
+        {t("description.userBar.helloText")}
+        <span>{actualName}</span>
       </h2>
       <div className={s.wrapperBox}>
-        <button className={s.bar} ref={userBarRef} onClick={togglePopover}>
+        <button className={s.bar} onClick={togglePopover}>
           <h3 className={s.s_name}>{actualName}</h3>
           <img
             src={user.userAvatar ? user.userAvatar : avatar}
             alt="avatar"
             className={s.img}
           />
-          {/* 
-          <svg
-            width="12"
-            height="8"
-            viewBox="0 0 12 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M1 1.5L6 6.5L11 1.5" stroke="white" />
-          </svg> */}
+
           <SvgIcon
             id="arrow-down"
             width={12}
@@ -67,9 +61,23 @@ const UserBar = () => {
           <UserBarPopover
             isLogOutModalOpen={isLogOutModalOpen}
             isSettingsModalOpen={isSettingsModalOpen}
-            onSettingsClick={() => setIsSettingsModalOpen(true)}
-            onLogOutClick={() => setIsLogOutModalOpen(true)}
-            onClose={() => setIsPopoverOpen(false)}
+            onSettingsClick={handleSettingsOpen}
+            onLogOutClick={handleLogoutOpen}
+            onPopoverClose={() => setIsPopoverOpen(false)}
+          />
+        )}
+        {isSettingsModalOpen && (
+          <SettingsProfile
+            onPopoverClose={() => setIsPopoverOpen(false)}
+            isOpen={isSettingsModalOpen}
+            onClose={() => setIsSettingsModalOpen(false)}
+          />
+        )}
+        {isLogOutModalOpen && (
+          <Logout
+            onPopoverClose={() => setIsPopoverOpen(false)}
+            isOpen={isLogOutModalOpen}
+            onClose={() => setIsLogOutModalOpen(false)}
           />
         )}
       </div>

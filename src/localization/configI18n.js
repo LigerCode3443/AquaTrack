@@ -1,13 +1,7 @@
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import {
-  signUpText,
-  signInText,
-  informSectionText,
-  welcomeSectionText,
-  modalForgotPasswordText,
-} from "./localization";
+import {signUpText, signInText, informSectionText, welcomeSectionText} from "./localization";
 
 i18n
   .use(LanguageDetector)
@@ -23,6 +17,11 @@ i18n
             signIn: signInText.en,
             inform: informSectionText.en,
             hero: welcomeSectionText.en,
+            norma: dailyNormaText.en,
+            userBar: userBarText.en,
+            month: monthNames.en,
+            day: daysOfWeek.en,
+            titles: calendarTitles.en,
             modalForgotPassword: modalForgotPasswordText.en,
           },
         },
@@ -34,6 +33,11 @@ i18n
             signIn: signInText.ukr,
             inform: informSectionText.ukr,
             hero: welcomeSectionText.ukr,
+            norma: dailyNormaText.ukr,
+            userBar: userBarText.ukr,
+            month: monthNames.ukr,
+            day: daysOfWeek.ukr,
+            titles: calendarTitles.ukr,
             modalForgotPassword: modalForgotPasswordText.ukr,
           },
         },

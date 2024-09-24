@@ -14,7 +14,7 @@ const DailyInfo = ({ waterData }) => {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedWaterData, setSelectedWaterData] = useState(null);
 
-  const date = useSelector(selectOneDayRecords).date;
+  const data = useSelector(selectOneDayRecords);
 
   const handleAddWater = () => setAddModalOpen(true);
   const closeAddModal = () => setAddModalOpen(false);
@@ -39,12 +39,13 @@ const DailyInfo = ({ waterData }) => {
     setSelectedWaterData(null);
   };
 
-  const isToday = new Date().toDateString() === new Date(date).toDateString();
+  const isToday =
+    new Date().toDateString() === new Date(data.date).toDateString();
 
   return (
     <div className={s.dailyInfo}>
       <div className={s.header}>
-        <h2>{isToday ? "Today" : new Date(date).toLocaleDateString()}</h2>
+        <h2>{isToday ? "Today" : new Date(data.date).toLocaleDateString()}</h2>
         <button onClick={handleAddWater}>
           <SvgIcon className={s.plusIcon} id="plus" />
           Add water

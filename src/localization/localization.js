@@ -82,6 +82,99 @@ export const welcomeSectionText = {
   },
 };
 
+export const dailyNormaText = {
+  en: {
+    normaText: "My daily norma",
+    liter: "L",
+    todayText: "Today",
+    addButtonText: "Add water",
+  },
+  ukr: {
+    normaText: "Моя денна норма",
+    liter: "Л",
+    todayText: "Сьогодні",
+    addButtonText: "Додати воду",
+  },
+};
+
+export const userBarText = {
+  en: {
+    helloText: "Hello,",
+    settingText: "Settings",
+    logOutText: "Log out",
+  },
+  ukr: {
+    helloText: "Вітаємо,",
+    settingText: "Налаштування",
+    logOutText: "Вихід",
+  },
+};
+
+export const monthNames = {
+  en: {
+    January: "January",
+    February: "February",
+    March: "March",
+    April: "April",
+    May: "May",
+    June: "June",
+    July: "July",
+    August: "August",
+    September: "September",
+    October: "October",
+    November: "November",
+    December: "December",
+  },
+  ukr: {
+    January: "Січень",
+    February: "Лютий",
+    March: "Березень",
+    April: "Квітень",
+    May: "Травень",
+    June: "Червень",
+    July: "Липень",
+    August: "Серпень",
+    September: "Вересень",
+    October: "Жовтень",
+    November: "Листопад",
+    December: "Грудень",
+  },
+};
+
+export const daysOfWeek = {
+  en: {
+    Monday: "Mon",
+    Tuesday: "Tue",
+    Wednesday: "Wed",
+    Thursday: "Thu",
+    Friday: "Fri",
+    Saturday: "Sat",
+    Sunday: "Sun",
+  },
+  ukr: {
+    Monday: "Пн",
+    Tuesday: "Вт",
+    Wednesday: "Ср",
+    Thursday: "Чт",
+    Friday: "Пт",
+    Saturday: "Сб",
+    Sunday: "Нд",
+  },
+};
+
+export const calendarTitles = {
+  en: {
+    statisticsText: "Statistics",
+    monthText: "Month",
+    ml: "ml",
+  },
+  ukr: {
+    statisticsText: "Статистика",
+    monthText: "Місяць",
+    ml: "мл",
+  },
+};
+
 export const modalForgotPasswordText = {
   en: {
     subtitleText: "Password recovery",
