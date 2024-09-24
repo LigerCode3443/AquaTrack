@@ -6,7 +6,7 @@ import {
   signInText,
   informSectionText,
   welcomeSectionText,
-} from "./localization";
+} from "./localization.js";
 
 i18n
   .use(LanguageDetector)
