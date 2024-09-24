@@ -29,3 +29,18 @@ export const schemaEmail = Yup.object({
     .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid email address")
     .required("Email is required"),
 });
+
+export const schemaChangePassword = Yup.object({
+  userNewPassword: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .max(12, "Password must not exceed 12 characters")
+    .matches(
+      /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{6,12}$/,
+      "Password must have a number, a letter, and no spaces"
+    )
+    .required("Password is required"),
+
+  repeatNewPassword: Yup.string()
+    .oneOf([Yup.ref("userNewPassword"), null], "Passwords do not match!")
+    .required("Repeat password is required"),
+});
