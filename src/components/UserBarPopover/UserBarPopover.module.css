@@ -21,18 +21,18 @@
   font-weight: 700;
   font-size: 15px;
   line-height: 1.49333;
-  color: rgba(50, 63, 71, 0.4);
+  color: #323f47;
   background-color: transparent;
 }
-.setting:hover,
-.exit:hover {
-  color: #323f47;
-}
+
 .btn button {
   display: flex;
   align-items: center;
+  opacity: 0.4;
 }
-
+.btn button:hover {
+  opacity: 1;
+}
 @media only screen and (min-width: 768px) {
   .wrapper {
     min-width: 157px;

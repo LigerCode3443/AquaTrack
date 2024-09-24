@@ -5,6 +5,7 @@ import avatar from "../../images/avatar/avatars.png";
 import { UserBarPopover } from "../UserBarPopover/UserBarPopover";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
+import SvgIcon from "../SvgIcon/SvgIcon";
 
 const UserBar = () => {
   const user = useSelector(selectUser);
@@ -45,9 +46,8 @@ const UserBar = () => {
             alt="avatar"
             className={s.img}
           />
-
+          {/* 
           <svg
-            className={`${s.accardion} ${isPopoverOpen ? s.accardionOpen : ""}`}
             width="12"
             height="8"
             viewBox="0 0 12 8"
@@ -55,9 +55,14 @@ const UserBar = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M1 1.5L6 6.5L11 1.5" stroke="white" />
-          </svg>
+          </svg> */}
+          <SvgIcon
+            id="arrow-down"
+            width={12}
+            height={8}
+            className={`${s.accardion} ${isPopoverOpen ? s.accardionOpen : ""}`}
+          />
         </button>
-
         {isPopoverOpen && (
           <UserBarPopover
             isLogOutModalOpen={isLogOutModalOpen}

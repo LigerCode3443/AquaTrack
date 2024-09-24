@@ -16,7 +16,7 @@ const CalendarItem = ({ item, isToday }) => {
       getByOneDayRecordsThunk({
         year: date.getFullYear(),
         month: date.getMonth(),
-        day: date.gatDate(),
+        day: date.getDate(),
       })
     );
   };

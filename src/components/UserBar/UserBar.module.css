@@ -64,8 +64,9 @@
 }
 
 .accardion {
-  transition: transform 2 ease;
+  transition: transform 0.25s ease;
 }
+
 .accardionOpen {
   transform: rotate(180deg);
 }

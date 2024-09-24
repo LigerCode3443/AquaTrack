@@ -5,12 +5,16 @@ import EditWaterForm from "../EditWaterForm/EditWaterForm";
 import DeleteWaterForm from "../DeleteWater/DeleteWater";
 import s from "./DailyInfo.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { useSelector } from "react-redux";
+import { selectOneDayRecords } from "../../redux/water/selectors";
 
-const DailyInfo = ({ date, waterData }) => {
+const DailyInfo = ({ waterData }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedWaterData, setSelectedWaterData] = useState(null);
+
+  const date = useSelector(selectOneDayRecords).date;
 
   const handleAddWater = () => setAddModalOpen(true);
   const closeAddModal = () => setAddModalOpen(false);

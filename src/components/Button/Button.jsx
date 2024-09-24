@@ -17,11 +17,7 @@ const Button = ({
 
   return (
     <button className={buttonClass} {...props}>
-      {icon && (
-        <span className={styles.icon}>
-          <SvgIcon id={icon} width={iconWidth} height={iconHeight} />
-        </span>
-      )}
+      {icon && <SvgIcon id={icon} width={iconWidth} height={iconHeight} />}
       {children && <span className={styles["btn-text"]}>{children}</span>}
     </button>
   );
