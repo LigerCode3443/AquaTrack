@@ -1,7 +1,7 @@
 import s from "./Logout.module.css";
-import ModalWindow from "../ModalWindow/ModalWindow";
 import { logoutThunk } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 const Logout = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
