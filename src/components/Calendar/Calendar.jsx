@@ -11,8 +11,10 @@ import {
   getRecordsThunk,
 } from "../../redux/water/operations";
 import { addEmptyDays, splitIntoChunks, convertData } from "./helper";
+import { useTranslation } from "react-i18next";
 
 const Calendar = () => {
+  const { t } = useTranslation();
   const [showStatistics, setShowStatistc] = useState(false);
   const [selectedDate, setSelectedDate] = useState({
     year: new Date().getFullYear(),
@@ -59,13 +61,23 @@ const Calendar = () => {
 
   const chunks = splitIntoChunks(addEmptyDays(data), 7);
 
-  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const daysOfWeek = [
+    t("description.day.Monday"),
+    t("description.day.Tuesday"),
+    t("description.day.Wednesday"),
+    t("description.day.Thursday"),
+    t("description.day.Friday"),
+    t("description.day.Saturday"),
+    t("description.day.Sunday"),
+  ];
 
   return (
     <div>
       <div className={css["pagination-container"]}>
         <h3 className={css.header}>
-          {showStatistics ? "Statistics" : "Month"}
+          {showStatistics
+            ? t("description.titles.statisticsText")
+            : t("description.titles.monthText")}
         </h3>
         <CalendarPagination
           selectedDate={selectedDate}

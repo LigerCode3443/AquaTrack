@@ -6,8 +6,10 @@ import { UserBarPopover } from "../UserBarPopover/UserBarPopover";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { useTranslation } from "react-i18next";
 
 const UserBar = () => {
+  const { t } = useTranslation();
   const user = useSelector(selectUser);
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -36,7 +38,8 @@ const UserBar = () => {
   return (
     <div className={s.wrapper}>
       <h2 className={s.name}>
-        Hello,<span>{actualName}</span>
+        {t("description.userBar.helloText")}
+        <span>{actualName}</span>
       </h2>
       <div className={s.wrapperBox}>
         <button className={s.bar} ref={userBarRef} onClick={togglePopover}>
