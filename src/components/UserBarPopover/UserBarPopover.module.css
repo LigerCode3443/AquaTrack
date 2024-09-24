@@ -1,14 +1,17 @@
 .wrapper {
+  position: absolute;
+  bottom: -180%;
+  left: 5%;
+  z-index: 100;
+  padding: 14px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
+  gap: 8px;
   border-radius: 15px;
   min-width: 137px;
-  height: auto;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: #fff;
-  margin-left: 7px;
-  margin-top: 4px;
 }
 .setting,
 .exit {
@@ -21,17 +24,19 @@
   color: #323f47;
   background-color: transparent;
 }
-.btn {
-  display: flex;
-  flex-direction: column;
-  min-width: 100px;
-  justify-content: center;
-  align-items: center;
-}
 
-@media (min-width: 768px) {
+.btn button {
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
+.btn button:hover {
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
   .wrapper {
-    max-width: 157px;
+    min-width: 157px;
     height: 82px;
+    bottom: -160%;
   }
 }
