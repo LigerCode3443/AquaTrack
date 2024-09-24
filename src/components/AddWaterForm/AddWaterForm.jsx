@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
-import { createWaterThunk } from "../../redux/water/operations.js";
+import {
+  createWaterThunk,
+  getRecordsThunk,
+} from "../../redux/water/operations.js";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 
 const validationSchema = Yup.object().shape({
@@ -17,7 +20,7 @@ const validationSchema = Yup.object().shape({
   time: Yup.string().required("Час запису обов'язковий"),
 });
 
-const AddWaterForm = () => {
+const AddWaterForm = ({ onClose }) => {
   const [counter, setCounter] = useState(50);
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
@@ -77,7 +80,18 @@ const AddWaterForm = () => {
         })
       ).unwrap();
 
+      const currentDate = new Date();
+      await dispatch(
+        getRecordsThunk({
+          year: currentDate.getFullYear(),
+          month: currentDate.getMonth() + 1,
+          day: currentDate.getDate(),
+        })
+      ).unwrap();
+
       toast.success("Запис про воду успішно створено!");
+
+      onClose();
     } catch (error) {
       if (error.status === 400) {
         toast.error(
