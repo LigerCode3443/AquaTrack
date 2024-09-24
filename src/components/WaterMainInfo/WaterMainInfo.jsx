@@ -32,7 +32,13 @@ const WaterMainInfo = () => {
       <h2>AquaTrack</h2>
       <WaterDailyNorma dailyNorma={dailyNorma / 1000} />
       <WaterProgressBar progress={progress} />
-      <Button variant="secondary" className={css.btnAddForm} icon="plus">
+      <Button
+        variant="secondary"
+        className={css.btnAddForm}
+        icon="whitePlus"
+        iconHeight={24}
+        iconWidth={24}
+      >
         Add water
       </Button>
     </div>
