@@ -5,14 +5,15 @@ import EditWaterForm from "../EditWaterForm/EditWaterForm";
 import DeleteWaterForm from "../DeleteWater/DeleteWater";
 import s from "./DailyInfo.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createWaterThunk,
   updateWaterThunk,
 } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import { selectOneDayRecords } from "../../redux/water/selectors";
 
-const DailyInfo = ({ waterData, selectedDate }) => {
+const DailyInfo = ({ waterData }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -55,19 +56,14 @@ const DailyInfo = ({ waterData, selectedDate }) => {
 
   const isToday =
     new Date().toDateString() === new Date(data.date).toDateString();
-  const isToday = selectedDate.toDateString() === new Date().toDateString();
 
   return (
     <div className={s.dailyInfo}>
       <div className={s.header}>
         <h2>{isToday ? "Today" : new Date(data.date).toLocaleDateString()}</h2>
-        <button onClick={handleAddWater}>
-          <SvgIcon className={s.plusIcon} id="plus" />
-          Add water
-        <h2>{isToday ? "Today" : selectedDate.toDateString()}</h2>
         <button className={s.btnPlus} onClick={handleAddWater}>
           <span className={s.circle}>
-            <SvgIcon className={s.plusIcon} id="plus" />
+            <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
           </span>
           <span className={s.textAdd}>Add water</span>
         </button>
