@@ -20,7 +20,7 @@ const WaterList = ({ onEditWater, onDeleteWater }) => {
   }, [dispatch]);
   return (
     <div className={s.waterList}>
-      {data.map((entry) => (
+      {data.records.map((entry) => (
         <WaterCard
           key={entry._id}
           quantity={entry.quantity}
