@@ -9,26 +9,23 @@
 }
 
 .title {
+  margin-bottom: 16px;
+
   font-weight: 700;
-  font-size: 28px;
-  line-height: 1.14286;
+  font-size: 20px;
+  line-height: 1.2;
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 24px;
 }
 .text {
+  margin-bottom: 28px;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 1.33333;
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
 }
 
 .btn_wrp {
@@ -80,6 +77,17 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .text {
+    line-height: 1.33;
+    margin-bottom: 24px;
+
+    font-size: 18px;
+  }
+  .title {
+    font-size: 28px;
+
+    margin-bottom: 24px;
+  }
   .box {
     min-width: 480px;
     max-height: 160px;
