@@ -33,6 +33,7 @@ export const signInText = {
     mainButton: "Sign In",
     alreadyHaveAcc: "Don`t have an account?",
     signUpLink: "Sign Up",
+    forgotPassword: "Forgot your password?",
   },
   ukr: {
     mainTitle: "Увійти",
@@ -43,6 +44,7 @@ export const signInText = {
     mainButton: "Увійти",
     alreadyHaveAcc: "Не маєте акаунту?",
     signUpLink: "Зареєструватись",
+    forgotPassword: "Забули пароль?",
   },
 };
 
@@ -77,5 +79,18 @@ export const welcomeSectionText = {
     titleText: "Трекер споживання води",
     btnTryText: "Спробувати",
     btnSignInText: "Увійти",
+  },
+};
+
+export const modalForgotPasswordText = {
+  en: {
+    subtitleText: "Password recovery",
+    btnModalText: "Send",
+    emailPlaceholder: "Enter your email",
+  },
+  ukr: {
+    subtitleText: "Відновлення пароля",
+    btnModalText: "Відправити",
+    emailPlaceholder: "Введіть вашу електронну пошту",
   },
 };
