@@ -1,4 +1,9 @@
-import {createSlice, isFulfilled, isPending, isRejected} from "@reduxjs/toolkit";
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from "@reduxjs/toolkit";
 import {
   loginThunk,
   logoutThunk,
@@ -22,11 +27,11 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.userData;
         state.isLoggedIn = true;
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.userData;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
