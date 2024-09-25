@@ -1,5 +1,5 @@
-import {Route, Routes} from "react-router-dom";
-import {Toaster} from "react-hot-toast";
+import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import "./App.css";
 import PublicRoute from "./routes/PublicRoute";
 import Home from "./pages/Home/Home";
@@ -8,11 +8,12 @@ import Register from "./pages/Register/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import Tracker from "./pages/Tracker/Tracker";
 import Container from "./components/Container/Container";
-import {useDispatch, useSelector} from "react-redux";
-import {selectIsRefresh} from "./redux/auth/selectors";
-import {useEffect} from "react";
-import {refreshThunk} from "./redux/auth/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsRefresh } from "./redux/auth/selectors";
+import { useEffect } from "react";
+import { refreshThunk } from "./redux/auth/operations";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Container>
