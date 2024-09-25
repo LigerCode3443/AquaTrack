@@ -33,6 +33,7 @@ export const signInText = {
     mainButton: "Sign In",
     alreadyHaveAcc: "Don`t have an account?",
     signUpLink: "Sign Up",
+    forgotPassword: "I Forgot My Password",
   },
   ukr: {
     mainTitle: "Увійти",
@@ -43,6 +44,7 @@ export const signInText = {
     mainButton: "Увійти",
     alreadyHaveAcc: "Не маєте акаунту?",
     signUpLink: "Зареєструватись",
+    forgotPassword: "Забули пароль?",
   },
 };
 
@@ -173,39 +175,118 @@ export const calendarTitles = {
   },
 };
 
-export const signOutText = {
+export const SettingsProfileText = {
   en: {
-    titleText: "Log out",
-    warningText: "Do you really want to leave?",
-    cancelBtn: "Cancel",
-  },
-  ukr: {
-    titleText: "Вийти",
-    warningText: "Ви дійсно хочете вийти?",
-    cancelBtn: "Скасувати",
-  },
-};
-
-export const addWaterText = {
-  en: {
-    titleText: "Add water",
-    chooseValueText: "Choose a value:",
-    amountWaterText: "Amount of water:",
-    recordingTimeText: "Recording time:",
-    usedWaterText: "Enter the value of the water used:",
+    setting: "Setting",
+    uploadPhotoBtn: "Upload a photo",
+    yourGenderLabel: "Your gender identity",
+    femaleGenderLabel: "Female",
+    maleGenderLabel: "Male",
+    yourNameLabel: "Your name",
+    placeYourName: "Name",
+    labelEmail: "Email",
+    placeEmail: "Email",
+    dailyNormah: "My daily norma",
+    forWomanP: "For woman:",
+    forManP: "For man:",
+    starText:
+      "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
+    activeText: "Active time in hours",
+    infoUser: "Your weight in kilograms:",
+    TheTimeSportsLabel: "The time of active participation in sports:",
+    requiredWater: "The required amount of water in liters per day:",
+    writeDownLabel: "Write down how much water you will drink:",
+    l: "L",
     saveBtn: "Save",
-    ml: "ml",
+    success: "Your data has been updated successfully",
+    validation: {
+      genderRequired: "Gender is required!",
+      nameRequired: "Name is required!",
+      nameMin: "Name must be at least 3 characters!",
+      nameMax: "Name must be no more than 50 characters!",
+      emailRequired: "Email is required!",
+      emailInvalid: "Must be a valid email!",
+      weightRequired: "Weight is required!",
+      weightNumber: "Weight must be a number!",
+      timeRequired: "Time is required!",
+      timeNumber: "Time must be a number!",
+      waterRequired: "Water intake is required!",
+      waterNumber: "Water must be a number!",
+    },
   },
   ukr: {
-    titleText: "Додати воду",
-    chooseValueText: "Виберіть значення:",
-    amountWaterText: "Кількість води:",
-    recordingTimeText: "Час прийому:",
-    usedWaterText: "Введіть значення випитої води:",
+    setting: "Налаштування",
+    uploadPhotoBtn: "Завантажити фото",
+    yourGenderLabel: "Ваша гендерна ідентичність",
+    femaleGenderLabel: "Жінка",
+    maleGenderLabel: "Чоловік",
+    yourNameLabel: "Ваше ім'я",
+    placeYourName: "Ім'я",
+    labelEmail: "Електронна пошта",
+    placeEmail: "Електронна пошта",
+    dailyNormah: "Моя денна норма",
+    forWomanP: "Для жінки:",
+    forManP: "Для чоловіка:",
+    starText:
+      "V - об'єм норми води в літрах на добу, M - маса вашого тіла, T - час активних занять спортом або іншим видом діяльності, співмірним за навантаженнями (за їх відсутності ви потрібно встановити 0)",
+    activeText: "Час активності в годинах",
+    infoUser: "Ваша вага в кілограмах:",
+    TheTimeSportsLabel: "Час активного заняття спортом:",
+    requiredWater: "Необхідна кількість води в літрах на день:",
+    writeDownLabel: "Запишіть, скільки води ви будете пити:",
+    l: "л",
     saveBtn: "Зберегти",
-    ml: "мл",
-  },
-};
+    success: "Ваші дані успішно оновлено",
+    validation: {
+      genderRequired: "Вкажіть вашу стать!",
+      nameRequired: "Ім'я обов'язкове!",
+      nameMin: "Ім'я повинно містити щонайменше 3 символи!",
+      nameMax: "Ім'я не повинно перевищувати 50 символів!",
+      emailRequired: "Електронна пошта обов'язкова!",
+      emailInvalid: "Введіть коректну електронну пошту!",
+      weightRequired: "Вага обов'язкова!",
+      weightNumber: "Вага повинна бути числом!",
+      timeRequired: "Час обов'язковий!",
+      timeNumber: "Час повинен бути числом!",
+      waterRequired: "Вкажіть кількість води!",
+      waterNumber: "Кількість води повинна бути числом!",
+    },
+
+    export const signOutText = {
+      en: {
+        titleText: "Log out",
+        warningText: "Do you really want to leave?",
+        cancelBtn: "Cancel",
+      },
+      ukr: {
+        titleText: "Вийти",
+        warningText: "Ви дійсно хочете вийти?",
+        cancelBtn: "Скасувати",
+      },
+    };
+
+    export const addWaterText = {
+      en: {
+        titleText: "Add water",
+        chooseValueText: "Choose a value:",
+        amountWaterText: "Amount of water:",
+        recordingTimeText: "Recording time:",
+        usedWaterText: "Enter the value of the water used:",
+        saveBtn: "Save",
+        ml: "ml",
+      },
+      ukr: {
+        titleText: "Додати воду",
+        chooseValueText: "Виберіть значення:",
+        amountWaterText: "Кількість води:",
+        recordingTimeText: "Час прийому:",
+        usedWaterText: "Введіть значення випитої води:",
+        saveBtn: "Зберегти",
+        ml: "мл",
+      },
+    };
+  }
+}
 
 export const editWaterText = {
   en: {
@@ -308,10 +389,45 @@ export const validationAuthText = {
     requiredEmail: "Електронна пошта є обов'язковою",
     passwordMin: "Пароль повинен містити принаймні 6 символів",
     passwordMax: "Пароль не повинен перевищувати 12 символів",
-    passwordPattern:
-      "Пароль повинен містити цифру, літеру та не містити пробіли",
+    passwordPattern: "Пароль повинен містити цифру, літеру та не містити пробіли",
     passwordRequired: "Пароль є обов'язковим",
     passwordMatch: "Паролі не співпадають!",
     repeatPassword: "Повторення паролю є обов'язковим",
+  },
+};
+
+export const modalForgotPasswordText = {
+  en: {
+    subtitleText: "Password recovery",
+    btnModalText: "Send",
+    emailPlaceholder: "Enter your email",
+  },
+  ukr: {
+    subtitleText: "Відновлення пароля",
+    btnModalText: "Відправити",
+    emailPlaceholder: "Введіть вашу електронну пошту",
+  },
+};
+
+export const restorePasswordText = {
+  en: {
+    subtitleText: "Password Recovery",
+    btnText: "Send",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your new password",
+    repeatPasswordLabel: "Repeat Password",
+    repeatPasswordPlaceholder: "Repeat your password",
+    text: "Remember your password?",
+    signInLink: "Sign In",
+  },
+  ukr: {
+    subtitleText: "Відновлення паролю",
+    btnText: "Відправити",
+    passwordLabel: "Пароль",
+    passwordPlaceholder: "Введіть ваш новий пароль",
+    repeatPasswordLabel: "Повторіть пароль",
+    repeatPasswordPlaceholder: "Повторіть ваш пароль",
+    text: "Пам'ятаєте свій пароль?",
+    signInLink: "Увійти",
   },
 };

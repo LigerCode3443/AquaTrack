@@ -6,6 +6,7 @@ input {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 0;
 }
 
 .label_text {
