@@ -22,6 +22,7 @@ import {
   restorePasswordText,
   toastAlerts,
   validationWaterForm,
+  notFoundText,
 } from "./localization";
 
 i18n
@@ -54,6 +55,8 @@ i18n
             restorePassword: restorePasswordText.en,
             toastAlerts: toastAlerts.en,
             validationWater: validationWaterForm.en,
+            notFoundText: notFoundText.en,
+
           },
         },
       },
@@ -80,16 +83,13 @@ i18n
             restorePassword: restorePasswordText.ukr,
             toastAlerts: toastAlerts.ukr,
             validationWater: validationWaterForm.ukr,
+            notFoundText: notFoundText.ukr,
+
           },
         },
       },
     },
   })
-  .then(() => {
-    console.log("Current language:", i18n.language);
-  })
-  .catch((err) => {
-    console.error("i18next initialization error:", err);
-  });
+
 
 export default i18n;
