@@ -20,6 +20,8 @@ import {
   deleteWaterText,
   validationAuthText,
   restorePasswordText,
+  toastAlerts,
+  validationWaterForm,
   notFoundText,
 } from "./localization";
 
@@ -27,7 +29,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: false, // Enable debug mode
+    debug: false,
     fallbackLng: "en",
     resources: {
       en: {
@@ -51,7 +53,10 @@ i18n
             validationAuth: validationAuthText.en,
             modalForgotPassword: modalForgotPasswordText.en,
             restorePassword: restorePasswordText.en,
+            toastAlerts: toastAlerts.en,
+            validationWater: validationWaterForm.en,
             notFoundText: notFoundText.en,
+
           },
         },
       },
@@ -76,17 +81,15 @@ i18n
             validationAuth: validationAuthText.ukr,
             modalForgotPassword: modalForgotPasswordText.ukr,
             restorePassword: restorePasswordText.ukr,
+            toastAlerts: toastAlerts.ukr,
+            validationWater: validationWaterForm.ukr,
             notFoundText: notFoundText.ukr,
+
           },
         },
       },
     },
   })
-  .then(() => {
-    console.log("Current language:", i18n.language);
-  })
-  .catch((err) => {
-    console.error("i18next initialization error:", err);
-  });
+
 
 export default i18n;

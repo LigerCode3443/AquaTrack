@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import s from "./DeleteWater.module.css";
 import { deleteWaterThunk } from "../../redux/water/operations";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteWater({ waterCardId, onClose }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const handleConfirmDelete = () => {
@@ -24,15 +26,15 @@ export default function DeleteWater({ waterCardId, onClose }) {
         ></span>
       </div>
       <div className={s.textCont}>
-        <h2 className={s.title}>Delete entry</h2>
-        <p className={s.text}>Are you sure you want to delete the entry?</p>
+        <h2 className={s.title}>{t("description.deleteWater.title")}</h2>
+        <p className={s.text}>{t("description.deleteWater.warning")}</p>
       </div>
       <div className={s.buttonContainer}>
         <button onClick={handleConfirmDelete} className={s.confirmButton}>
-          Delete
+          {t("description.deleteWater.deleteBtn")}
         </button>
         <button onClick={onClose} className={s.cancelButton}>
-          Cancel
+          {t("description.deleteWater.cancelBtn")}
         </button>
       </div>
     </div>

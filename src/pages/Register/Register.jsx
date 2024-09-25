@@ -15,6 +15,7 @@ const Register = () => {
         <div className={css.wrapper}>
           <div className={css.header}>
             <Logo />
+
             <LocalizationSwitcher />
           </div>
           <SignUpForm />
