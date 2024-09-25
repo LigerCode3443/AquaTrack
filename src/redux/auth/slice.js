@@ -48,8 +48,8 @@ const slice = createSlice({
       .addCase(logoutThunk.fulfilled, () => {
         return initialState;
       })
-      .addCase(recoveryPasswordThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+      .addCase(recoveryPasswordThunk.fulfilled, (state) => {
+        state.isLoading = false;
       })
       .addMatcher(isPending, (state) => {
         state.isLoading = true;
