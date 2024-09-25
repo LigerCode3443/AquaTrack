@@ -6,7 +6,7 @@
   overflow-y: hidden;
   scroll-behavior: smooth;
   max-height: 150px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1439px) {
