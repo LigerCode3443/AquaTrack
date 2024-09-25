@@ -430,3 +430,14 @@ export const restorePasswordText = {
     signInLink: "Увійти",
   },
 };
+
+export const notFoundText = {
+  en: {
+    oopsTitle: "Requested Page Not Found",
+    returnToHomeText: "Return to home page",
+  },
+  ukr: {
+    oopsTitle: "Сторінка не знайдена",
+    returnToHomeText: "Повернутися на домашню сторінку",
+  },
+};

@@ -7,6 +7,7 @@ const PageNotFound = () => {
 
   return (
     <div>
+      <h1 className={css.header}> {t("description.notFoundText.oopsTitle")}</h1>
       <section className={css.errorContainer}>
         <span className={css.four}>
           <span className={css.screenReaderText}>4</span>
@@ -20,7 +21,7 @@ const PageNotFound = () => {
       </section>
       <div className={css.linkContainer}>
         <Link className={css.moreLink} to="/">
-          {}
+          {t("description.notFoundText.returnToHomeText")}
         </Link>
       </div>
     </div>
