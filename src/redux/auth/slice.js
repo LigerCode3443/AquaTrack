@@ -10,11 +10,12 @@ import {
   recoveryPasswordThunk,
   refreshThunk,
   registerThunk,
-} from "./operations";
+} from "./operations.js";
 
 const initialState = {
   user: null,
   token: "",
+  refreshToken: "",
   isLoggedIn: false,
   isLoading: false,
   isRefresh: false,
@@ -32,10 +33,13 @@ const slice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.user = action.payload.userData;
         state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
       })
       .addCase(refreshThunk.fulfilled, (state, action) => {
         state.user = action.payload.userData;
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.isRefresh = false;
       })
