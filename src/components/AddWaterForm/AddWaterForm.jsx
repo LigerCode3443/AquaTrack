@@ -119,6 +119,8 @@ const AddWaterForm = ({ onClose }) => {
             <div className={s.counter_input_wrapper}>
               <input
                 type="number"
+                id="counter"
+                name="counter"
                 value={counter}
                 readOnly
                 className={s.water_counter}
