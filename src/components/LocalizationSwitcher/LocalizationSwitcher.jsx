@@ -23,9 +23,7 @@ export const LocalizationSwitcher = () => {
           className={`${css.button} ${css[lng]} ${
             i18n.resolvedLanguage === lng ? css.active : ""
           }`}
-        >
-          {/* {languages[lng].name} */}
-        </button>
+        ></button>
       ))}
     </div>
   );

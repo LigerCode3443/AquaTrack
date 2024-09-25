@@ -8,11 +8,8 @@
   padding: 10px;
   cursor: pointer;
   position: relative;
-  /* font-size: 16px;
-  font-weight: 700;
-  line-height: 18px;
-  text-align: center; */
   color: #323f47;
+  border-radius: 50%;
 }
 
 .button.en {
