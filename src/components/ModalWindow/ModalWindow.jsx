@@ -14,6 +14,7 @@ const customStyles = {
     boxShadow: "0 4px 50px 0 rgba(0, 0, 0, 0.1)",
     border: "none",
     borderRadius: "15px",
+    maxHeight: "90vh",
     padding: "0px",
   },
   overlay: {
@@ -24,7 +25,7 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-export default function ModalWindow({isOpen, onClose, children}) {
+export default function ModalWindow({ isOpen, onClose, children }) {
   return (
     <Modal
       isOpen={isOpen}
