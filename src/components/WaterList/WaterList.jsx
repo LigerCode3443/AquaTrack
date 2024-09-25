@@ -4,8 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 import { useEffect } from "react";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
+import { useTranslation } from "react-i18next";
 
 const WaterList = ({ onEditWater, onDeleteWater }) => {
+  const { t } = useTranslation();
+
   const data = useSelector(selectOneDayRecords);
   const dispatch = useDispatch();
 
@@ -34,7 +37,7 @@ const WaterList = ({ onEditWater, onDeleteWater }) => {
         ))
       ) : (
         <div className={s.waterPlaceholder}>
-          <p>No water entries today.</p>
+          <p>{t("description.waterList.noWaterRecords")}</p>
         </div>
       )}
     </div>
