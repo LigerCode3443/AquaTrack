@@ -23,6 +23,7 @@ import {
   toastAlerts,
   validationWaterForm,
   notFoundText,
+  waterList,
 } from "./localization";
 
 i18n
@@ -56,7 +57,7 @@ i18n
             toastAlerts: toastAlerts.en,
             validationWater: validationWaterForm.en,
             notFoundText: notFoundText.en,
-
+            waterList: waterList.en,
           },
         },
       },
@@ -84,12 +85,11 @@ i18n
             toastAlerts: toastAlerts.ukr,
             validationWater: validationWaterForm.ukr,
             notFoundText: notFoundText.ukr,
-
+            waterList: waterList.ukr,
           },
         },
       },
     },
-  })
-
+  });
 
 export default i18n;
