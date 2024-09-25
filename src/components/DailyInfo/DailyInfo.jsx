@@ -54,6 +54,21 @@ const DailyInfo = ({ selectedDate }) => {
     }
   }, [selectedDate, dispatch]);
 
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const todayCheck =
     new Date().toLocaleDateString() ===
     new Date(data.date).toLocaleDateString();
@@ -64,7 +79,9 @@ const DailyInfo = ({ selectedDate }) => {
         <h2>
           {todayCheck
             ? "Today"
-            : new Date(data.date).toLocaleDateString().replaceAll("/", ".")}
+            : `${new Date(data.date).getDate()}, ${
+                months[new Date(data.date).getMonth()]
+              }`}
         </h2>
         <button className={s.btnPlus} onClick={handleAddWater}>
           <span className={s.circle}>
