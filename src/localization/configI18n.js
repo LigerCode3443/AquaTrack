@@ -1,11 +1,12 @@
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import {initReactI18next} from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import {
   signUpText,
   signInText,
   informSectionText,
   welcomeSectionText,
+  modalForgotPasswordText,
   dailyNormaText,
   userBarText,
   monthNames,
@@ -17,7 +18,8 @@ import {
   settingsText,
   deleteWaterText,
   validationAuthText,
-} from "./localization.js";
+  restorePasswordText,
+} from "./localization";
 
 i18n
   .use(LanguageDetector)
@@ -44,6 +46,8 @@ i18n
             deleteWater: deleteWaterText.en,
             settings: settingsText.en,
             validationAuth: validationAuthText.en,
+            modalForgotPassword: modalForgotPasswordText.en,
+            restorePassword: restorePasswordText.en,
           },
         },
       },
@@ -65,6 +69,8 @@ i18n
             deleteWater: deleteWaterText.ukr,
             settings: settingsText.ukr,
             validationAuth: validationAuthText.ukr,
+            modalForgotPassword: modalForgotPasswordText.ukr,
+            restorePassword: restorePasswordText.ukr,
           },
         },
       },

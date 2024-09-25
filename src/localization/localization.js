@@ -33,6 +33,7 @@ export const signInText = {
     mainButton: "Sign In",
     alreadyHaveAcc: "Don`t have an account?",
     signUpLink: "Sign Up",
+    forgotPassword: "I Forgot My Password",
   },
   ukr: {
     mainTitle: "Увійти",
@@ -43,6 +44,7 @@ export const signInText = {
     mainButton: "Увійти",
     alreadyHaveAcc: "Не маєте акаунту?",
     signUpLink: "Зареєструватись",
+    forgotPassword: "Забули пароль?",
   },
 };
 
@@ -308,10 +310,45 @@ export const validationAuthText = {
     requiredEmail: "Електронна пошта є обов'язковою",
     passwordMin: "Пароль повинен містити принаймні 6 символів",
     passwordMax: "Пароль не повинен перевищувати 12 символів",
-    passwordPattern:
-      "Пароль повинен містити цифру, літеру та не містити пробіли",
+    passwordPattern: "Пароль повинен містити цифру, літеру та не містити пробіли",
     passwordRequired: "Пароль є обов'язковим",
     passwordMatch: "Паролі не співпадають!",
     repeatPassword: "Повторення паролю є обов'язковим",
+  },
+};
+
+export const modalForgotPasswordText = {
+  en: {
+    subtitleText: "Password recovery",
+    btnModalText: "Send",
+    emailPlaceholder: "Enter your email",
+  },
+  ukr: {
+    subtitleText: "Відновлення пароля",
+    btnModalText: "Відправити",
+    emailPlaceholder: "Введіть вашу електронну пошту",
+  },
+};
+
+export const restorePasswordText = {
+  en: {
+    subtitleText: "Password Recovery",
+    btnText: "Send",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your new password",
+    repeatPasswordLabel: "Repeat Password",
+    repeatPasswordPlaceholder: "Repeat your password",
+    text: "Remember your password?",
+    signInLink: "Sign In",
+  },
+  ukr: {
+    subtitleText: "Відновлення паролю",
+    btnText: "Відправити",
+    passwordLabel: "Пароль",
+    passwordPlaceholder: "Введіть ваш новий пароль",
+    repeatPasswordLabel: "Повторіть пароль",
+    repeatPasswordPlaceholder: "Повторіть ваш пароль",
+    text: "Пам'ятаєте свій пароль?",
+    signInLink: "Увійти",
   },
 };

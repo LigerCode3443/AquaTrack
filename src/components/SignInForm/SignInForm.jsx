@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import {useForm} from "react-hook-form";
+import {useTranslation} from "react-i18next";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useDispatch} from "react-redux";
 
 import FormAuth from "../FormAuth/FormAuth.jsx";
 
@@ -11,13 +11,13 @@ import * as authThunk from "../../redux/auth/operations.js";
 import css from "./SignInForm.module.css";
 
 const SignInForm = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schemaValidate.schemaLogin) });
+    formState: {errors},
+  } = useForm({resolver: yupResolver(schemaValidate.schemaLogin)});
 
   const dispatch = useDispatch();
 
@@ -54,6 +54,7 @@ const SignInForm = () => {
         link={"/signup"}
         textLink={t("description.signIn.signUpLink")}
         textInfo={t("description.signIn.alreadyHaveAcc")}
+        forgotPassword={t("description.signIn.forgotPassword")}
       />
     </div>
   );
