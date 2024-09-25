@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import {motion} from "framer-motion";
 import css from "./ModalWindow.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 
@@ -13,6 +14,7 @@ const customStyles = {
     boxShadow: "0 4px 50px 0 rgba(0, 0, 0, 0.1)",
     border: "none",
     borderRadius: "15px",
+    maxHeight: "90vh",
     padding: "0px",
   },
   overlay: {
@@ -23,7 +25,7 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-export default function ModalWindow({isOpen, onClose, children}) {
+export default function ModalWindow({ isOpen, onClose, children }) {
   return (
     <Modal
       isOpen={isOpen}
@@ -32,10 +34,17 @@ export default function ModalWindow({isOpen, onClose, children}) {
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
     >
-      <button className={css.close} onClick={onClose}>
-        <SvgIcon id="close" width={28} height={28} stroke="#2F2F2F" />
-      </button>
-      <div className={css.wrapper}>{children}</div>
+      <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{duration: 1}}
+      >
+        <button className={css.close} onClick={onClose}>
+          <SvgIcon id="close" width={28} height={28} stroke="#2F2F2F" />
+        </button>
+        <div className={css.wrapper}>{children}</div>
+      </motion.div>
     </Modal>
   );
 }

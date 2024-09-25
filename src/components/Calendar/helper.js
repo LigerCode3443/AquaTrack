@@ -4,7 +4,7 @@ export const addEmptyDays = (record) => {
   const firstDayOfWeek = firstDayDate.getDay();
 
   const lastDayDate = new Date(record[record.length - 1].date);
-  lastDayDate.setDate(firstDayDate.getDate() - 1);
+  lastDayDate.setDate(lastDayDate.getDate() - 1);
   const lastDayOfWeek = lastDayDate.getDay();
 
   const emptyDaysAtStart = [];
@@ -26,6 +26,8 @@ export const splitIntoChunks = (array, chunkSize) => {
   for (let i = 0; i < array.length; i += chunkSize) {
     chunks.push(array.slice(i, i + chunkSize));
   }
+  if (chunks[chunks.length - 1][0].isEmpty) chunks.splice(chunks.length - 1, 1);
+
   return chunks;
 };
 

@@ -4,7 +4,7 @@ import { trackerApi } from "../../config/trackerApi";
 
 const updateData = (thunkApi) => {
   const state = thunkApi.getState();
-  console.log(state.water.records.date);
+
   thunkApi.dispatch(
     getRecordsThunk({
       year: new Date(state.water.records.date).getFullYear(),
@@ -57,7 +57,7 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
 
       return {
         records: data.data,
-        date: new Date(year, month, day).toLocaleDateString(),
+        date: new Date(year, month, day).toString(),
       };
     } catch (error) {
       toast.error(error.message);

@@ -84,7 +84,7 @@ export const welcomeSectionText = {
 
 export const dailyNormaText = {
   en: {
-    normaText: "My daily norma",
+    normaText: "My daily norm",
     liter: "L",
     todayText: "Today",
     addButtonText: "Add water",
@@ -186,7 +186,7 @@ export const SettingsProfileText = {
     placeYourName: "Name",
     labelEmail: "Email",
     placeEmail: "Email",
-    dailyNormah: "My daily norma",
+    dailyNormah: "My daily norm",
     forWomanP: "For woman:",
     forManP: "For man:",
     starText:
@@ -217,7 +217,7 @@ export const SettingsProfileText = {
   ukr: {
     setting: "Налаштування",
     uploadPhotoBtn: "Завантажити фото",
-    yourGenderLabel: "Ваша гендерна ідентичність",
+    yourGenderLabel: "Ваша стать",
     femaleGenderLabel: "Жінка",
     maleGenderLabel: "Чоловік",
     yourNameLabel: "Ваше ім'я",
@@ -473,5 +473,14 @@ export const notFoundText = {
   ukr: {
     oopsTitle: "Сторінка не знайдена",
     returnToHomeText: "Повернутися на домашню сторінку",
+  },
+};
+
+export const waterList = {
+  en: {
+    noWaterRecords: "No records for this day",
+  },
+  ukr: {
+    noWaterRecords: "Немає даних за цей день",
   },
 };
