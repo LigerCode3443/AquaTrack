@@ -70,7 +70,6 @@ const AddWaterForm = ({ onClose }) => {
   const onSubmit = async (data) => {
     try {
       const now = new Date();
-      console.log(now);
       const [hours, minutes] = data.time.split(":");
       now.setHours(hours);
       now.setMinutes(minutes);
