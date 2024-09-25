@@ -111,7 +111,7 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
           <div className={css.picWrapper}>
             <div className={css.pic}>
               <img
-                src={userAvatar ? URL.createObjectURL(userAvatar) : user.photo}
+                src={userAvatar ? URL.createObjectURL(userAvatar) : user?.photo}
                 className={css.avatar}
                 alt="User Avatar"
               />
@@ -138,7 +138,7 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
         <div className={css.inputs}>
           <div className={css.wrapperInputsForm}>
             <div className={css.midContainer}>
-              <h3>Your Gender identity</h3>
+              <h3>Your gender identity</h3>
               <div className={css.radioContainer}>
                 {["female", "male"].map((genderOption) => (
                   <div className={css.radioButton} key={genderOption}>
@@ -202,60 +202,65 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
                   must set 0)
                 </div>
                 <div className={css.note}>
-                  {" "}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M7.57934 10.4315C7.64769 11.1434 7.76356 11.6724 7.92303 12.0214C8.08447 12.3693 8.37106 12.5429 8.78478 12.5429C8.86212 12.5429 8.93131 12.5308 8.99994 12.5167C9.07025 12.5308 9.13916 12.5429 9.21706 12.5429C9.62966 12.5429 9.91709 12.3693 10.0777 12.0214C10.238 11.6724 10.3519 11.1434 10.4217 10.4315L10.789 4.93532C10.8573 3.86404 10.8922 3.09538 10.8922 2.62879C10.8922 1.99372 10.7265 1.49816 10.3941 1.14238C10.0605 0.7866 9.62234 0.609131 9.07953 0.609131C9.05056 0.609131 9.02891 0.6156 9.0005 0.616725C8.9735 0.6156 8.95128 0.609131 8.92316 0.609131C8.37922 0.609131 7.94187 0.7866 7.60887 1.14238C7.27616 1.49872 7.10938 1.99457 7.10938 2.62907C7.10938 3.09566 7.14341 3.86432 7.21287 4.9356L7.57934 10.4315ZM9.01428 14.5518C8.48722 14.5518 8.03947 14.718 7.66766 15.0505C7.29612 15.3832 7.10994 15.7871 7.10994 16.2613C7.10994 16.7965 7.29837 17.2178 7.67244 17.5238C8.04819 17.8298 8.48637 17.9828 8.98728 17.9828C9.49719 17.9828 9.94184 17.832 10.3221 17.5297C10.7018 17.2282 10.8916 16.8046 10.8916 16.2618C10.8916 15.7876 10.7099 15.3838 10.3466 15.051C9.98319 14.718 9.53909 14.5518 9.01344 14.5518"
-                      fill="#9BE1A0"
-                    />
-                  </svg>
                   <p className={css.textRegular}>Active time in hours</p>
                 </div>
               </div>
-              <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>Your Weight in kilograms:</p>
-                <input
-                  className={css.userInfoInput}
-                  type="number"
-                  name="weight"
-                  value={userInfo.weight}
-                  step=".1"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>
-                  The time of active participation in sports:
-                </p>
-                <input
-                  className={css.userInfoInput}
-                  type="number"
-                  name="activeTime"
-                  value={userInfo.activeTime}
-                  step=".1"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>
-                  The required amount of water in liters per day:
-                </p>
-                <p className={css.textAccent}>
-                  {requiredWater
-                    ? `${requiredWater} L`
-                    : "Write down how much water you will drink"}
-                </p>
+            </div>
+            <div className={css.wrapperInputsForm}>
+              <div className={css.midContainer}>
+                <div className={css.userInfoInputContainer}>
+                  <p className={css.textRegular}>Your Weight in kilograms:</p>
+                  <input
+                    className={css.userInfoInput}
+                    type="text"
+                    name="weight"
+                    value={userInfo.weight}
+                    step=".1"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={css.userInfoInputContainer}>
+                  <p className={css.textRegular}>
+                    The time of active participation in sports:
+                  </p>
+                  <input
+                    className={css.userInfoInput}
+                    type="text"
+                    name="activeTime"
+                    value={userInfo.activeTime}
+                    step=".1"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={css.midContainer}>
+                  <div
+                    className={`${css.userInfoInputContainer} ${css.amount}`}
+                  >
+                    <div className={css.userInfoInputContainer}>
+                      <p className={css.textRegular}>
+                        The required amount of water in liters per day:
+                      </p>
+                      <p className={css.textAccent}>
+                        {requiredWater
+                          ? `${requiredWater} L`
+                          : "The required amount of water in liters per day:"}
+                      </p>
+                      <h3>Write down how much water you will drink:</h3>
+                      <input
+                        className={css.userInfoInput}
+                        type="text"
+                        name="water"
+                        value={userInfo.recommendedWater}
+                        id="water"
+                        step=".1"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
         <div className={css.buttonContainer}>
           <button className={css.saveButton} type="submit">
             Save
