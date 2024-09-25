@@ -22,15 +22,21 @@ const WaterList = ({ onEditWater, onDeleteWater }) => {
 
   return (
     <div className={s.waterList}>
-      {data.records.map((data) => (
-        <WaterCard
-          key={data._id}
-          quantity={data.quantity}
-          time={data.date}
-          onEdit={() => onEditWater(data._id)}
-          onDelete={() => onDeleteWater(data._id)}
-        />
-      ))}
+      {data.records.length > 0 ? (
+        data.records.map((data) => (
+          <WaterCard
+            key={data._id}
+            quantity={data.quantity}
+            time={data.date}
+            onEdit={() => onEditWater(data._id)}
+            onDelete={() => onDeleteWater(data._id)}
+          />
+        ))
+      ) : (
+        <div className={s.waterPlaceholder}>
+          <p>No water entries today.</p>
+        </div>
+      )}
     </div>
   );
 };
