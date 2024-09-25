@@ -6,11 +6,7 @@ import DeleteWaterForm from "../DeleteWater/DeleteWater";
 import s from "./DailyInfo.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createWaterThunk,
-  getByOneDayRecordsThunk,
-  updateWaterThunk,
-} from "../../redux/water/operations";
+import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 
@@ -45,15 +41,6 @@ const DailyInfo = ({ selectedDate }) => {
     setDeleteModalOpen(false);
     setSelectedWaterData(null);
   };
-  const handleAddWaterSubmit = (waterData) => {
-    dispatch(createWaterThunk(waterData)).then(() => closeAddModal());
-  };
-
-  const handleEditWaterSubmit = (waterData) => {
-    dispatch(
-      updateWaterThunk({ id: selectedWaterData._id, data: waterData })
-    ).then(() => closeEditModal());
-  };
 
   useEffect(() => {
     if (selectedDate) {
@@ -81,16 +68,14 @@ const DailyInfo = ({ selectedDate }) => {
       </div>
 
       <WaterList
+        waterData={data.records}
         onEditWater={handleEditWater}
         onDeleteWater={handleDeleteWater}
       />
 
       {isAddModalOpen && (
         <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
-          <AddWaterForm
-            onClose={closeAddModal}
-            onSubmit={handleAddWaterSubmit}
-          />
+          <AddWaterForm onClose={closeAddModal} />
         </ModalWindow>
       )}
 
@@ -99,7 +84,6 @@ const DailyInfo = ({ selectedDate }) => {
           <EditWaterForm
             waterEntry={selectedWaterData}
             onClose={closeEditModal}
-            onSubmit={handleEditWaterSubmit}
           />
         </ModalWindow>
       )}
