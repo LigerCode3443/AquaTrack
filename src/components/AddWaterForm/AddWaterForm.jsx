@@ -70,7 +70,6 @@ const AddWaterForm = ({ onClose }) => {
   const onSubmit = async (data) => {
     try {
       const now = new Date();
-      console.log(now);
       const [hours, minutes] = data.time.split(":");
       now.setHours(hours);
       now.setMinutes(minutes);
@@ -119,6 +118,8 @@ const AddWaterForm = ({ onClose }) => {
             <div className={s.counter_input_wrapper}>
               <input
                 type="number"
+                id="counter"
+                name="counter"
                 value={counter}
                 readOnly
                 className={s.water_counter}

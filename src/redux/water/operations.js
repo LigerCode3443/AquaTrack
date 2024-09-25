@@ -32,7 +32,6 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
           day,
         },
       });
-      console.log(data);
 
       return {
         records: data.data,
@@ -70,7 +69,7 @@ export const getOneRecordThunk = createAsyncThunk(
     try {
       const data = await trackerApi.get(`/water/${id}`);
 
-      return data.data[0];
+      return data.data;
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -113,10 +112,9 @@ export const createWaterThunk = createAsyncThunk(
 
 export const updateWaterThunk = createAsyncThunk(
   "updateWater",
-  async ({ id, data: { userWaterGoal, date, quantity } }, thunkApi) => {
+  async ({ id, data: { date, quantity } }, thunkApi) => {
     try {
       const data = await trackerApi.put(`/water/${id}`, {
-        userWaterGoal,
         date,
         quantity,
       });
