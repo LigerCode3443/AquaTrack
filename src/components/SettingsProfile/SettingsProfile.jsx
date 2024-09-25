@@ -8,6 +8,7 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import defaultAvatar from "../../images/avatar/avatars.png";
 
 const SettingsProfile = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ const SettingsProfile = () => {
         formData.append("userAvatar", userAvatar);
       }
 
-      const updatedUserData = await dispatch(updateUserThunk(formData));
+      dispatch(updateUserThunk(formData));
       toast.success("Profile updated successfully", {
         position: "top-right",
       });
@@ -96,7 +97,11 @@ const SettingsProfile = () => {
           <div className={css.picWrapper}>
             <div className={css.pic}>
               <img
-                src={userAvatar ? URL.createObjectURL(userAvatar) : user.photo}
+                src={
+                  userAvatar
+                    ? URL.createObjectURL(userAvatar)
+                    : user.userAvatar || defaultAvatar
+                }
                 className={css.avatar}
                 alt="User Avatar"
               />
