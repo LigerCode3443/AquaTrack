@@ -52,7 +52,7 @@ const FormAuth = ({
       )}
 
       <ModalWindow isOpen={isOpenForgotPassword} onClose={() => setIsOpenForgotPassword(false)}>
-        <ModalForgotPassword />
+        <ModalForgotPassword onClose={() => setIsOpenForgotPassword(false)} />
       </ModalWindow>
 
       <span className={css.info}>
