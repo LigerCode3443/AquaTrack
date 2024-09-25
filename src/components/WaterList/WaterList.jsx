@@ -27,8 +27,8 @@ const WaterList = ({ onEditWater, onDeleteWater }) => {
           key={data._id}
           quantity={data.quantity}
           time={data.date}
-          onEdit={() => onEditWater(data)}
-          onDelete={() => onDeleteWater(data)}
+          onEdit={() => onEditWater(data._id)}
+          onDelete={() => onDeleteWater(data._id)}
         />
       ))}
     </div>
