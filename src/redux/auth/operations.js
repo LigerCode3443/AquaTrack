@@ -49,7 +49,13 @@ export const refreshThunk = createAsyncThunk("refresh", async (_, thunkApi) => {
 
 export const updateUserThunk = createAsyncThunk("update", async (credentials, thunkApi) => {
   try {
-    const {data} = await trackerApi.patch("/users", credentials);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const {data} = await trackerApi.patch("/users", credentials, config);
 
     await thunkApi.dispatch(refreshThunk());
 

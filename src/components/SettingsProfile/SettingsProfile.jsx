@@ -1,100 +1,84 @@
 import css from "./SettingsProfile.module.css";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
-import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { updateUserThunk } from "../../redux/auth/operations.js";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import defaultAvatar from "../../images/avatar/avatars.png";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
-  // const { t } = useTranslation();
+const SettingsProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
-  const [userInfo, setUserInfo] = useState({
-    name: user.userName,
-    gender: user.userGender,
-    email: user.userEmail,
-    weight: user.userWeight,
-    activeTime: user.userActiveTime,
-    waterGoal: user.userWaterGoal,
-  });
 
   const [userAvatar, setUserAvatar] = useState(null);
   const [requiredWater, setRequiredWater] = useState("1.5");
   const [loading, setLoading] = useState(false);
-
   const hiddenInputUpload = useRef(null);
 
   const UserSchema = Yup.object().shape({
-    gender: Yup.string().required("Gender is required"),
-    name: Yup.string()
+    userName: Yup.string()
       .trim()
       .min(3, "Name must be at least 3 characters")
-      .max(50, "Name must be less than 50 characters")
-      .required("Name is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    weight: Yup.number()
-      .typeError("Weight must be a number")
-      .required("Weight is required"),
-    activeTime: Yup.number()
-      .typeError("Active time must be a number")
-      .required("Active time is required"),
-    waterGoal: Yup.number()
-      .typeError("Water must be a number")
-      .required("Recommended water is required"),
+      .max(50, "Name must be less than 50 characters"),
+    userEmail: Yup.string().email("Invalid email address"),
+    userWeight: Yup.number().typeError("Weight must be a number"),
+    userActiveTime: Yup.number().typeError("Active time must be a number"),
+    userGender: Yup.string(),
+    userWaterGoal: Yup.number().typeError("Water goal must be a number"),
   });
 
+  const { register, handleSubmit, watch } = useForm({
+    resolver: yupResolver(UserSchema),
+    defaultValues: {
+      userAvatar: user.userAvatar,
+      userName: user.userName,
+      userGender: user.userGender,
+      userEmail: user.userEmail,
+      userWeight: user.userWeight,
+      userActiveTime: user.userActiveTime,
+      userWaterGoal: user.userWaterGoal,
+    },
+  });
+
+  const userWeight = watch("userWeight");
+  const userGender = watch("userGender");
+  const userActiveTime = watch("userActiveTime");
+
   useEffect(() => {
-    if (userInfo.weight && userInfo.gender) {
+    if (userWeight && userGender) {
       const newAmount =
-        userInfo.gender === "male"
-          ? userInfo.weight * 0.04 + userInfo.activeTime * 0.6
-          : userInfo.weight * 0.03 + userInfo.activeTime * 0.4;
+        userGender === "male"
+          ? userWeight * 0.04 + userActiveTime * 0.6
+          : userWeight * 0.03 + userActiveTime * 0.4;
 
       setRequiredWater((Math.ceil(newAmount * 10) / 10).toFixed(1));
     }
-  }, [userInfo.gender, userInfo.activeTime, userInfo.weight]);
+  }, [userGender, userActiveTime, userWeight]);
 
   const handleClick = (e) => {
     e.preventDefault();
     hiddenInputUpload.current?.click();
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     setLoading(true);
-
     try {
-      await UserSchema.validate(userInfo, { abortEarly: false });
-
       const formData = new FormData();
-      Object.entries(userInfo).forEach(([key, value]) => {
+      Object.entries(data).forEach(([key, value]) => {
         formData.append(key, value);
       });
+
       if (userAvatar) {
         formData.append("userAvatar", userAvatar);
       }
 
-      const updatedUserData = await dispatch(
-        updateUserThunk(formData)
-      ).unwrap();
-
+      const updatedUserData = await dispatch(updateUserThunk(formData));
       toast.success("Profile updated successfully", {
         position: "top-right",
       });
-      setUserInfo(updatedUserData);
-      setIsUserRefreshed(true);
-      closeModal();
     } catch (error) {
       toast.error(error.message, {
         position: "top-right",
@@ -106,7 +90,7 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
 
   return (
     <div className={css.wrapper}>
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.userPic}>
           <h2>Settings</h2>
           <div className={css.picWrapper}>
@@ -145,11 +129,9 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
                   <input
                     className={css.radio}
                     type="radio"
-                    name="gender"
+                    {...register("userGender")}
                     id={genderOption}
                     value={genderOption}
-                    onChange={handleChange}
-                    checked={userInfo.gender === genderOption}
                   />
                   <label className={css.radioLabel} htmlFor={genderOption}>
                     {genderOption === "female" ? "Female" : "Male"}
@@ -166,9 +148,7 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
                   <input
                     className={css.userInfoInput}
                     type="text"
-                    name="name"
-                    value={userInfo.name}
-                    onChange={handleChange}
+                    {...register("userName")}
                     disabled={loading}
                   />
                 </div>
@@ -177,10 +157,8 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
                   <input
                     className={css.userInfoInput}
                     type="email"
-                    name="email"
-                    value={userInfo.email}
-                    onChange={handleChange}
-                    disabled={loading}
+                    {...register("userEmail")}
+                    disabled
                   />
                 </div>
                 <div className={css.midContainer}>
@@ -219,10 +197,8 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
                 <input
                   className={css.userInfoInput}
                   type="number"
-                  name="weight"
-                  value={userInfo.weight}
                   step=".1"
-                  onChange={handleChange}
+                  {...register("userWeight")}
                 />
               </div>
               <div className={css.userInfoInputContainer}>
@@ -232,10 +208,19 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
                 <input
                   className={css.userInfoInput}
                   type="number"
-                  name="activeTime"
-                  value={userInfo.activeTime}
                   step=".1"
-                  onChange={handleChange}
+                  {...register("userActiveTime")}
+                />
+              </div>
+              <div className={css.userInfoInputContainer}>
+                <p className={css.textRegular}>
+                  Your Water Goal in liters per day:
+                </p>
+                <input
+                  className={css.userInfoInput}
+                  type="number"
+                  step=".1"
+                  {...register("userWaterGoal")}
                 />
               </div>
               <div className={css.userInfoInputContainer}>
@@ -252,7 +237,7 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
           </div>
         </div>
 
-        <button className={css.saveButton} type="submit">
+        <button className={css.saveButton} type="submit" disabled={loading}>
           Save
         </button>
       </form>
