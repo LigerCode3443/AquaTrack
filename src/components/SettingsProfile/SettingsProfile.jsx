@@ -217,7 +217,6 @@ const SettingsProfile = () => {
                   {...register("userActiveTime")}
                 />
               </div>
-
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
                   The required amount of water in liters per day:
