@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WaterList from "../WaterList/WaterList";
 import AddWaterForm from "../AddWaterForm/AddWaterForm";
 import EditWaterForm from "../EditWaterForm/EditWaterForm";
@@ -6,14 +6,11 @@ import DeleteWaterForm from "../DeleteWater/DeleteWater";
 import s from "./DailyInfo.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createWaterThunk,
-  updateWaterThunk,
-} from "../../redux/water/operations";
+import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 
-const DailyInfo = ({ waterData }) => {
+const DailyInfo = ({ selectedDate }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -44,15 +41,16 @@ const DailyInfo = ({ waterData }) => {
     setDeleteModalOpen(false);
     setSelectedWaterData(null);
   };
-  const handleAddWaterSubmit = (waterData) => {
-    dispatch(createWaterThunk(waterData)).then(() => closeAddModal());
-  };
 
-  const handleEditWaterSubmit = (waterData) => {
-    dispatch(
-      updateWaterThunk({ id: selectedWaterData._id, data: waterData })
-    ).then(() => closeEditModal());
-  };
+  useEffect(() => {
+    if (selectedDate) {
+      const year = selectedDate.getFullYear();
+      const month = selectedDate.getMonth();
+      const day = selectedDate.getDate();
+
+      dispatch(getByOneDayRecordsThunk({ year, month, day }));
+    }
+  }, [selectedDate, dispatch]);
 
   const isToday =
     new Date().toDateString() === new Date(data.date).toDateString();
@@ -70,17 +68,14 @@ const DailyInfo = ({ waterData }) => {
       </div>
 
       <WaterList
-        waterData={waterData}
+        waterData={data.records}
         onEditWater={handleEditWater}
         onDeleteWater={handleDeleteWater}
       />
 
       {isAddModalOpen && (
         <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
-          <AddWaterForm
-            onClose={closeAddModal}
-            onSubmit={handleAddWaterSubmit}
-          />
+          <AddWaterForm onClose={closeAddModal} />
         </ModalWindow>
       )}
 
@@ -89,7 +84,6 @@ const DailyInfo = ({ waterData }) => {
           <EditWaterForm
             waterEntry={selectedWaterData}
             onClose={closeEditModal}
-            onSubmit={handleEditWaterSubmit}
           />
         </ModalWindow>
       )}
