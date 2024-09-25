@@ -9,12 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
+import { isToday, parse } from "date-fns";
 
 const DailyInfo = ({ selectedDate }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [selectedWaterData, setSelectedWaterData] = useState(null);
+  const [selectedWaterId, setSelectedWaterId] = useState(null);
 
   const data = useSelector(selectOneDayRecords);
   const dispatch = useDispatch();
@@ -22,24 +23,24 @@ const DailyInfo = ({ selectedDate }) => {
   const handleAddWater = () => setAddModalOpen(true);
   const closeAddModal = () => setAddModalOpen(false);
 
-  const handleEditWater = (waterEntry) => {
-    setSelectedWaterData(waterEntry);
+  const handleEditWater = (waterId) => {
+    setSelectedWaterId(waterId);
     setEditModalOpen(true);
   };
 
   const closeEditModal = () => {
     setEditModalOpen(false);
-    setSelectedWaterData(null);
+    setSelectedWaterId(null);
   };
 
-  const handleDeleteWater = (waterEntry) => {
-    setSelectedWaterData(waterEntry);
+  const handleDeleteWater = (waterId) => {
+    setSelectedWaterId(waterId);
     setDeleteModalOpen(true);
   };
 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
-    setSelectedWaterData(null);
+    setSelectedWaterId(null);
   };
 
   useEffect(() => {
@@ -52,14 +53,22 @@ const DailyInfo = ({ selectedDate }) => {
     }
   }, [selectedDate, dispatch]);
 
-  console.log(data);
-  const isToday =
-    new Date().toDateString() === new Date(data.date).toDateString();
+  const parseDate = (dateString) => {
+    if (!dateString) {
+      return null;
+    }
+
+    const parsedDate = parse(dateString, "dd.MM.yyyy", new Date());
+    return isNaN(parsedDate.getTime()) ? null : parsedDate;
+  };
+
+  const parsedDate = parseDate(data.date);
+  const todayCheck = parsedDate ? isToday(parsedDate) : false;
 
   return (
     <div className={s.dailyInfo}>
       <div className={s.header}>
-        <h2>{isToday ? "Today" : new Date(data.date).toLocaleDateString()}</h2>
+        <h2>{todayCheck ? "Today" : data.date}</h2>
         <button className={s.btnPlus} onClick={handleAddWater}>
           <span className={s.circle}>
             <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
@@ -74,29 +83,17 @@ const DailyInfo = ({ selectedDate }) => {
         onDeleteWater={handleDeleteWater}
       />
 
-      {isAddModalOpen && (
-        <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
-          <AddWaterForm onClose={closeAddModal} />
-        </ModalWindow>
-      )}
+      <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
+        <AddWaterForm onClose={closeAddModal} />
+      </ModalWindow>
 
-      {isEditModalOpen && selectedWaterData && (
-        <ModalWindow isOpen={isEditModalOpen} onClose={closeEditModal}>
-          <EditWaterForm
-            waterEntry={selectedWaterData}
-            onClose={closeEditModal}
-          />
-        </ModalWindow>
-      )}
+      <ModalWindow isOpen={isEditModalOpen} onClose={closeEditModal}>
+        <EditWaterForm waterId={selectedWaterId} onClose={closeEditModal} />
+      </ModalWindow>
 
-      {isDeleteModalOpen && selectedWaterData && (
-        <ModalWindow isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
-          <DeleteWaterForm
-            waterEntry={selectedWaterData}
-            onClose={closeDeleteModal}
-          />
-        </ModalWindow>
-      )}
+      <ModalWindow isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
+        <DeleteWaterForm waterId={selectedWaterId} onClose={closeDeleteModal} />
+      </ModalWindow>
     </div>
   );
 };

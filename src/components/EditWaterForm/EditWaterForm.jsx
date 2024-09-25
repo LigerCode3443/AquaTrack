@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
   ),
 });
 
-const EditWaterForm = ({ waterId }) => {
+const EditWaterForm = ({ waterId, onClose }) => {
   const { t } = useTranslation();
   const [counter, setCounter] = useState(0);
   const [time, setTime] = useState("");
@@ -48,17 +48,25 @@ const EditWaterForm = ({ waterId }) => {
   });
 
   useEffect(() => {
-    dispatch(getOneRecordThunk(waterId));
+    if (waterId !== null) dispatch(getOneRecordThunk(waterId));
   }, [dispatch, waterId]);
 
   useEffect(() => {
     if (waterRecord) {
+      const qq = new Date(waterRecord.date);
       setCounter(waterRecord.quantity);
-      setTime(new Date(waterRecord.date).toISOString().substring(11, 16));
+
+      setTime(
+        `${qq.getHours() < 10 ? `0${qq.getHours()}` : qq.getHours()}:${
+          qq.getMinutes() < 10 ? `0${qq.getMinutes()}` : qq.getMinutes()
+        }`
+      );
       setValue("waterAmount", waterRecord.quantity);
       setValue(
         "time",
-        new Date(waterRecord.date).toISOString().substring(11, 16)
+        `${qq.getHours() < 10 ? `0${qq.getHours()}` : qq.getHours()}:${
+          qq.getMinutes() < 10 ? `0${qq.getMinutes()}` : qq.getMinutes()
+        }`
       );
     }
   }, [waterRecord, setValue]);
@@ -98,6 +106,8 @@ const EditWaterForm = ({ waterId }) => {
       ).unwrap();
 
       toast.success(t("description.toastAlerts.waterRecordSuccess"));
+
+      onClose();
     } catch (error) {
       if (error.status === 400) {
         toast.error(t("description.toastAlerts.waterIncorrectData"));

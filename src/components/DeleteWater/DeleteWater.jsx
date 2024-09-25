@@ -3,12 +3,13 @@ import s from "./DeleteWater.module.css";
 import { deleteWaterThunk } from "../../redux/water/operations";
 import { useTranslation } from "react-i18next";
 
-export default function DeleteWater({ waterCardId, onClose }) {
+export default function DeleteWater({ waterId, onClose }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const handleConfirmDelete = () => {
-    dispatch(deleteWaterThunk(waterCardId))
+    dispatch(deleteWaterThunk(waterId))
+      .unwrap()
       .then(() => {
         onClose();
       })
