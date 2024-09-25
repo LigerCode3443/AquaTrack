@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
+const SettingsProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -79,8 +79,6 @@ const SettingsProfile = ({ setIsUserRefreshed, closeModal }) => {
       toast.success("Profile updated successfully", {
         position: "top-right",
       });
-      setIsUserRefreshed(true);
-      closeModal();
     } catch (error) {
       toast.error(error.message, {
         position: "top-right",

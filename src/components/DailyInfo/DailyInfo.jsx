@@ -10,8 +10,10 @@ import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 import { isToday, parse } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 const DailyInfo = ({ selectedDate }) => {
+  const { t } = useTranslation();
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -73,7 +75,9 @@ const DailyInfo = ({ selectedDate }) => {
           <span className={s.circle}>
             <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
           </span>
-          <span className={s.textAdd}>Add water</span>
+          <span className={s.textAdd}>
+            {t("description.norma.addButtonText")}
+          </span>
         </button>
       </div>
 
