@@ -3,18 +3,19 @@
   flex-direction: column;
 
   gap: 24px;
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1439px) {
   .dailyInfo {
-    margin-bottom: 40px;
+    margin: 0 auto 40px;
     width: 100%;
   }
 }
 
 @media only screen and (min-width: 1439px) {
   .dailyInfo {
+    margin: 0 auto 15px;
     margin-bottom: 40px;
     width: 608px;
   }
