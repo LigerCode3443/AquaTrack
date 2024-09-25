@@ -252,39 +252,41 @@ export const SettingsProfileText = {
       waterNumber: "Кількість води повинна бути числом!",
     },
 
-export const signOutText = {
-  en: {
-    titleText: "Log out",
-    warningText: "Do you really want to leave?",
-    cancelBtn: "Cancel",
-  },
-  ukr: {
-    titleText: "Вийти",
-    warningText: "Ви дійсно хочете вийти?",
-    cancelBtn: "Скасувати",
-  },
-};
+    export const signOutText = {
+      en: {
+        titleText: "Log out",
+        warningText: "Do you really want to leave?",
+        cancelBtn: "Cancel",
+      },
+      ukr: {
+        titleText: "Вийти",
+        warningText: "Ви дійсно хочете вийти?",
+        cancelBtn: "Скасувати",
+      },
+    };
 
-export const addWaterText = {
-  en: {
-    titleText: "Add water",
-    chooseValueText: "Choose a value:",
-    amountWaterText: "Amount of water:",
-    recordingTimeText: "Recording time:",
-    usedWaterText: "Enter the value of the water used:",
-    saveBtn: "Save",
-    ml: "ml",
-  },
-  ukr: {
-    titleText: "Додати воду",
-    chooseValueText: "Виберіть значення:",
-    amountWaterText: "Кількість води:",
-    recordingTimeText: "Час прийому:",
-    usedWaterText: "Введіть значення випитої води:",
-    saveBtn: "Зберегти",
-    ml: "мл",
-  },
-};
+    export const addWaterText = {
+      en: {
+        titleText: "Add water",
+        chooseValueText: "Choose a value:",
+        amountWaterText: "Amount of water:",
+        recordingTimeText: "Recording time:",
+        usedWaterText: "Enter the value of the water used:",
+        saveBtn: "Save",
+        ml: "ml",
+      },
+      ukr: {
+        titleText: "Додати воду",
+        chooseValueText: "Виберіть значення:",
+        amountWaterText: "Кількість води:",
+        recordingTimeText: "Час прийому:",
+        usedWaterText: "Введіть значення випитої води:",
+        saveBtn: "Зберегти",
+        ml: "мл",
+      },
+    };
+  }
+}
 
 export const editWaterText = {
   en: {
