@@ -116,7 +116,7 @@
   height: 40px !important;
   padding: 11px 40px 11px 20px !important; /* Паддінги: 11px зверху/знизу і 20px зліва, 40px справа для 'ml' */
   width: calc(1ch * (3 + 1) + 60px) !important;
-  text-align: left !important;
+  text-align: right !important;
   font-weight: 700 !important;
 }
 
@@ -136,7 +136,7 @@
 .unit {
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: 19px;
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 14px;

@@ -10,6 +10,7 @@ import { createWaterThunk } from "../../redux/water/operations.js";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 import { useTranslation } from "react-i18next";
 import i18next from "../../localization/configI18n.js";
+import { selectOneDayRecords } from "../../redux/water/selectors.js";
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -27,6 +28,7 @@ const AddWaterForm = ({ onClose }) => {
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
   const userWaterGoal = useSelector(selectUserWaterGoal);
+  const oneDayRecords = useSelector(selectOneDayRecords);
 
   const {
     register,
@@ -69,7 +71,7 @@ const AddWaterForm = ({ onClose }) => {
 
   const onSubmit = async (data) => {
     try {
-      const now = new Date();
+      const now = new Date(oneDayRecords.date);
       const [hours, minutes] = data.time.split(":");
       now.setHours(hours);
       now.setMinutes(minutes);
