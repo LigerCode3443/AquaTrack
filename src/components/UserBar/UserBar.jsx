@@ -9,6 +9,7 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import Logout from "../Logout/Logout";
 import SettingsProfile from "../SettingsProfile/SettingsProfile";
 import { useTranslation } from "react-i18next";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 const UserBar = () => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ const UserBar = () => {
   const userName = user.userEmail?.slice(0, user.userEmail?.indexOf("@"));
   const actualName = user.userName ? user.userName : userName;
 
+  console.log(isSettingsModalOpen);
   return (
     <div className={s.wrapper}>
       <h2 className={s.name}>
@@ -66,13 +68,17 @@ const UserBar = () => {
             onPopoverClose={() => setIsPopoverOpen(false)}
           />
         )}
-        {isSettingsModalOpen && (
+        <ModalWindow
+          isOpen={isSettingsModalOpen}
+          onClose={() => setIsSettingsModalOpen(false)}
+        >
           <SettingsProfile
             onPopoverClose={() => setIsPopoverOpen(false)}
             isOpen={isSettingsModalOpen}
             onClose={() => setIsSettingsModalOpen(false)}
           />
-        )}
+        </ModalWindow>
+
         {isLogOutModalOpen && (
           <Logout
             onPopoverClose={() => setIsPopoverOpen(false)}

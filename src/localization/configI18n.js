@@ -12,6 +12,12 @@ import {
   monthNames,
   daysOfWeek,
   calendarTitles,
+  signOutText,
+  addWaterText,
+  editWaterText,
+  settingsText,
+  deleteWaterText,
+  validationAuthText,
   restorePasswordText,
 } from "./localization";
 
@@ -34,6 +40,12 @@ i18n
             month: monthNames.en,
             day: daysOfWeek.en,
             titles: calendarTitles.en,
+            signOut: signOutText.en,
+            addWater: addWaterText.en,
+            editWater: editWaterText.en,
+            deleteWater: deleteWaterText.en,
+            settings: settingsText.en,
+            validationAuth: validationAuthText.en,
             modalForgotPassword: modalForgotPasswordText.en,
             restorePassword: restorePasswordText.en,
           },
@@ -51,6 +63,12 @@ i18n
             month: monthNames.ukr,
             day: daysOfWeek.ukr,
             titles: calendarTitles.ukr,
+            signOut: signOutText.ukr,
+            addWater: addWaterText.ukr,
+            editWater: editWaterText.ukr,
+            deleteWater: deleteWaterText.ukr,
+            settings: settingsText.ukr,
+            validationAuth: validationAuthText.ukr,
             modalForgotPassword: modalForgotPasswordText.ukr,
             restorePassword: restorePasswordText.ukr,
           },
@@ -58,3 +76,5 @@ i18n
       },
     },
   });
+
+export default i18n;
