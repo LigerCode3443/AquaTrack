@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
-import {
-  createWaterThunk,
-  getRecordsThunk,
-} from "../../redux/water/operations.js";
+import { createWaterThunk } from "../../redux/water/operations.js";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 import { useTranslation } from "react-i18next";
 import i18next from "../../localization/configI18n.js";
@@ -80,17 +77,8 @@ const AddWaterForm = ({ onClose }) => {
       await dispatch(
         createWaterThunk({
           userWaterGoal: userWaterGoal,
-          date: now.toISOString(),
+          date: now.toString(),
           quantity: data.waterAmount,
-        })
-      ).unwrap();
-
-      const currentDate = new Date();
-      await dispatch(
-        getRecordsThunk({
-          year: currentDate.getFullYear(),
-          month: currentDate.getMonth() + 1,
-          day: currentDate.getDate(),
         })
       ).unwrap();
 
@@ -130,6 +118,8 @@ const AddWaterForm = ({ onClose }) => {
             <div className={s.counter_input_wrapper}>
               <input
                 type="number"
+                id="counter"
+                name="counter"
                 value={counter}
                 readOnly
                 className={s.water_counter}

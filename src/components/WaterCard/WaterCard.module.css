@@ -10,14 +10,10 @@
   border-radius: 15px;
   background-color: #fff;
   backdrop-filter: blur(33.599998474121094px);
-  flex: 0 0 calc((100% - 8px) / 2);
-  max-width: calc((100% - 8px) / 2);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1439px) {
   .waterCard {
-    flex: 0 0 calc((100% - 64px) / 3);
-    max-width: calc((100% - 64px) / 3);
     width: 192px;
     height: 86px;
     padding: 20px;
@@ -27,9 +23,6 @@
 
 @media only screen and (min-width: 1440px) {
   .waterCard {
-    flex: 0 0 calc((100% - 32px) / 3);
-
-    max-width: calc((100% - 32px) / 3);
     width: 192px;
     height: 86px;
     padding: 20px;

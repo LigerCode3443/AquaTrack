@@ -2,6 +2,25 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { trackerApi } from "../../config/trackerApi";
 
+const updateData = (thunkApi) => {
+  const state = thunkApi.getState();
+  console.log(state.water.records.date);
+  thunkApi.dispatch(
+    getRecordsThunk({
+      year: new Date(state.water.records.date).getFullYear(),
+      month: new Date(state.water.records.date).getMonth(),
+    })
+  );
+  thunkApi.dispatch(
+    getByOneDayRecordsThunk({
+      year: new Date(state.water.oneDayRecords.date).getFullYear(),
+      month: new Date(state.water.oneDayRecords.date).getMonth(),
+      day: new Date(state.water.oneDayRecords.date).getDate(),
+    })
+  );
+  thunkApi.dispatch(getLast7DaysThunk());
+};
+
 export const getRecordsThunk = createAsyncThunk(
   "getRecords",
   async ({ year, month }, thunkApi) => {
@@ -13,7 +32,10 @@ export const getRecordsThunk = createAsyncThunk(
         },
       });
 
-      return data.data;
+      return {
+        records: data.data,
+        date: new Date(year, month, 1).toString(),
+      };
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -69,7 +91,7 @@ export const getOneRecordThunk = createAsyncThunk(
     try {
       const data = await trackerApi.get(`/water/${id}`);
 
-      return data.data[0];
+      return data.data;
     } catch (error) {
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
@@ -85,21 +107,7 @@ export const createWaterThunk = createAsyncThunk(
         waterRecords: [{ userWaterGoal, date, quantity }],
       });
 
-      const props = new Date(date);
-      thunkApi.dispatch(
-        getRecordsThunk({
-          year: props.getFullYear(),
-          month: props.getMonth() + 1,
-        })
-      );
-      const state = thunkApi.getState();
-      thunkApi.dispatch(
-        getByOneDayRecordsThunk({
-          year: new Date(state.water.oneDayRecords.date).getFullYear(),
-          month: new Date(state.water.oneDayRecords.date).getMonth(),
-          day: new Date(state.water.oneDayRecords.date).getDate(),
-        })
-      );
+      updateData(thunkApi);
 
       return data.data;
     } catch (error) {
@@ -111,26 +119,14 @@ export const createWaterThunk = createAsyncThunk(
 
 export const updateWaterThunk = createAsyncThunk(
   "updateWater",
-  async ({ id, data: { userWaterGoal, date, quantity } }, thunkApi) => {
+  async ({ id, data: { date, quantity } }, thunkApi) => {
     try {
       const data = await trackerApi.put(`/water/${id}`, {
-        userWaterGoal,
         date,
         quantity,
       });
 
-      const props = new Date(date);
-      thunkApi.dispatch(
-        getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
-      );
-      const state = thunkApi.getState();
-      thunkApi.dispatch(
-        getByOneDayRecordsThunk({
-          year: new Date(state.water.oneDayRecords.date).getFullYear(),
-          month: new Date(state.water.oneDayRecords.date).getMonth(),
-          day: new Date(state.water.oneDayRecords.date).getDate(),
-        })
-      );
+      updateData(thunkApi);
 
       return data.data;
     } catch (error) {
@@ -151,15 +147,7 @@ export const updateDayNormThunk = createAsyncThunk(
         }
       );
 
-      thunkApi.dispatch(getRecordsThunk({ year, month }));
-      const state = thunkApi.getState();
-      thunkApi.dispatch(
-        getByOneDayRecordsThunk({
-          year: new Date(state.water.oneDayRecords.date).getFullYear(),
-          month: new Date(state.water.oneDayRecords.date).getMonth(),
-          day: new Date(state.water.oneDayRecords.date).getDate(),
-        })
-      );
+      updateData(thunkApi);
 
       return data.data;
     } catch (error) {
@@ -175,18 +163,7 @@ export const deleteWaterThunk = createAsyncThunk(
     try {
       const data = await trackerApi.delete(`/water/${id}`);
 
-      const props = new Date(data.date);
-      thunkApi.dispatch(
-        getRecordsThunk({ year: props.getFullYear(), month: props.getMonth() })
-      );
-      const state = thunkApi.getState();
-      thunkApi.dispatch(
-        getByOneDayRecordsThunk({
-          year: new Date(state.water.oneDayRecords.date).getFullYear(),
-          month: new Date(state.water.oneDayRecords.date).getMonth(),
-          day: new Date(state.water.oneDayRecords.date).getDate(),
-        })
-      );
+      updateData(thunkApi);
 
       return data.data;
     } catch (error) {

@@ -15,7 +15,7 @@ import {
 const waterSlice = createSlice({
   name: "water",
   initialState: {
-    records: [],
+    records: { records: [], date: null },
     oneDayRecords: { records: [], date: null },
     last7Days: [],
     selectedRecord: null,

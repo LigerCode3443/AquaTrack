@@ -1,4 +1,4 @@
-export const selectRecords = (state) => state.water.records;
+export const selectRecords = (state) => state.water.records.records;
 
 export const selectTotalConsumed = (state) => {
   const todayRecords = state.water.last7Days.filter(
