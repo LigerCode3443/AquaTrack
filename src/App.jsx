@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import { useEffect } from "react";
 import { refreshThunk } from "./redux/auth/operations";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Container>

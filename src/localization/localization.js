@@ -172,3 +172,12 @@ export const calendarTitles = {
     ml: "мл",
   },
 };
+
+export const NotFoundText = {
+  en: {
+    returnToHomeText: "Return to home page",
+  },
+  ukr: {
+    returnToHomeText: "Повернутися на домашню сторінку",
+  },
+};
