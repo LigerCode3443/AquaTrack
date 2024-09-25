@@ -1,4 +1,9 @@
-import {createSlice, isFulfilled, isPending, isRejected} from "@reduxjs/toolkit";
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from "@reduxjs/toolkit";
 import {
   loginThunk,
   logoutThunk,
@@ -21,17 +26,16 @@ const slice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(registerThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+      .addCase(registerThunk.fulfilled, (state) => {
         state.isLoggedIn = true;
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.userData;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(refreshThunk.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.userData;
         state.isLoggedIn = true;
         state.isRefresh = false;
       })
@@ -44,8 +48,8 @@ const slice = createSlice({
       .addCase(logoutThunk.fulfilled, () => {
         return initialState;
       })
-      .addCase(recoveryPasswordThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+      .addCase(recoveryPasswordThunk.fulfilled, (state) => {
+        state.isLoading = false;
       })
       .addMatcher(isPending, (state) => {
         state.isLoading = true;

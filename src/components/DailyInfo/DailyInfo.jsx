@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
+import { isToday, parse } from "date-fns";
 
 const DailyInfo = ({ selectedDate }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
@@ -52,13 +53,22 @@ const DailyInfo = ({ selectedDate }) => {
     }
   }, [selectedDate, dispatch]);
 
-  const isToday =
-    new Date().toDateString() === new Date(data.date).toDateString();
+  const parseDate = (dateString) => {
+    if (!dateString) {
+      return null;
+    }
+
+    const parsedDate = parse(dateString, "dd.MM.yyyy", new Date());
+    return isNaN(parsedDate.getTime()) ? null : parsedDate; // Повертаємо parsedDate, або null, якщо недійсно
+  };
+
+  const parsedDate = parseDate(data.date);
+  const todayCheck = parsedDate ? isToday(parsedDate) : false;
 
   return (
     <div className={s.dailyInfo}>
       <div className={s.header}>
-        <h2>{isToday ? "Today" : data.date}</h2>
+        <h2>{todayCheck ? "Today" : data.date}</h2>
         <button className={s.btnPlus} onClick={handleAddWater}>
           <span className={s.circle}>
             <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
@@ -73,26 +83,17 @@ const DailyInfo = ({ selectedDate }) => {
         onDeleteWater={handleDeleteWater}
       />
 
-      {isAddModalOpen && (
-        <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
-          <AddWaterForm onClose={closeAddModal} />
-        </ModalWindow>
-      )}
+      <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
+        <AddWaterForm onClose={closeAddModal} />
+      </ModalWindow>
 
-      {isEditModalOpen && selectedWaterId && (
-        <ModalWindow isOpen={isEditModalOpen} onClose={closeEditModal}>
-          <EditWaterForm waterId={selectedWaterId} onClose={closeEditModal} />
-        </ModalWindow>
-      )}
+      <ModalWindow isOpen={isEditModalOpen} onClose={closeEditModal}>
+        <EditWaterForm waterId={selectedWaterId} onClose={closeEditModal} />
+      </ModalWindow>
 
-      {isDeleteModalOpen && selectedWaterId && (
-        <ModalWindow isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
-          <DeleteWaterForm
-            waterId={selectedWaterId}
-            onClose={closeDeleteModal}
-          />
-        </ModalWindow>
-      )}
+      <ModalWindow isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
+        <DeleteWaterForm waterId={selectedWaterId} onClose={closeDeleteModal} />
+      </ModalWindow>
     </div>
   );
 };
