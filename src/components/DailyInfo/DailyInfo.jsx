@@ -52,7 +52,6 @@ const DailyInfo = ({ selectedDate }) => {
     }
   }, [selectedDate, dispatch]);
 
-  console.log(data);
   const isToday =
     new Date().toDateString() === new Date(data.date).toDateString();
 

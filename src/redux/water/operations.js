@@ -32,7 +32,6 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
           day,
         },
       });
-      console.log(data);
 
       return {
         records: data.data,
