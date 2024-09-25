@@ -33,22 +33,21 @@ export const splitIntoChunks = (array, chunkSize) => {
 
 export const convertData = (rawData, date) => {
   const countDays = new Date(date.year, date.month + 1, 0).getDate();
-
+  console.log("start");
   const newData = Array.from({ length: countDays }, (_, index) => {
-    const currentDate = new Date(date.year, date.month, index + 2);
+    const currentDate = new Date(date.year, date.month, index + 1);
 
     let dailyData = {
       userWaterGoal: 0,
-      date: currentDate.toLocaleDateString(),
+      date: currentDate.toDateString(),
       quantity: 0,
     };
-
     const filtered = rawData.filter((item) => {
       const itemDate = new Date(item.date);
 
-      return itemDate.toLocaleDateString() === dailyData.date;
+      return itemDate.toLocaleDateString() === currentDate.toLocaleDateString();
     });
-
+    console.log(filtered);
     filtered.forEach((e) => {
       dailyData = {
         ...dailyData,
