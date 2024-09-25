@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import {initReactI18next} from "react-i18next";
+import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import {
   signUpText,
@@ -20,14 +20,15 @@ import {
   deleteWaterText,
   validationAuthText,
   restorePasswordText,
+  toastAlerts,
+  validationWaterForm,
 } from "./localization";
-
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: false, // Enable debug mode
+    debug: false,
     fallbackLng: "en",
     resources: {
       en: {
@@ -51,7 +52,8 @@ i18n
             validationAuth: validationAuthText.en,
             modalForgotPassword: modalForgotPasswordText.en,
             restorePassword: restorePasswordText.en,
-
+            toastAlerts: toastAlerts.en,
+            validationWater: validationWaterForm.en,
           },
         },
       },
@@ -76,7 +78,8 @@ i18n
             validationAuth: validationAuthText.ukr,
             modalForgotPassword: modalForgotPasswordText.ukr,
             restorePassword: restorePasswordText.ukr,
-
+            toastAlerts: toastAlerts.ukr,
+            validationWater: validationWaterForm.ukr,
           },
         },
       },

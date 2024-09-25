@@ -90,10 +90,10 @@ export const dailyNormaText = {
     addButtonText: "Add water",
   },
   ukr: {
-    normaText: "Моя денна норма",
+    normaText: "Денна норма",
     liter: "Л",
     todayText: "Сьогодні",
-    addButtonText: "Додати воду",
+    addButtonText: "Додати",
   },
 };
 
@@ -258,11 +258,13 @@ export const signOutText = {
     titleText: "Log out",
     warningText: "Do you really want to leave?",
     cancelBtn: "Cancel",
+    logOutBtn: "Log out",
   },
   ukr: {
     titleText: "Вийти",
     warningText: "Ви дійсно хочете вийти?",
     cancelBtn: "Скасувати",
+    logOutBtn: "Вийти",
   },
 };
 
@@ -428,5 +430,38 @@ export const restorePasswordText = {
     repeatPasswordPlaceholder: "Повторіть ваш пароль",
     text: "Пам'ятаєте свій пароль?",
     signInLink: "Увійти",
+  },
+};
+
+export const toastAlerts = {
+  en: {
+    waterRecordSuccess: "Water record successfully created!",
+    waterIncorrectData:
+      "Incorrect data! Check the entered water amount or date.",
+    waterResourceError: "Resource not found.",
+    waterRecordError: "An error occurred while saving the record. Try again.",
+  },
+  ukr: {
+    waterRecordSuccess: "Запис про воду успішно створено!",
+    waterIncorrectData:
+      "Некоректні дані! Перевірте введену кількість води або дату.",
+    waterResourceError: "Ресурс не знайдено.",
+    waterRecordError:
+      "Сталася помилка під час збереження запису. Спробуйте ще раз.",
+  },
+};
+
+export const validationWaterForm = {
+  en: {
+    waterMin: "Minimum amount of water is 50 ml",
+    waterMax: "Maximum amount of water is 5000 ml",
+    waterQuantity: "Water quantity is required",
+    waterTime: "Time of recording is required",
+  },
+  ukr: {
+    waterMin: "Мінімальна кількість води — 50 мл",
+    waterMax: "Максимальна кількість води — 5000 мл",
+    waterQuantity: "Кількість води обов'язкова",
+    waterTime: "Час запису обов'язковий",
   },
 };
