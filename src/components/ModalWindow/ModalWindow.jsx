@@ -17,12 +17,13 @@ const customStyles = {
   },
   overlay: {
     backgroundColor: "rgba(47, 47, 47, 0.6)",
+    zIndex: "3",
   },
 };
 
 Modal.setAppElement("#root");
 
-export default function ModalWindow({ isOpen, onClose, children }) {
+export default function ModalWindow({isOpen, onClose, children}) {
   return (
     <Modal
       isOpen={isOpen}

@@ -1,12 +1,8 @@
-import {
-  createSlice,
-  isFulfilled,
-  isPending,
-  isRejected,
-} from "@reduxjs/toolkit";
+import {createSlice, isFulfilled, isPending, isRejected} from "@reduxjs/toolkit";
 import {
   loginThunk,
   logoutThunk,
+  recoveryPasswordThunk,
   refreshThunk,
   registerThunk,
 } from "./operations";
@@ -47,6 +43,9 @@ const slice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, () => {
         return initialState;
+      })
+      .addCase(recoveryPasswordThunk.fulfilled, (state, action) => {
+        state.user = action.payload.user;
       })
       .addMatcher(isPending, (state) => {
         state.isLoading = true;

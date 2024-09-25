@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import { useEffect } from "react";
 import { refreshThunk } from "./redux/auth/operations";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
@@ -48,6 +49,14 @@ function App() {
           element={
             <PublicRoute>
               <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/password-recovery/:verificationToken"
+          element={
+            <PublicRoute>
+              <ChangePassword />
             </PublicRoute>
           }
         />

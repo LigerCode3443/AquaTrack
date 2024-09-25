@@ -1,14 +1,58 @@
 .dailyInfo {
   display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+  margin: 40px auto;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1439px) {
+  .dailyInfo {
+    margin: 40px auto;
+    width: 640px;
+  }
+}
+
+@media only screen and (min-width: 1439px) {
+  .dailyInfo {
+    margin: 40px 32px;
+    width: 608px;
+  }
 }
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.btnPlus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: #9be1a0;
 }
 
 .plusIcon {
-  width: 14px;
-  height: 14px;
+  display: flex;
+}
+
+.textAdd {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
 }
