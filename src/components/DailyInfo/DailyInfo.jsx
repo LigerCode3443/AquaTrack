@@ -59,7 +59,7 @@ const DailyInfo = ({ selectedDate }) => {
     }
 
     const parsedDate = parse(dateString, "dd.MM.yyyy", new Date());
-    return isNaN(parsedDate.getTime()) ? null : parsedDate; // Повертаємо parsedDate, або null, якщо недійсно
+    return isNaN(parsedDate.getTime()) ? null : parsedDate;
   };
 
   const parsedDate = parseDate(data.date);
