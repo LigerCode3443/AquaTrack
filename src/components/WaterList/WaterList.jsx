@@ -19,6 +19,7 @@ const WaterList = ({ onEditWater, onDeleteWater }) => {
       })
     );
   }, [dispatch]);
+
   return (
     <div className={s.waterList}>
       {data.records.map((data) => (
