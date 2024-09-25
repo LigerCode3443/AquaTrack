@@ -32,6 +32,7 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
           day,
         },
       });
+      console.log(data);
 
       return {
         records: data.data,
@@ -100,6 +101,7 @@ export const createWaterThunk = createAsyncThunk(
           day: new Date(state.water.oneDayRecords.date).getDate(),
         })
       );
+      thunkApi.dispatch(getLast7DaysThunk());
 
       return data.data;
     } catch (error) {
@@ -131,6 +133,7 @@ export const updateWaterThunk = createAsyncThunk(
           day: new Date(state.water.oneDayRecords.date).getDate(),
         })
       );
+      thunkApi.dispatch(getLast7DaysThunk());
 
       return data.data;
     } catch (error) {
@@ -160,6 +163,7 @@ export const updateDayNormThunk = createAsyncThunk(
           day: new Date(state.water.oneDayRecords.date).getDate(),
         })
       );
+      thunkApi.dispatch(getLast7DaysThunk());
 
       return data.data;
     } catch (error) {
@@ -187,6 +191,7 @@ export const deleteWaterThunk = createAsyncThunk(
           day: new Date(state.water.oneDayRecords.date).getDate(),
         })
       );
+      thunkApi.dispatch(getLast7DaysThunk());
 
       return data.data;
     } catch (error) {
