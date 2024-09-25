@@ -32,7 +32,6 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
           day,
         },
       });
-      console.log(data);
 
       return {
         records: data.data,
@@ -72,7 +71,6 @@ export const getOneRecordThunk = createAsyncThunk(
 
       return data.data;
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       thunkApi.rejectWithValue(error.message);
     }

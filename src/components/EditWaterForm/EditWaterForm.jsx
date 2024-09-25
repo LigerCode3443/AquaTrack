@@ -34,9 +34,6 @@ const EditWaterForm = ({ waterId, onClose }) => {
   const waterRecord = useSelector(selectOneRecord);
   const userWaterGoal = useSelector(selectUserWaterGoal);
 
-  console.log(waterRecord);
-  console.log(time);
-
   const {
     register,
     handleSubmit,
