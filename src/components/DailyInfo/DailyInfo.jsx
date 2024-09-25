@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WaterList from "../WaterList/WaterList";
 import AddWaterForm from "../AddWaterForm/AddWaterForm";
 import EditWaterForm from "../EditWaterForm/EditWaterForm";
@@ -8,12 +8,13 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createWaterThunk,
+  getByOneDayRecordsThunk,
   updateWaterThunk,
 } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 
-const DailyInfo = ({ waterData }) => {
+const DailyInfo = ({ selectedDate }) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -54,6 +55,16 @@ const DailyInfo = ({ waterData }) => {
     ).then(() => closeEditModal());
   };
 
+  useEffect(() => {
+    if (selectedDate) {
+      const year = selectedDate.getFullYear();
+      const month = selectedDate.getMonth();
+      const day = selectedDate.getDate();
+
+      dispatch(getByOneDayRecordsThunk({ year, month, day }));
+    }
+  }, [selectedDate, dispatch]);
+
   const isToday =
     new Date().toDateString() === new Date(data.date).toDateString();
 
@@ -70,7 +81,6 @@ const DailyInfo = ({ waterData }) => {
       </div>
 
       <WaterList
-        waterData={waterData}
         onEditWater={handleEditWater}
         onDeleteWater={handleDeleteWater}
       />
