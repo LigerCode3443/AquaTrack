@@ -57,7 +57,7 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
 
       return {
         records: data.data,
-        date: new Date(year, month, day).toLocaleDateString(),
+        date: new Date(year, month, day).toString(),
       };
     } catch (error) {
       toast.error(error.message);

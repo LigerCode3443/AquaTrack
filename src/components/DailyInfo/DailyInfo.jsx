@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
-import { isToday, parse } from "date-fns";
 import { useTranslation } from "react-i18next";
 
 const DailyInfo = ({ selectedDate }) => {
@@ -55,22 +54,18 @@ const DailyInfo = ({ selectedDate }) => {
     }
   }, [selectedDate, dispatch]);
 
-  const parseDate = (dateString) => {
-    if (!dateString) {
-      return null;
-    }
-
-    const parsedDate = parse(dateString, "dd.MM.yyyy", new Date());
-    return isNaN(parsedDate.getTime()) ? null : parsedDate;
-  };
-
-  const parsedDate = parseDate(data.date);
-  const todayCheck = parsedDate ? isToday(parsedDate) : false;
+  const todayCheck =
+    new Date().toLocaleDateString() ===
+    new Date(data.date).toLocaleDateString();
 
   return (
     <div className={s.dailyInfo}>
       <div className={s.header}>
-        <h2>{todayCheck ? "Today" : data.date}</h2>
+        <h2>
+          {todayCheck
+            ? "Today"
+            : new Date(data.date).toLocaleDateString().replaceAll("/", ".")}
+        </h2>
         <button className={s.btnPlus} onClick={handleAddWater}>
           <span className={s.circle}>
             <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
