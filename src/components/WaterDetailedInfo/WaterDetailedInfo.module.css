@@ -1,4 +1,7 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex: 1;
   background-color: #f0eff4;
   border-radius: 30px;
