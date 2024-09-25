@@ -34,9 +34,6 @@ const EditWaterForm = ({ waterId, onClose }) => {
   const waterRecord = useSelector(selectOneRecord);
   const userWaterGoal = useSelector(selectUserWaterGoal);
 
-  console.log(waterRecord);
-  console.log(time);
-
   const {
     register,
     handleSubmit,
@@ -145,6 +142,8 @@ const EditWaterForm = ({ waterId, onClose }) => {
               <div className={s.counter_input_wrapper}>
                 <input
                   type="number"
+                  id="counter"
+                  name="counter"
                   value={counter}
                   readOnly
                   className={s.water_counter}
