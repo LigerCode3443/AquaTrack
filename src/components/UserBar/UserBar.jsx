@@ -40,7 +40,7 @@ const UserBar = () => {
     <div className={s.wrapper}>
       <h2 className={s.name}>
         {t("description.userBar.helloText")}
-        <span>{actualName}</span>
+        <span> {actualName}</span>
       </h2>
       <div className={s.wrapperBox}>
         <button className={s.bar} onClick={togglePopover}>

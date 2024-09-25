@@ -1,7 +1,7 @@
 .waterCard {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-direction: row;
   gap: 10px;
   width: 149px;
@@ -57,7 +57,7 @@
 .quantity {
   font-weight: 700;
   font-size: 14px;
-  line-height: 1;
+  line-height: 14px;
   color: #323f47;
 }
 
@@ -71,7 +71,7 @@
 .time {
   font-weight: 400;
   font-size: 12px;
-  line-height: 1;
+  line-height: 12px;
   color: rgba(47, 47, 47, 0.6);
 }
 
@@ -108,5 +108,20 @@
   .waterActions button {
     width: 16px;
     height: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .waterCard {
+    min-width: 190px;
+  }
+
+  .quantity {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+
+  .time {
+    line-height: 22.4px;
   }
 }
