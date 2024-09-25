@@ -433,7 +433,6 @@ export const restorePasswordText = {
   },
 };
 
-
 export const toastAlerts = {
   en: {
     waterRecordSuccess: "Water record successfully created!",
@@ -464,7 +463,8 @@ export const validationWaterForm = {
     waterMax: "Максимальна кількість води — 5000 мл",
     waterQuantity: "Кількість води обов'язкова",
     waterTime: "Час запису обов'язковий",
-
+  },
+};
 export const notFoundText = {
   en: {
     oopsTitle: "Requested Page Not Found",
@@ -473,6 +473,5 @@ export const notFoundText = {
   ukr: {
     oopsTitle: "Сторінка не знайдена",
     returnToHomeText: "Повернутися на домашню сторінку",
-
   },
 };

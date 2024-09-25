@@ -36,7 +36,6 @@ const UserBar = () => {
   const userName = user.userEmail?.slice(0, user.userEmail?.indexOf("@"));
   const actualName = user.userName ? user.userName : userName;
 
-  console.log(isSettingsModalOpen);
   return (
     <div className={s.wrapper}>
       <h2 className={s.name}>
