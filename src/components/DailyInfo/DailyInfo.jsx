@@ -5,7 +5,12 @@ import EditWaterForm from "../EditWaterForm/EditWaterForm";
 import DeleteWaterForm from "../DeleteWater/DeleteWater";
 import s from "./DailyInfo.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createWaterThunk,
+  updateWaterThunk,
+} from "../../redux/water/operations";
+import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 
 const DailyInfo = ({ waterData }) => {
@@ -15,6 +20,7 @@ const DailyInfo = ({ waterData }) => {
   const [selectedWaterData, setSelectedWaterData] = useState(null);
 
   const data = useSelector(selectOneDayRecords);
+  const dispatch = useDispatch();
 
   const handleAddWater = () => setAddModalOpen(true);
   const closeAddModal = () => setAddModalOpen(false);
@@ -38,6 +44,15 @@ const DailyInfo = ({ waterData }) => {
     setDeleteModalOpen(false);
     setSelectedWaterData(null);
   };
+  const handleAddWaterSubmit = (waterData) => {
+    dispatch(createWaterThunk(waterData)).then(() => closeAddModal());
+  };
+
+  const handleEditWaterSubmit = (waterData) => {
+    dispatch(
+      updateWaterThunk({ id: selectedWaterData._id, data: waterData })
+    ).then(() => closeEditModal());
+  };
 
   const isToday =
     new Date().toDateString() === new Date(data.date).toDateString();
@@ -46,9 +61,11 @@ const DailyInfo = ({ waterData }) => {
     <div className={s.dailyInfo}>
       <div className={s.header}>
         <h2>{isToday ? "Today" : new Date(data.date).toLocaleDateString()}</h2>
-        <button onClick={handleAddWater}>
-          <SvgIcon className={s.plusIcon} id="plus" />
-          Add water
+        <button className={s.btnPlus} onClick={handleAddWater}>
+          <span className={s.circle}>
+            <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
+          </span>
+          <span className={s.textAdd}>Add water</span>
         </button>
       </div>
 
@@ -59,27 +76,31 @@ const DailyInfo = ({ waterData }) => {
       />
 
       {isAddModalOpen && (
-        <div className="modal">
-          <AddWaterForm onClose={closeAddModal} />
-        </div>
+        <ModalWindow isOpen={isAddModalOpen} onClose={closeAddModal}>
+          <AddWaterForm
+            onClose={closeAddModal}
+            onSubmit={handleAddWaterSubmit}
+          />
+        </ModalWindow>
       )}
 
       {isEditModalOpen && selectedWaterData && (
-        <div className="modal">
+        <ModalWindow isOpen={isEditModalOpen} onClose={closeEditModal}>
           <EditWaterForm
             waterEntry={selectedWaterData}
             onClose={closeEditModal}
+            onSubmit={handleEditWaterSubmit}
           />
-        </div>
+        </ModalWindow>
       )}
 
       {isDeleteModalOpen && selectedWaterData && (
-        <div className="modal">
+        <ModalWindow isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
           <DeleteWaterForm
             waterEntry={selectedWaterData}
             onClose={closeDeleteModal}
           />
-        </div>
+        </ModalWindow>
       )}
     </div>
   );
