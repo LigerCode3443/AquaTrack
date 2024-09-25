@@ -39,8 +39,8 @@ const WaterMainInfo = () => {
 
   return (
     <div className={css.waterTracker}>
+      <h2>AquaTrack</h2>
       <div className={css.header}>
-        <h2>AquaTrack</h2>
         <LocalizationSwitcher />
       </div>
 

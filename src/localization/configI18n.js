@@ -6,12 +6,24 @@ import {
   signInText,
   informSectionText,
   welcomeSectionText,
+  modalForgotPasswordText,
   dailyNormaText,
   userBarText,
   monthNames,
   daysOfWeek,
   calendarTitles,
-} from "./localization.js";
+  SettingsProfileText,
+  signOutText,
+  addWaterText,
+  editWaterText,
+  settingsText,
+  deleteWaterText,
+  validationAuthText,
+  restorePasswordText,
+  toastAlerts,
+  validationWaterForm,
+  notFoundText,
+} from "./localization";
 
 i18n
   .use(LanguageDetector)
@@ -32,6 +44,19 @@ i18n
             month: monthNames.en,
             day: daysOfWeek.en,
             titles: calendarTitles.en,
+            SettingsProfile: SettingsProfileText.en,
+            signOut: signOutText.en,
+            addWater: addWaterText.en,
+            editWater: editWaterText.en,
+            deleteWater: deleteWaterText.en,
+            settings: settingsText.en,
+            validationAuth: validationAuthText.en,
+            modalForgotPassword: modalForgotPasswordText.en,
+            restorePassword: restorePasswordText.en,
+            toastAlerts: toastAlerts.en,
+            validationWater: validationWaterForm.en,
+            notFoundText: notFoundText.en,
+
           },
         },
       },
@@ -47,8 +72,24 @@ i18n
             month: monthNames.ukr,
             day: daysOfWeek.ukr,
             titles: calendarTitles.ukr,
+            SettingsProfile: SettingsProfileText.ukr,
+            signOut: signOutText.ukr,
+            addWater: addWaterText.ukr,
+            editWater: editWaterText.ukr,
+            deleteWater: deleteWaterText.ukr,
+            settings: settingsText.ukr,
+            validationAuth: validationAuthText.ukr,
+            modalForgotPassword: modalForgotPasswordText.ukr,
+            restorePassword: restorePasswordText.ukr,
+            toastAlerts: toastAlerts.ukr,
+            validationWater: validationWaterForm.ukr,
+            notFoundText: notFoundText.ukr,
+
           },
         },
       },
     },
-  });
+  })
+
+
+export default i18n;

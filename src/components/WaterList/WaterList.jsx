@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectOneDayRecords } from "../../redux/water/selectors";
 import { useEffect } from "react";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
+
 const WaterList = ({ onEditWater, onDeleteWater }) => {
   const data = useSelector(selectOneDayRecords);
   const dispatch = useDispatch();
@@ -18,15 +19,16 @@ const WaterList = ({ onEditWater, onDeleteWater }) => {
       })
     );
   }, [dispatch]);
+
   return (
     <div className={s.waterList}>
-      {data.records.map((entry) => (
+      {data.records.map((data) => (
         <WaterCard
-          key={entry._id}
-          quantity={entry.quantity}
-          time={new Date(entry.date).toLocaleTimeString()}
-          onEdit={() => onEditWater(entry)}
-          onDelete={() => onDeleteWater(entry)}
+          key={data._id}
+          quantity={data.quantity}
+          time={data.date}
+          onEdit={() => onEditWater(data)}
+          onDelete={() => onDeleteWater(data)}
         />
       ))}
     </div>

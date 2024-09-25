@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import { useEffect } from "react";
 import { refreshThunk } from "./redux/auth/operations";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +53,14 @@ function App() {
           }
         />
         <Route
+          path="/password-recovery/:verificationToken"
+          element={
+            <PublicRoute>
+              <ChangePassword />
+            </PublicRoute>
+          }
+        />
+        <Route
           path="/tracker"
           element={
             <PrivateRoute>
@@ -58,6 +68,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Container>
