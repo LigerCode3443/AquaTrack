@@ -1,4 +1,6 @@
-label {
+.counter_label,
+.time_label,
+.water_label {
   display: block;
   margin-bottom: 8px;
   font-size: 14px;
@@ -7,27 +9,31 @@ label {
 }
 
 @media (min-width: 768px) {
-  label {
+  .counter_label,
+  .time_label,
+  .water_label {
     font-size: 16px;
     letter-spacing: -0.16px;
   }
 }
 
-input {
-  padding: 14px 16px;
-  align-items: flex-start;
-  font-size: 14px;
-  border: 1px solid rgba(47, 47, 47, 0.15);
-  border-radius: 15px;
-  height: 46px;
-  width: 100%;
-  box-sizing: border-box;
-  color: #2f2f2f;
-  font-weight: 400;
+.time_input,
+.water_input {
+  padding: 14px 16px !important;
+  align-items: flex-start !important;
+  font-size: 14px !important;
+  border: 1px solid rgba(47, 47, 47, 0.15) !important;
+  border-radius: 15px !important;
+  height: 46px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  color: #2f2f2f !important;
+  font-weight: 400 !important;
 }
 
 @media (min-width: 768px) {
-  input {
+  .time_input,
+  .water_input {
     padding: 16px;
     font-size: 16px;
     height: 56px;
@@ -35,15 +41,18 @@ input {
 }
 
 /* Для WebKit браузерів (Chrome, Safari, Edge) */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.water_counter::-webkit-outer-spin-button,
+.water_input::-webkit-outer-spin-button,
+.water_counter::-webkit-inner-spin-button,
+.water_input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
 }
 
 /* Для Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
+.water_counter,
+.water_input {
+  -moz-appearance: textfield !important;
 }
 
 .container {
@@ -99,16 +108,16 @@ input[type="number"] {
 }
 
 .water_counter {
-  border-radius: 30px;
-  background: #323f47;
-  color: #fff;
-  font-size: 14px;
-  border: none;
-  height: 40px;
-  padding: 11px 40px 11px 20px; /* Паддінги: 11px зверху/знизу і 20px зліва, 40px справа для 'ml' */
-  width: calc(1ch * (3 + 1) + 60px);
-  text-align: left;
-  font-weight: 700;
+  border-radius: 30px !important;
+  background: #323f47 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  border: none !important;
+  height: 40px !important;
+  padding: 11px 40px 11px 20px !important; /* Паддінги: 11px зверху/знизу і 20px зліва, 40px справа для 'ml' */
+  width: calc(1ch * (3 + 1) + 60px) !important;
+  text-align: left !important;
+  font-weight: 700 !important;
 }
 
 @media (min-width: 768px) {

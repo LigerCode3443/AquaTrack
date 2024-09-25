@@ -10,8 +10,8 @@ export const registerThunk = createAsyncThunk(
   "register",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await trackerApi.post("/users/signup", credentials);
-
+      await trackerApi.post("/users/signup", credentials);
+      const { data } = await thunkApi.dispatch(loginThunk(credentials));
       return data;
     } catch (error) {
       if (error.status === 400) {
@@ -65,7 +65,13 @@ export const updateUserThunk = createAsyncThunk(
   "update",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await trackerApi.patch("/users", credentials);
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await trackerApi.patch("/users", credentials, config);
 
       await thunkApi.dispatch(refreshThunk());
 
@@ -89,3 +95,35 @@ export const logoutThunk = createAsyncThunk("logout", async (_, thunkApi) => {
     return thunkApi.rejectWithValue(error.message);
   }
 });
+
+export const forgotPasswordThunk = createAsyncThunk(
+  "forgotPassword",
+  async (credentials, thunkApi) => {
+    try {
+      const { data } = await trackerApi.post(
+        "/users/forgot-password",
+        credentials
+      );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const recoveryPasswordThunk = createAsyncThunk(
+  "recoveryPassword",
+  async (credentials, thunkApi) => {
+    const { verificationToken, ...datas } = credentials;
+    try {
+      const { data } = await trackerApi.patch(
+        `/users/change-password/${verificationToken}`,
+        datas
+      );
+      toast.success("Password changed successfully!");
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

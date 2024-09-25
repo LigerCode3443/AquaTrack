@@ -33,6 +33,7 @@ export const signInText = {
     mainButton: "Sign In",
     alreadyHaveAcc: "Don`t have an account?",
     signUpLink: "Sign Up",
+    forgotPassword: "I Forgot My Password",
   },
   ukr: {
     mainTitle: "Увійти",
@@ -43,6 +44,7 @@ export const signInText = {
     mainButton: "Увійти",
     alreadyHaveAcc: "Не маєте акаунту?",
     signUpLink: "Зареєструватись",
+    forgotPassword: "Забули пароль?",
   },
 };
 
@@ -77,5 +79,399 @@ export const welcomeSectionText = {
     titleText: "Трекер споживання води",
     btnTryText: "Спробувати",
     btnSignInText: "Увійти",
+  },
+};
+
+export const dailyNormaText = {
+  en: {
+    normaText: "My daily norma",
+    liter: "L",
+    todayText: "Today",
+    addButtonText: "Add water",
+  },
+  ukr: {
+    normaText: "Денна норма",
+    liter: "Л",
+    todayText: "Сьогодні",
+    addButtonText: "Додати",
+  },
+};
+
+export const userBarText = {
+  en: {
+    helloText: "Hello,",
+    settingText: "Settings",
+    logOutText: "Log out",
+  },
+  ukr: {
+    helloText: "Вітаємо,",
+    settingText: "Налаштування",
+    logOutText: "Вихід",
+  },
+};
+
+export const monthNames = {
+  en: {
+    January: "January",
+    February: "February",
+    March: "March",
+    April: "April",
+    May: "May",
+    June: "June",
+    July: "July",
+    August: "August",
+    September: "September",
+    October: "October",
+    November: "November",
+    December: "December",
+  },
+  ukr: {
+    January: "Січень",
+    February: "Лютий",
+    March: "Березень",
+    April: "Квітень",
+    May: "Травень",
+    June: "Червень",
+    July: "Липень",
+    August: "Серпень",
+    September: "Вересень",
+    October: "Жовтень",
+    November: "Листопад",
+    December: "Грудень",
+  },
+};
+
+export const daysOfWeek = {
+  en: {
+    Monday: "Mon",
+    Tuesday: "Tue",
+    Wednesday: "Wed",
+    Thursday: "Thu",
+    Friday: "Fri",
+    Saturday: "Sat",
+    Sunday: "Sun",
+  },
+  ukr: {
+    Monday: "Пн",
+    Tuesday: "Вт",
+    Wednesday: "Ср",
+    Thursday: "Чт",
+    Friday: "Пт",
+    Saturday: "Сб",
+    Sunday: "Нд",
+  },
+};
+
+export const calendarTitles = {
+  en: {
+    statisticsText: "Statistics",
+    monthText: "Month",
+    ml: "ml",
+  },
+  ukr: {
+    statisticsText: "Статистика",
+    monthText: "Місяць",
+    ml: "мл",
+  },
+};
+
+export const SettingsProfileText = {
+  en: {
+    setting: "Setting",
+    uploadPhotoBtn: "Upload a photo",
+    yourGenderLabel: "Your gender identity",
+    femaleGenderLabel: "Female",
+    maleGenderLabel: "Male",
+    yourNameLabel: "Your name",
+    placeYourName: "Name",
+    labelEmail: "Email",
+    placeEmail: "Email",
+    dailyNormah: "My daily norma",
+    forWomanP: "For woman:",
+    forManP: "For man:",
+    starText:
+      "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
+    activeText: "Active time in hours",
+    infoUser: "Your weight in kilograms:",
+    TheTimeSportsLabel: "The time of active participation in sports:",
+    requiredWater: "The required amount of water in liters per day:",
+    writeDownLabel: "Write down how much water you will drink:",
+    l: "L",
+    saveBtn: "Save",
+    success: "Your data has been updated successfully",
+    validation: {
+      genderRequired: "Gender is required!",
+      nameRequired: "Name is required!",
+      nameMin: "Name must be at least 3 characters!",
+      nameMax: "Name must be no more than 50 characters!",
+      emailRequired: "Email is required!",
+      emailInvalid: "Must be a valid email!",
+      weightRequired: "Weight is required!",
+      weightNumber: "Weight must be a number!",
+      timeRequired: "Time is required!",
+      timeNumber: "Time must be a number!",
+      waterRequired: "Water intake is required!",
+      waterNumber: "Water must be a number!",
+    },
+  },
+  ukr: {
+    setting: "Налаштування",
+    uploadPhotoBtn: "Завантажити фото",
+    yourGenderLabel: "Ваша гендерна ідентичність",
+    femaleGenderLabel: "Жінка",
+    maleGenderLabel: "Чоловік",
+    yourNameLabel: "Ваше ім'я",
+    placeYourName: "Ім'я",
+    labelEmail: "Електронна пошта",
+    placeEmail: "Електронна пошта",
+    dailyNormah: "Моя денна норма",
+    forWomanP: "Для жінки:",
+    forManP: "Для чоловіка:",
+    starText:
+      "V - об'єм норми води в літрах на добу, M - маса вашого тіла, T - час активних занять спортом або іншим видом діяльності, співмірним за навантаженнями (за їх відсутності ви потрібно встановити 0)",
+    activeText: "Час активності в годинах",
+    infoUser: "Ваша вага в кілограмах:",
+    TheTimeSportsLabel: "Час активного заняття спортом:",
+    requiredWater: "Необхідна кількість води в літрах на день:",
+    writeDownLabel: "Запишіть, скільки води ви будете пити:",
+    l: "л",
+    saveBtn: "Зберегти",
+    success: "Ваші дані успішно оновлено",
+    validation: {
+      genderRequired: "Вкажіть вашу стать!",
+      nameRequired: "Ім'я обов'язкове!",
+      nameMin: "Ім'я повинно містити щонайменше 3 символи!",
+      nameMax: "Ім'я не повинно перевищувати 50 символів!",
+      emailRequired: "Електронна пошта обов'язкова!",
+      emailInvalid: "Введіть коректну електронну пошту!",
+      weightRequired: "Вага обов'язкова!",
+      weightNumber: "Вага повинна бути числом!",
+      timeRequired: "Час обов'язковий!",
+      timeNumber: "Час повинен бути числом!",
+      waterRequired: "Вкажіть кількість води!",
+      waterNumber: "Кількість води повинна бути числом!",
+    },
+  },
+};
+export const signOutText = {
+  en: {
+    titleText: "Log out",
+    warningText: "Do you really want to leave?",
+    cancelBtn: "Cancel",
+    logOutBtn: "Log out",
+  },
+  ukr: {
+    titleText: "Вийти",
+    warningText: "Ви дійсно хочете вийти?",
+    cancelBtn: "Скасувати",
+    logOutBtn: "Вийти",
+  },
+};
+
+export const addWaterText = {
+  en: {
+    titleText: "Add water",
+    chooseValueText: "Choose a value:",
+    amountWaterText: "Amount of water:",
+    recordingTimeText: "Recording time:",
+    usedWaterText: "Enter the value of the water used:",
+    saveBtn: "Save",
+    ml: "ml",
+  },
+  ukr: {
+    titleText: "Додати воду",
+    chooseValueText: "Виберіть значення:",
+    amountWaterText: "Кількість води:",
+    recordingTimeText: "Час прийому:",
+    usedWaterText: "Введіть значення випитої води:",
+    saveBtn: "Зберегти",
+    ml: "мл",
+  },
+};
+export const editWaterText = {
+  en: {
+    titleText: "Edit the entered amount of water",
+    correctText: "Correct entered data:",
+    amountWaterText: "Amount of water:",
+    recordingTimeText: "Recording time:",
+    usedWaterText: "Enter the value of the water used:",
+    saveBtn: "Save",
+    ml: "ml",
+  },
+  ukr: {
+    titleText: "Редагувати введену кількість води",
+    correctText: "Виправіть введені дані:",
+    amountWaterText: "Кількість води:",
+    recordingTimeText: "Час прийому:",
+    usedWaterText: "Введіть значення випитої води:",
+    saveBtn: "Зберегти",
+    ml: "мл",
+  },
+};
+
+export const deleteWaterText = {
+  en: {
+    title: "Delete entry",
+    warning: "Are you sure you want to delete the entry?",
+    deleteBtn: "Delete",
+    cancelBtn: "Cancel",
+  },
+  ukr: {
+    title: "Видалити запис",
+    warning: "Ви впевнені, що хочете видалити запис?",
+    deleteBtn: "Видалити",
+    cancelBtn: "Скасувати",
+  },
+};
+
+export const settingsText = {
+  en: {
+    titleText: "Settings",
+    femaleText: "female",
+    genderText: "Your gender identity: ",
+    womanText: "Woman",
+    manText: "Man",
+    nameText: "Your name:",
+    emailText: "Email:",
+    requirementText: "My daily requirement:",
+    forWomanText: "For woman:",
+    womanFormula: "V=(M*0,03) + (T*0,4)",
+    forManText: "For man:",
+    manFormula: "V=(M*0,04) + (T*0,6)",
+    weightText: "Your weight in kilograms:",
+    activeTimeText: "The time of active participation in sports:",
+    requiredWaterText: "The required amount of water in liters per day:",
+    liter: "ml",
+    waterToDrinkText: "Write down how much water you will drink:",
+    save: "Save",
+    formulaExplanation:
+      "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
+    activeTimeHour: "Active time in hours",
+  },
+  ukr: {
+    titleText: "Налаштування",
+    femaleText: "Жінка",
+    genderText: "Ви себе ідентифікуєте як: ",
+    womanText: "Жінка",
+    manText: "Чоловік",
+    nameText: "Ваше ім'я:",
+    emailText: "Електронна пошта:",
+    requirementText: "Моя щоденна норма:",
+    forWomanText: "Для жінки:",
+    womanFormula: "V=(М*0,03) + (Т*0,4)",
+    forManText: "Для чоловіка:",
+    manFormula: "V=(М*0,04) + (Т*0,6)",
+    weightText: "Ваша вага в кілограмах:",
+    activeTimeText: "Час активних занять спортом:",
+    requiredWaterText: "Необхідна кількість води в літрах на день:",
+    liter: "мл",
+    waterToDrinkText: "Запишіть, скільки води ви вип'єте:",
+    save: "Зберегти",
+    formulaExplanation:
+      " V - це обсяг норми води в літрах на день, М - ваша вага, Т - час активних занять спортом або іншим видом діяльності, рівнозначним за навантаженням (при їх відсутності необхідно встановити 0)",
+    activeTimeHour: "Активний час в годинах",
+  },
+};
+
+export const validationAuthText = {
+  en: {
+    emailPattern: "Invalid email address",
+    requiredEmail: "Email is required",
+    passwordMin: "Password must be at least 6 characters",
+    passwordMax: "Password must not exceed 12 characters",
+    passwordPattern: "Password must have a number, a letter, and no spaces",
+    passwordRequired: "Password is required",
+    passwordMatch: "Passwords do not match!",
+    repeatPassword: "Repeat password is required",
+  },
+  ukr: {
+    emailPattern: "Невірна адреса електронної пошти",
+    requiredEmail: "Електронна пошта є обов'язковою",
+    passwordMin: "Пароль повинен містити принаймні 6 символів",
+    passwordMax: "Пароль не повинен перевищувати 12 символів",
+    passwordPattern:
+      "Пароль повинен містити цифру, літеру та не містити пробіли",
+    passwordRequired: "Пароль є обов'язковим",
+    passwordMatch: "Паролі не співпадають!",
+    repeatPassword: "Повторення паролю є обов'язковим",
+  },
+};
+
+export const modalForgotPasswordText = {
+  en: {
+    subtitleText: "Password recovery",
+    btnModalText: "Send",
+    emailPlaceholder: "Enter your email",
+  },
+  ukr: {
+    subtitleText: "Відновлення пароля",
+    btnModalText: "Відправити",
+    emailPlaceholder: "Введіть вашу електронну пошту",
+  },
+};
+
+export const restorePasswordText = {
+  en: {
+    subtitleText: "Password Recovery",
+    btnText: "Send",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your new password",
+    repeatPasswordLabel: "Repeat Password",
+    repeatPasswordPlaceholder: "Repeat your password",
+    text: "Remember your password?",
+    signInLink: "Sign In",
+  },
+  ukr: {
+    subtitleText: "Відновлення паролю",
+    btnText: "Відправити",
+    passwordLabel: "Пароль",
+    passwordPlaceholder: "Введіть ваш новий пароль",
+    repeatPasswordLabel: "Повторіть пароль",
+    repeatPasswordPlaceholder: "Повторіть ваш пароль",
+    text: "Пам'ятаєте свій пароль?",
+    signInLink: "Увійти",
+  },
+};
+
+export const toastAlerts = {
+  en: {
+    waterRecordSuccess: "Water record successfully created!",
+    waterIncorrectData:
+      "Incorrect data! Check the entered water amount or date.",
+    waterResourceError: "Resource not found.",
+    waterRecordError: "An error occurred while saving the record. Try again.",
+  },
+  ukr: {
+    waterRecordSuccess: "Запис про воду успішно створено!",
+    waterIncorrectData:
+      "Некоректні дані! Перевірте введену кількість води або дату.",
+    waterResourceError: "Ресурс не знайдено.",
+    waterRecordError:
+      "Сталася помилка під час збереження запису. Спробуйте ще раз.",
+  },
+};
+
+export const validationWaterForm = {
+  en: {
+    waterMin: "Minimum amount of water is 50 ml",
+    waterMax: "Maximum amount of water is 5000 ml",
+    waterQuantity: "Water quantity is required",
+    waterTime: "Time of recording is required",
+  },
+  ukr: {
+    waterMin: "Мінімальна кількість води — 50 мл",
+    waterMax: "Максимальна кількість води — 5000 мл",
+    waterQuantity: "Кількість води обов'язкова",
+    waterTime: "Час запису обов'язковий",
+  },
+};
+export const notFoundText = {
+  en: {
+    oopsTitle: "Requested Page Not Found",
+    returnToHomeText: "Return to home page",
+  },
+  ukr: {
+    oopsTitle: "Сторінка не знайдена",
+    returnToHomeText: "Повернутися на домашню сторінку",
   },
 };

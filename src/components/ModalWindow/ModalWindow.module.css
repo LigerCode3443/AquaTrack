@@ -1,5 +1,5 @@
 .wrapper {
-  padding: 40px 20px;
+  padding: 40px 14px;
 
   @media only screen and (min-width: 768px) {
     padding: 40px 40px;

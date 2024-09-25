@@ -8,16 +8,21 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./AddWaterForm.module.css";
 import { createWaterThunk } from "../../redux/water/operations.js";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
+import { useTranslation } from "react-i18next";
+import i18next from "../../localization/configI18n.js";
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
-    .min(50, "Мінімальна кількість води — 50 мл")
-    .max(5000, "Максимальна кількість води — 5000 мл")
-    .required("Кількість води обов'язкова"),
-  time: Yup.string().required("Час запису обов'язковий"),
+    .min(50, i18next.t("description.validationWater.waterMin"))
+    .max(5000, i18next.t("description.validationWater.waterMax"))
+    .required(i18next.t("description.validationWater.waterQuantity")),
+  time: Yup.string().required(
+    i18next.t("description.validationWater.waterTime")
+  ),
 });
 
-const AddWaterForm = () => {
+const AddWaterForm = ({ onClose }) => {
+  const { t } = useTranslation();
   const [counter, setCounter] = useState(50);
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
@@ -72,35 +77,35 @@ const AddWaterForm = () => {
       await dispatch(
         createWaterThunk({
           userWaterGoal: userWaterGoal,
-          date: now.toISOString(),
+          date: now.toString(),
           quantity: data.waterAmount,
         })
       ).unwrap();
 
-      toast.success("Запис про воду успішно створено!");
+      toast.success(t("description.toastAlerts.waterRecordSuccess"));
+
+      onClose();
     } catch (error) {
       if (error.status === 400) {
-        toast.error(
-          "Некоректні дані! Перевірте введену кількість води або дату."
-        );
+        toast.error(t("description.toastAlerts.waterIncorrectData"));
       } else if (error.status === 404) {
-        toast.error("Ресурс не знайдено.");
+        toast.error(t("description.toastAlerts.waterResourceError"));
       } else {
-        toast.error(
-          "Сталася помилка під час збереження запису. Спробуйте ще раз."
-        );
+        toast.error(t("description.toastAlerts.waterRecordError"));
       }
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
-      <h2 className={s.header}>Add water</h2>
+      <h2 className={s.header}>{t("description.addWater.titleText")}</h2>
       <div className={s.wrapper}>
-        <h3 className={s.form_header}>Choose a value</h3>
+        <h3 className={s.form_header}>
+          {t("description.addWater.chooseValueText")}
+        </h3>
         <div className={s.counter_container}>
           <label htmlFor="counter" className={s.counter_label}>
-            Amount of water:
+            {t("description.addWater.amountWaterText")}
           </label>
           <div className={s.counter}>
             <button
@@ -113,11 +118,13 @@ const AddWaterForm = () => {
             <div className={s.counter_input_wrapper}>
               <input
                 type="number"
+                id="counter"
+                name="counter"
                 value={counter}
                 readOnly
                 className={s.water_counter}
               />
-              <span className={s.unit}>ml</span>
+              <span className={s.unit}>{t("description.addWater.ml")}</span>
             </div>
 
             <button
@@ -131,7 +138,7 @@ const AddWaterForm = () => {
         </div>
         <div className={s.time_container}>
           <label htmlFor="time" className={s.time_label}>
-            Recording time:
+            {t("description.addWater.recordingTimeText")}
           </label>
           <input
             type="time"
@@ -148,7 +155,7 @@ const AddWaterForm = () => {
       </div>
       <div className={s.water_amount}>
         <label htmlFor="waterAmount" className={s.water_label}>
-          Enter the value of the water used:
+          {t("description.addWater.usedWaterText")}
         </label>
         <input
           type="number"
@@ -168,7 +175,7 @@ const AddWaterForm = () => {
         )}
       </div>
       <button type="submit" className={s.save_btn}>
-        Save
+        {t("description.addWater.saveBtn")}
       </button>
     </form>
   );

@@ -1,18 +1,15 @@
 import MediaQuery from "react-responsive";
 import s from "./WaterCard.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const WaterCard = ({ quantity, time, onEdit, onDelete }) => {
   let formattedTime;
 
   try {
-    const parsedDate = new Date(time);
-
+    const parsedDate = parseISO(time);
     if (!isNaN(parsedDate.getTime())) {
-      formattedTime = format(parsedDate, "hh:mm a");
-    } else {
-      throw new Error("Invalid Date");
+      formattedTime = format(parsedDate, "h:mm a");
     }
   } catch (error) {
     console.error("Invalid date format:", time, error);

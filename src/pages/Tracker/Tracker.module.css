@@ -6,6 +6,7 @@
 @media only screen and (min-width: 1440px) {
   .wrapper {
     height: calc(100vh - (32px * 2));
+    max-height: 750px;
     flex-direction: row;
     gap: 32px;
   }

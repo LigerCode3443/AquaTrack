@@ -13,10 +13,12 @@ const customStyles = {
     boxShadow: "0 4px 50px 0 rgba(0, 0, 0, 0.1)",
     border: "none",
     borderRadius: "15px",
+    maxHeight: "90vh",
     padding: "0px",
   },
   overlay: {
     backgroundColor: "rgba(47, 47, 47, 0.6)",
+    zIndex: "3",
   },
 };
 

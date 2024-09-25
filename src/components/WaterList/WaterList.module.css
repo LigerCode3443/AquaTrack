@@ -3,8 +3,9 @@
   flex-direction: row;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 24px;
+  overflow-y: hidden;
   scroll-behavior: smooth;
+  max-height: 150px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1439px) {

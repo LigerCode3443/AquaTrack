@@ -12,16 +12,21 @@ import {
 import { selectOneRecord } from "../../redux/water/selectors";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 import s from "./EditWaterForm.module.css";
+import i18next from "../../localization/configI18n.js";
+import { useTranslation } from "react-i18next";
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
-    .min(50, "Мінімальна кількість води — 50 мл")
-    .max(5000, "Максимальна кількість води — 5000 мл")
-    .required("Кількість води обов'язкова"),
-  time: Yup.string().required("Час запису обов'язковий"),
+    .min(50, i18next.t("description.validationWater.waterMin"))
+    .max(5000, i18next.t("description.validationWater.waterMax"))
+    .required(i18next.t("description.validationWater.waterQuantity")),
+  time: Yup.string().required(
+    i18next.t("description.validationWater.waterTime")
+  ),
 });
 
-const EditWaterForm = ({ waterId }) => {
+const EditWaterForm = ({ waterId, onClose }) => {
+  const { t } = useTranslation();
   const [counter, setCounter] = useState(0);
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
@@ -43,17 +48,25 @@ const EditWaterForm = ({ waterId }) => {
   });
 
   useEffect(() => {
-    dispatch(getOneRecordThunk(waterId));
+    if (waterId !== null) dispatch(getOneRecordThunk(waterId));
   }, [dispatch, waterId]);
 
   useEffect(() => {
     if (waterRecord) {
+      const qq = new Date(waterRecord.date);
       setCounter(waterRecord.quantity);
-      setTime(new Date(waterRecord.date).toISOString().substring(11, 16));
+
+      setTime(
+        `${qq.getHours() < 10 ? `0${qq.getHours()}` : qq.getHours()}:${
+          qq.getMinutes() < 10 ? `0${qq.getMinutes()}` : qq.getMinutes()
+        }`
+      );
       setValue("waterAmount", waterRecord.quantity);
       setValue(
         "time",
-        new Date(waterRecord.date).toISOString().substring(11, 16)
+        `${qq.getHours() < 10 ? `0${qq.getHours()}` : qq.getHours()}:${
+          qq.getMinutes() < 10 ? `0${qq.getMinutes()}` : qq.getMinutes()
+        }`
       );
     }
   }, [waterRecord, setValue]);
@@ -92,18 +105,16 @@ const EditWaterForm = ({ waterId }) => {
         })
       ).unwrap();
 
-      toast.success("Запис про воду успішно створено!");
+      toast.success(t("description.toastAlerts.waterRecordSuccess"));
+
+      onClose();
     } catch (error) {
       if (error.status === 400) {
-        toast.error(
-          "Некоректні дані! Перевірте введену кількість води або дату."
-        );
+        toast.error(t("description.toastAlerts.waterIncorrectData"));
       } else if (error.status === 404) {
-        toast.error("Запис не знайдено.");
+        toast.error(t("description.toastAlerts.waterResourceError"));
       } else {
-        toast.error(
-          "Сталася помилка під час збереження запису. Спробуйте ще раз."
-        );
+        toast.error(t("description.toastAlerts.waterRecordError"));
       }
     }
   };
@@ -111,12 +122,14 @@ const EditWaterForm = ({ waterId }) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className={s.container}>
-        <h2 className={s.header}>Edit the entered amount of water</h2>
+        <h2 className={s.header}>{t("description.editWater.titleText")}</h2>
         <div className={s.wrapper}>
-          <h3 className={s.form_header}>Correct entered data:</h3>
+          <h3 className={s.form_header}>
+            {t("description.editWater.correctText")}
+          </h3>
           <div className={s.counter_container}>
             <label htmlFor="counter" className={s.counter_label}>
-              Amount of water:
+              {t("description.editWater.amountWaterText")}
             </label>
             <div className={s.counter}>
               <button
@@ -129,11 +142,13 @@ const EditWaterForm = ({ waterId }) => {
               <div className={s.counter_input_wrapper}>
                 <input
                   type="number"
+                  id="counter"
+                  name="counter"
                   value={counter}
                   readOnly
                   className={s.water_counter}
                 />
-                <span className={s.unit}>ml</span>
+                <span className={s.unit}>{t("description.editWater.ml")}</span>
               </div>
 
               <button
@@ -147,7 +162,7 @@ const EditWaterForm = ({ waterId }) => {
           </div>
           <div className={s.time_container}>
             <label htmlFor="time" className={s.time_label}>
-              Recording time:
+              {t("description.editWater.recordingTimeText")}
             </label>
             <input
               type="time"
@@ -164,7 +179,7 @@ const EditWaterForm = ({ waterId }) => {
         </div>
         <div className={s.water_amount}>
           <label htmlFor="waterAmount" className={s.water_label}>
-            Enter the value of the water used:
+            {t("description.editWater.usedWaterText")}
           </label>
           <input
             type="number"
@@ -184,7 +199,7 @@ const EditWaterForm = ({ waterId }) => {
           )}
         </div>
         <button type="submit" className={s.save_btn}>
-          Save
+          {t("description.editWater.saveBtn")}
         </button>
       </form>
     </div>

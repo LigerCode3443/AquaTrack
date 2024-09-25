@@ -1,24 +1,23 @@
 import MediaQuery from "react-responsive";
-import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
-import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/WrapperForPublicRoutes";
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
-import Logo from "../../components/Logo/Logo";
+import ChangePasswordForm from "../../components/ChangePasswordForm/ChangePasswordForm";
 import HomeAuthSidebar from "../../components/HomeAuthSidebar/HomeAuthSidebar";
 import LocalizationSwitcher from "../../components/LocalizationSwitcher/LocalizationSwitcher";
+import Logo from "../../components/Logo/Logo";
+import WrapperForPublicRoutes from "../../components/WrapperForPublicRoutes/WrapperForPublicRoutes";
+import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
+import css from "./ChangePassword.module.css";
 
-import css from "./Register.module.css";
-
-const Register = () => {
+const ChangePassword = () => {
   return (
     <WrapperForPublicRoutes>
       <HomeAuthSidebar>
         <div className={css.wrapper}>
           <div className={css.header}>
             <Logo />
-
             <LocalizationSwitcher />
           </div>
-          <SignUpForm />
+
+          <ChangePasswordForm />
         </div>
       </HomeAuthSidebar>
 
@@ -28,4 +27,4 @@ const Register = () => {
     </WrapperForPublicRoutes>
   );
 };
-export default Register;
+export default ChangePassword;
