@@ -12,6 +12,7 @@ import {
   monthNames,
   daysOfWeek,
   calendarTitles,
+  SettingsProfileText,
   signOutText,
   addWaterText,
   editWaterText,
@@ -21,11 +22,12 @@ import {
   restorePasswordText,
 } from "./localization";
 
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: false,
+    debug: false, // Enable debug mode
     fallbackLng: "en",
     resources: {
       en: {
@@ -40,6 +42,7 @@ i18n
             month: monthNames.en,
             day: daysOfWeek.en,
             titles: calendarTitles.en,
+            SettingsProfile: SettingsProfileText.en,
             signOut: signOutText.en,
             addWater: addWaterText.en,
             editWater: editWaterText.en,
@@ -48,6 +51,7 @@ i18n
             validationAuth: validationAuthText.en,
             modalForgotPassword: modalForgotPasswordText.en,
             restorePassword: restorePasswordText.en,
+
           },
         },
       },
@@ -63,6 +67,7 @@ i18n
             month: monthNames.ukr,
             day: daysOfWeek.ukr,
             titles: calendarTitles.ukr,
+            SettingsProfile: SettingsProfileText.ukr,
             signOut: signOutText.ukr,
             addWater: addWaterText.ukr,
             editWater: editWaterText.ukr,
@@ -71,10 +76,17 @@ i18n
             validationAuth: validationAuthText.ukr,
             modalForgotPassword: modalForgotPasswordText.ukr,
             restorePassword: restorePasswordText.ukr,
+
           },
         },
       },
     },
+  })
+  .then(() => {
+    console.log("Current language:", i18n.language);
+  })
+  .catch((err) => {
+    console.error("i18next initialization error:", err);
   });
 
 export default i18n;
