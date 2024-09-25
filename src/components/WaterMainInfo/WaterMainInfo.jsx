@@ -3,9 +3,8 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
 import AddWaterForm from "../AddWaterForm/AddWaterForm";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import css from "./WaterMainInfo.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getRecordsThunk } from "../../redux/water/operations";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 import { selectTotalConsumed } from "../../redux/water/selectors";
 import { selectUserWaterGoal } from "../../redux/auth/selectors";
 import SvgIcon from "../SvgIcon/SvgIcon";
@@ -14,8 +13,7 @@ import LocalizationSwitcher from "../LocalizationSwitcher/LocalizationSwitcher";
 
 const WaterMainInfo = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const userWaterGoal = useSelector(selectUserWaterGoal);
+  const dailyNorma = useSelector(selectUserWaterGoal);
   const totalConsumed = useSelector(selectTotalConsumed);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,19 +21,7 @@ const WaterMainInfo = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const dailyNorma = userWaterGoal || 0;
-  const progress = dailyNorma > 0 ? (totalConsumed / dailyNorma) * 100 : 0;
-
-  useEffect(() => {
-    const currentDate = new Date();
-    dispatch(
-      getRecordsThunk({
-        year: currentDate.getFullYear(),
-        month: currentDate.getMonth() + 1,
-        day: currentDate.getDate(),
-      })
-    );
-  }, [dispatch, totalConsumed, userWaterGoal]);
+  const progress = (totalConsumed / dailyNorma) * 100;
 
   return (
     <div className={css.waterTracker}>
