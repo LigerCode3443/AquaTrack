@@ -39,14 +39,14 @@ export const convertData = (rawData, date) => {
 
     let dailyData = {
       userWaterGoal: 0,
-      date: currentDate.toISOString().split("T")[0],
+      date: currentDate.toLocaleDateString(),
       quantity: 0,
     };
 
     const filtered = rawData.filter((item) => {
       const itemDate = new Date(item.date);
 
-      return itemDate.toISOString().split("T")[0] === dailyData.date;
+      return itemDate.toLocaleDateString() === dailyData.date;
     });
 
     filtered.forEach((e) => {
