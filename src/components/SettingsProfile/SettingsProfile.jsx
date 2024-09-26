@@ -219,24 +219,28 @@ const SettingsProfile = () => {
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
-                  Your Water Goal in liters per day:
+                  The required amount of water in liters per day:
                 </p>
+                <p className={css.textAccent}>
+                  {requiredWater ? (
+                    `${requiredWater} L`
+                  ) : (
+                    <h3 className={css.textWaterGoal}>
+                      Write down how much water you will drink{" "}
+                    </h3>
+                  )}
+                </p>
+              </div>
+              <div className={css.userInfoInputContainer}>
+                <h3 className={css.textWaterGoal}>
+                  Write down how much water you will drink{" "}
+                </h3>
                 <input
                   className={css.userInfoInput}
                   type="number"
                   step=".1"
                   {...register("userWaterGoal")}
                 />
-              </div>
-              <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>
-                  The required amount of water in liters per day:
-                </p>
-                <p className={css.textAccent}>
-                  {requiredWater
-                    ? `${requiredWater} L`
-                    : "Write down how much water you will drink"}
-                </p>
               </div>
             </div>
           </div>
