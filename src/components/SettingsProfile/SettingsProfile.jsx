@@ -55,7 +55,8 @@ const SettingsProfile = () => {
     resolver: yupResolver(UserSchema),
     defaultValues: {
       userAvatar: user.userAvatar,
-      userName: user.userName || "",
+      userName:
+        user.userName || user.userEmail?.slice(0, user.userEmail?.indexOf("@")),
       userGender: user.userGender,
       userEmail: user.userEmail,
       userWeight: user.userWeight,

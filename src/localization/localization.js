@@ -167,11 +167,13 @@ export const calendarTitles = {
     statisticsText: "Statistics",
     monthText: "Month",
     ml: "ml",
+    L: "L",
   },
   ukr: {
     statisticsText: "Статистика",
     monthText: "Місяць",
     ml: "мл",
+    L: "Л",
   },
 };
 

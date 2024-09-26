@@ -119,7 +119,7 @@ export const recoveryPasswordThunk = createAsyncThunk(
     const { verificationToken, ...datas } = credentials;
     try {
       const { data } = await trackerApi.patch(
-        `/users/change-password/${verificationToken}`,
+        `/users/password-recovery/${verificationToken}`,
         datas
       );
       toast.success("Password changed successfully!");
@@ -135,6 +135,8 @@ export const refreshAccessToken = createAsyncThunk(
   "refreshToken",
   async (_, thunkApi) => {
     const { auth } = thunkApi.getState();
+    if (!auth.refreshToken)
+      return thunkApi.rejectWithValue({ message: "Token not found" });
 
     try {
       const { data } = await trackerApi.get("/users/refresh-token", {
