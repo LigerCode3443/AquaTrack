@@ -30,19 +30,24 @@ const SettingsProfile = () => {
     userEmail: Yup.string().email(
       i18next.t("description.validationSettings.userEmail")
     ),
-    userWeight: Yup.number().typeError(
-      i18next.t("description.validationSettings.userWeight")
-    ),
-    userActiveTime: Yup.number().typeError(
-      i18next.t("description.validationSettings.userActiveTime")
-    ),
+    userWeight: Yup.number()
+      .typeError(i18next.t("description.validationSettings.userWeight"))
+      .required(),
+    userActiveTime: Yup.number()
+      .typeError(i18next.t("description.validationSettings.userActiveTime"))
+      .required(),
     userGender: Yup.string(),
     userWaterGoal: Yup.number().typeError(
       i18next.t("description.validationSettings.userWaterGoal")
     ),
   });
 
-  const { register, handleSubmit, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(UserSchema),
     defaultValues: {
       userAvatar: user.userAvatar,
@@ -166,20 +171,36 @@ const SettingsProfile = () => {
                 <div className={css.userInfoInputContainer}>
                   <h3>{t("description.settings.nameText")}</h3>
                   <input
-                    className={css.userInfoInput}
+                    className={
+                      errors.userName
+                        ? css.userInfoInputError
+                        : css.userInfoInput
+                    }
                     type="text"
                     {...register("userName")}
                     disabled={loading}
                   />
+                  {errors.userName && (
+                    <span className={css.error}>{errors.userName.message}</span>
+                  )}
                 </div>
                 <div className={css.userInfoInputContainer}>
                   <h3>{t("description.settings.emailText")}</h3>
                   <input
-                    className={css.userInfoInput}
+                    className={
+                      errors.userEmail
+                        ? css.userInfoInputError
+                        : css.userInfoInput
+                    }
                     type="email"
                     {...register("userEmail")}
                     disabled
                   />
+                  {errors.userEmail && (
+                    <span className={css.error}>
+                      {errors.userEmail.message}
+                    </span>
+                  )}
                 </div>
                 <div className={css.midContainer}>
                   <h3>{t("description.settings.normaText")}</h3>
@@ -214,17 +235,24 @@ const SettingsProfile = () => {
                 </div>
               </div>
             </div>
-            <div>
+            <div className={css.userParams}>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
                   {t("description.settings.weightText")}
                 </p>
                 <input
-                  className={css.userInfoInput}
+                  className={
+                    errors.userWeight
+                      ? css.userInfoInputError
+                      : css.userInfoInput
+                  }
                   type="number"
                   step=".1"
                   {...register("userWeight")}
                 />
+                {errors.userWeight && (
+                  <span className={css.error}>{errors.userWeight.message}</span>
+                )}
               </div>
 
               <div className={css.userInfoInputContainer}>
@@ -232,11 +260,20 @@ const SettingsProfile = () => {
                   {t("description.settings.activeTimeText")}
                 </p>
                 <input
-                  className={css.userInfoInput}
+                  className={
+                    errors.userActiveTime
+                      ? css.userInfoInputError
+                      : css.userInfoInput
+                  }
                   type="number"
                   step=".1"
                   {...register("userActiveTime")}
                 />
+                {errors.userActiveTime && (
+                  <span className={css.error}>
+                    {errors.userActiveTime.message}
+                  </span>
+                )}
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
@@ -249,11 +286,20 @@ const SettingsProfile = () => {
                   {t("description.settings.waterToDrinkText")}{" "}
                 </h3>
                 <input
-                  className={css.userInfoInput}
+                  className={
+                    errors.userWaterGoal
+                      ? css.userInfoInputError
+                      : css.userInfoInput
+                  }
                   type="number"
                   step=".1"
                   {...register("userWaterGoal")}
                 />
+                {errors.userWaterGoal && (
+                  <span className={css.error}>
+                    {errors.userWaterGoal.message}
+                  </span>
+                )}
               </div>
             </div>
           </div>

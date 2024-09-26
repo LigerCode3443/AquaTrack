@@ -18,6 +18,6 @@
 }
 @media screen and (min-width: 1440px) {
   .wrapper {
-    gap: auto;
+    gap: 5px;
   }
 }
