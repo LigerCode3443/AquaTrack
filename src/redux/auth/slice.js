@@ -8,6 +8,7 @@ import {
   loginThunk,
   logoutThunk,
   recoveryPasswordThunk,
+  refreshAccessToken,
   refreshThunk,
   registerThunk,
 } from "./operations.js";
@@ -54,6 +55,9 @@ const slice = createSlice({
       })
       .addCase(recoveryPasswordThunk.fulfilled, (state) => {
         state.isLoading = false;
+      })
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        state.token = action.payload.accessToken;
       })
       .addMatcher(isPending, (state) => {
         state.isLoading = true;

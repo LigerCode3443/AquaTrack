@@ -31,7 +31,7 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await trackerApi.post("/users/signin", credentials);
-      setAuthHeader(data.accessToken, data.refreshToken);
+      setAuthHeader(data.accessToken);
       return data;
     } catch (error) {
       if (error.status === 400) {
@@ -48,13 +48,12 @@ export const loginThunk = createAsyncThunk(
 
 export const refreshThunk = createAsyncThunk("refresh", async (_, thunkApi) => {
   const { auth } = thunkApi.getState();
-  console.log(auth);
 
   if (!auth.token) {
     return thunkApi.rejectWithValue("Not found token");
   }
   try {
-    setAuthHeader(auth.token, auth.refreshToken);
+    setAuthHeader(auth.token);
     const { data } = await trackerApi.get("/users/current");
     return data;
   } catch (error) {
@@ -135,11 +134,14 @@ export const recoveryPasswordThunk = createAsyncThunk(
 export const refreshAccessToken = createAsyncThunk(
   "refreshToken",
   async (_, thunkApi) => {
+    const { auth } = thunkApi.getState();
+
     try {
-      const { data } = await trackerApi.get("/users/refresh-token", _, {
-        headers: { authorization: "Bearer" },
+      const { data } = await trackerApi.get("/users/refresh-token", {
+        headers: { authorization: `Bearer ${auth.refreshToken}` },
       });
-      console.log(data);
+      setAuthHeader(data.accessToken);
+      console.log(data.accessToken);
 
       return data;
     } catch (error) {
