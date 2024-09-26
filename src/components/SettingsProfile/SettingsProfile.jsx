@@ -26,32 +26,42 @@ const SettingsProfile = () => {
     userName: Yup.string()
       .trim()
       .min(3, i18next.t("description.validationSettings.nameMin"))
-      .max(50, i18next.t("description.validationSettings.nameMax")),
+      .max(15, i18next.t("description.validationSettings.nameMax")),
     userEmail: Yup.string().email(
       i18next.t("description.validationSettings.userEmail")
     ),
-    userWeight: Yup.number().typeError(
-      i18next.t("description.validationSettings.userWeight")
-    ),
-    userActiveTime: Yup.number().typeError(
-      i18next.t("description.validationSettings.userActiveTime")
-    ),
+    userWeight: Yup.number()
+      .min(0)
+      .max(635)
+      .typeError(i18next.t("description.validationSettings.userWeight"))
+      .required(),
+    userActiveTime: Yup.number()
+      .min(0)
+      .typeError(i18next.t("description.validationSettings.userActiveTime"))
+      .required(),
     userGender: Yup.string(),
-    userWaterGoal: Yup.number().typeError(
-      i18next.t("description.validationSettings.userWaterGoal")
-    ),
+    userWaterGoal: Yup.number()
+      .min(0)
+      .max(15000)
+      .typeError(i18next.t("description.validationSettings.userWaterGoal")),
   });
 
-  const { register, handleSubmit, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(UserSchema),
     defaultValues: {
       userAvatar: user.userAvatar,
-      userName: user.userName,
+      userName:
+        user.userName || user.userEmail?.slice(0, user.userEmail?.indexOf("@")),
       userGender: user.userGender,
       userEmail: user.userEmail,
       userWeight: user.userWeight,
       userActiveTime: user.userActiveTime,
-      userWaterGoal: user.userWaterGoal,
+      userWaterGoal: user.userWaterGoal / 1000,
     },
   });
 
@@ -80,7 +90,9 @@ const SettingsProfile = () => {
     try {
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value);
+        if (key === "userWaterGoal") {
+          formData.append(key, value * 1000);
+        } else formData.append(key, value);
       });
 
       if (userAvatar) {
@@ -166,20 +178,36 @@ const SettingsProfile = () => {
                 <div className={css.userInfoInputContainer}>
                   <h3>{t("description.settings.nameText")}</h3>
                   <input
-                    className={css.userInfoInput}
+                    className={
+                      errors.userName
+                        ? css.userInfoInputError
+                        : css.userInfoInput
+                    }
                     type="text"
                     {...register("userName")}
                     disabled={loading}
                   />
+                  {errors.userName && (
+                    <span className={css.error}>{errors.userName.message}</span>
+                  )}
                 </div>
                 <div className={css.userInfoInputContainer}>
                   <h3>{t("description.settings.emailText")}</h3>
                   <input
-                    className={css.userInfoInput}
+                    className={
+                      errors.userEmail
+                        ? css.userInfoInputError
+                        : css.userInfoInput
+                    }
                     type="email"
                     {...register("userEmail")}
                     disabled
                   />
+                  {errors.userEmail && (
+                    <span className={css.error}>
+                      {errors.userEmail.message}
+                    </span>
+                  )}
                 </div>
                 <div className={css.midContainer}>
                   <h3>{t("description.settings.normaText")}</h3>
@@ -214,17 +242,24 @@ const SettingsProfile = () => {
                 </div>
               </div>
             </div>
-            <div>
+            <div className={css.userParams}>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
                   {t("description.settings.weightText")}
                 </p>
                 <input
-                  className={css.userInfoInput}
+                  className={
+                    errors.userWeight
+                      ? css.userInfoInputError
+                      : css.userInfoInput
+                  }
                   type="number"
                   step=".1"
                   {...register("userWeight")}
                 />
+                {errors.userWeight && (
+                  <span className={css.error}>{errors.userWeight.message}</span>
+                )}
               </div>
 
               <div className={css.userInfoInputContainer}>
@@ -232,11 +267,20 @@ const SettingsProfile = () => {
                   {t("description.settings.activeTimeText")}
                 </p>
                 <input
-                  className={css.userInfoInput}
+                  className={
+                    errors.userActiveTime
+                      ? css.userInfoInputError
+                      : css.userInfoInput
+                  }
                   type="number"
                   step=".1"
                   {...register("userActiveTime")}
                 />
+                {errors.userActiveTime && (
+                  <span className={css.error}>
+                    {errors.userActiveTime.message}
+                  </span>
+                )}
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
@@ -249,11 +293,20 @@ const SettingsProfile = () => {
                   {t("description.settings.waterToDrinkText")}{" "}
                 </h3>
                 <input
-                  className={css.userInfoInput}
+                  className={
+                    errors.userWaterGoal
+                      ? css.userInfoInputError
+                      : css.userInfoInput
+                  }
                   type="number"
                   step=".1"
                   {...register("userWaterGoal")}
                 />
+                {errors.userWaterGoal && (
+                  <span className={css.error}>
+                    {errors.userWaterGoal.message}
+                  </span>
+                )}
               </div>
             </div>
           </div>

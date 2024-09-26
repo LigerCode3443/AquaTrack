@@ -86,10 +86,10 @@ const Statistics = () => {
           <YAxis
             className={css.YAxis}
             height={150}
-            tick={{ dx: -11 }}
+            tick={{ dx: -8 }}
             tickFormatter={(tick) => {
               let value = "";
-              if (tick >= 500) value = tick / 1000 + "L";
+              if (tick >= 500) value = tick / 1000 + t("description.titles.L");
               else if (tick === 0) value = "0%";
               else value = tick + t("description.titles.ml");
 

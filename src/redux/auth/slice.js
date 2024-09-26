@@ -8,13 +8,15 @@ import {
   loginThunk,
   logoutThunk,
   recoveryPasswordThunk,
+  refreshAccessToken,
   refreshThunk,
   registerThunk,
-} from "./operations";
+} from "./operations.js";
 
 const initialState = {
   user: null,
   token: "",
+  refreshToken: "",
   isLoggedIn: false,
   isLoading: false,
   isRefresh: false,
@@ -32,10 +34,13 @@ const slice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.user = action.payload.userData;
         state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
       })
       .addCase(refreshThunk.fulfilled, (state, action) => {
         state.user = action.payload.userData;
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.isRefresh = false;
       })
@@ -50,6 +55,9 @@ const slice = createSlice({
       })
       .addCase(recoveryPasswordThunk.fulfilled, (state) => {
         state.isLoading = false;
+      })
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        state.token = action.payload.accessToken;
       })
       .addMatcher(isPending, (state) => {
         state.isLoading = true;

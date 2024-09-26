@@ -4,6 +4,7 @@ const HomeAuthSidebar = styled.div`
   border-radius: 30px;
   background-color: #f0eff4;
   max-width: 343px;
+  margin: 0 auto;
 
   @media only screen and (min-width: 768px) {
     max-width: 704px;
