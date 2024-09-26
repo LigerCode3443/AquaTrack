@@ -1,8 +1,19 @@
-# React + Vite
+# Aquatracker (FE)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+Tha application allows user to track their water consumption per day and observe
+statistics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
+
+Login: ![alt text](./src/images/demo/authDemo.png)
+
+Inside: ![alt text](./src/images/demo/insideDemo.png)
+
+## Base technologies used
+
+- Main app is written with CSS, HTML5, JavaScript.
+- State management is done with Redux.js.
+- Communication with BE is done with axios.
+- Language change id done with i18n-js.
