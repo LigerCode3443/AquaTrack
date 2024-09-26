@@ -55,18 +55,18 @@ const DailyInfo = ({ selectedDate }) => {
   }, [selectedDate, dispatch]);
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    t("description.month.January"),
+    t("description.month.February"),
+    t("description.month.March"),
+    t("description.month.April"),
+    t("description.month.May"),
+    t("description.month.June"),
+    t("description.month.July"),
+    t("description.month.August"),
+    t("description.month.September"),
+    t("description.month.October"),
+    t("description.month.November"),
+    t("description.month.December"),
   ];
 
   const todayCheck =
@@ -78,7 +78,7 @@ const DailyInfo = ({ selectedDate }) => {
       <div className={s.header}>
         <h2>
           {todayCheck
-            ? "Today"
+            ? t("description.norma.todayText")
             : `${new Date(data.date).getDate()}, ${
                 months[new Date(data.date).getMonth()]
               }`}
