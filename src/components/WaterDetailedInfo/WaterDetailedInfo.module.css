@@ -16,8 +16,3 @@
     padding: 32px;
   }
 }
-@media screen and (min-width: 1440px) {
-  .wrapper {
-    gap: 5px;
-  }
-}
