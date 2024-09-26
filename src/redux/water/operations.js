@@ -148,6 +148,7 @@ export const updateDayNormThunk = createAsyncThunk(
   "updateDayNorm",
   async ({ date: { year, month, day }, userWaterGoal }, thunkApi) => {
     try {
+      console.log({ date: { year, month, day }, userWaterGoal });
       const data = await trackerApi.patch(
         `/water?year=${year}&month=${month}&day=${day}`,
         {

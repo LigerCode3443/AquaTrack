@@ -410,7 +410,7 @@ export const waterList = {
 export const validationSettings = {
   en: {
     nameMin: "Name must be at least 3 characters",
-    nameMax: "Name must be less than 50 characters",
+    nameMax: "Name must be less than 15 characters",
     userEmail: "Invalid email address",
     userWeight: "Weight must be a number",
     userActiveTime: "Active time must be a number",
@@ -418,7 +418,7 @@ export const validationSettings = {
   },
   ukr: {
     nameMin: "Ім'я повинно містити принаймні 3 символи",
-    nameMax: "Ім'я повинно бути менше 50 символів",
+    nameMax: "Ім'я повинно бути менше 15 символів",
     userEmail: "Невірна адреса електронної пошти",
     userWeight: "Вага повинна бути числом",
     userActiveTime: "Активний час повинен бути числом",

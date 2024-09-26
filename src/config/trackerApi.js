@@ -21,6 +21,7 @@ trackerApi.interceptors.response.use(
     const { store } = await import("../redux/store");
     const { refreshAccessToken } = await import("../redux/auth/operations");
 
+    console.log(error.response);
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 

@@ -26,20 +26,24 @@ const SettingsProfile = () => {
     userName: Yup.string()
       .trim()
       .min(3, i18next.t("description.validationSettings.nameMin"))
-      .max(50, i18next.t("description.validationSettings.nameMax")),
+      .max(15, i18next.t("description.validationSettings.nameMax")),
     userEmail: Yup.string().email(
       i18next.t("description.validationSettings.userEmail")
     ),
     userWeight: Yup.number()
+      .min(0)
+      .max(635)
       .typeError(i18next.t("description.validationSettings.userWeight"))
       .required(),
     userActiveTime: Yup.number()
+      .min(0)
       .typeError(i18next.t("description.validationSettings.userActiveTime"))
       .required(),
     userGender: Yup.string(),
-    userWaterGoal: Yup.number().typeError(
-      i18next.t("description.validationSettings.userWaterGoal")
-    ),
+    userWaterGoal: Yup.number()
+      .min(0)
+      .max(15000)
+      .typeError(i18next.t("description.validationSettings.userWaterGoal")),
   });
 
   const {
@@ -51,12 +55,12 @@ const SettingsProfile = () => {
     resolver: yupResolver(UserSchema),
     defaultValues: {
       userAvatar: user.userAvatar,
-      userName: user.userName,
+      userName: user.userName || "",
       userGender: user.userGender,
       userEmail: user.userEmail,
       userWeight: user.userWeight,
       userActiveTime: user.userActiveTime,
-      userWaterGoal: user.userWaterGoal,
+      userWaterGoal: user.userWaterGoal / 1000,
     },
   });
 
@@ -85,7 +89,9 @@ const SettingsProfile = () => {
     try {
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value);
+        if (key === "userWaterGoal") {
+          formData.append(key, value * 1000);
+        } else formData.append(key, value);
       });
 
       if (userAvatar) {
