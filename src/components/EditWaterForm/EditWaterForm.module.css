@@ -114,9 +114,9 @@
   font-size: 14px !important;
   border: none !important;
   height: 40px !important;
-  padding: 11px 40px 11px 20px !important; /* Паддінги: 11px зверху/знизу і 20px зліва, 40px справа для 'ml' */
-  width: calc(1ch * (3 + 1) + 60px) !important;
-  text-align: right !important;
+  padding: 11px 45px 11px 20px !important; /* Паддінги: 11px зверху/знизу і 20px зліва, 40px справа для 'ml' */
+  width: calc(1ch * (3 + 1) + 65px) !important;
+  text-align: left !important;
   font-weight: 700 !important;
 }
 
