@@ -55,3 +55,12 @@
   text-align: center;
   color: #323f47;
 }
+
+.textAdd {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+}
