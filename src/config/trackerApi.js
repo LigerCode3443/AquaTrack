@@ -21,12 +21,12 @@ trackerApi.interceptors.response.use(
     const { store } = await import("../redux/store");
     const { refreshAccessToken } = await import("../redux/auth/operations");
 
-    if (error.response.status === 404 && !originalRequest._retry) {
+    if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const accessToken = await store.dispatch(refreshAccessToken());
-      console.log(accessToken);
 
-      axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
+      const data = await store.dispatch(refreshAccessToken());
+
+      setAuthHeader(data.payload.accessToken);
 
       return trackerApi(originalRequest);
     }

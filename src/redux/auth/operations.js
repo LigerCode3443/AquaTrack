@@ -141,7 +141,6 @@ export const refreshAccessToken = createAsyncThunk(
         headers: { authorization: `Bearer ${auth.refreshToken}` },
       });
       setAuthHeader(data.accessToken);
-      console.log(data.accessToken);
 
       return data;
     } catch (error) {

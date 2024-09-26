@@ -86,7 +86,6 @@ const SettingsProfile = () => {
       if (userAvatar) {
         formData.append("userAvatar", userAvatar);
       }
-      console.log(Array.from(formData.entries()));
 
       dispatch(updateUserThunk(formData));
       toast.success(t("description.toastAlerts.settingsUpdateSuccess"), {
