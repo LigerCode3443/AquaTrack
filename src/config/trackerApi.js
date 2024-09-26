@@ -1,8 +1,5 @@
 import axios from "axios";
 
-import { refreshAccessToken } from "../redux/auth/operations";
-// import { store } from "../redux/store";
-
 export const trackerApi = axios.create({
   baseURL: "https://water-tracker-be-production.up.railway.app/api",
 });
@@ -21,9 +18,12 @@ trackerApi.interceptors.response.use(
   async function (error) {
     const originalRequest = error.config;
 
+    const { store } = await import("../redux/store");
+    const { refreshAccessToken } = await import("../redux/auth/operations");
+
     if (error.response.status === 404 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const accessToken = await refreshAccessToken();
+      const accessToken = await store.dispatch(refreshAccessToken());
       console.log(accessToken);
 
       axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
