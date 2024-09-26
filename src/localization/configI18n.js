@@ -12,7 +12,6 @@ import {
   monthNames,
   daysOfWeek,
   calendarTitles,
-  SettingsProfileText,
   signOutText,
   addWaterText,
   editWaterText,
@@ -24,6 +23,7 @@ import {
   validationWaterForm,
   notFoundText,
   waterList,
+  validationSettings,
 } from "./localization";
 
 i18n
@@ -45,7 +45,6 @@ i18n
             month: monthNames.en,
             day: daysOfWeek.en,
             titles: calendarTitles.en,
-            SettingsProfile: SettingsProfileText.en,
             signOut: signOutText.en,
             addWater: addWaterText.en,
             editWater: editWaterText.en,
@@ -58,6 +57,7 @@ i18n
             validationWater: validationWaterForm.en,
             notFoundText: notFoundText.en,
             waterList: waterList.en,
+            validationSettings: validationSettings.en,
           },
         },
       },
@@ -73,7 +73,6 @@ i18n
             month: monthNames.ukr,
             day: daysOfWeek.ukr,
             titles: calendarTitles.ukr,
-            SettingsProfile: SettingsProfileText.ukr,
             signOut: signOutText.ukr,
             addWater: addWaterText.ukr,
             editWater: editWaterText.ukr,
@@ -86,6 +85,7 @@ i18n
             validationWater: validationWaterForm.ukr,
             notFoundText: notFoundText.ukr,
             waterList: waterList.ukr,
+            validationSettings: validationSettings.ukr,
           },
         },
       },
