@@ -26,7 +26,7 @@ const WaterCard = ({ quantity, time, onEdit, onDelete }) => {
       </MediaQuery>
 
       <div className={s.waterInfo}>
-        <p className={s.quantity}>{quantity} ml</p>
+        <p className={s.quantity}>{(quantity / 1000).toFixed(2)} L</p>
         <p className={s.time}>{formattedTime}</p>
       </div>
 
