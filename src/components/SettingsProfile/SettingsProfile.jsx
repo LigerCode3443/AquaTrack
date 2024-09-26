@@ -285,7 +285,9 @@ const SettingsProfile = () => {
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
                   {t("description.settings.waterGoalText")}{" "}
-                  <span className={css.textAccent}>{`${requiredWater} L`}</span>
+                  <span className={css.textAccent}>{`${requiredWater} ${t(
+                    "description.titles.L"
+                  )}`}</span>
                 </p>
               </div>
               <div className={css.userInfoInputContainer}>
