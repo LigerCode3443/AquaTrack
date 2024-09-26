@@ -4,7 +4,7 @@ export const addEmptyDays = (record) => {
   const firstDayOfWeek = firstDayDate.getDay();
 
   const lastDayDate = new Date(record[record.length - 1].date);
-  lastDayDate.setDate(firstDayDate.getDate() - 1);
+  lastDayDate.setDate(lastDayDate.getDate() - 1);
   const lastDayOfWeek = lastDayDate.getDay();
 
   const emptyDaysAtStart = [];
@@ -26,27 +26,28 @@ export const splitIntoChunks = (array, chunkSize) => {
   for (let i = 0; i < array.length; i += chunkSize) {
     chunks.push(array.slice(i, i + chunkSize));
   }
+  if (chunks[chunks.length - 1][0].isEmpty) chunks.splice(chunks.length - 1, 1);
+
   return chunks;
 };
 
 export const convertData = (rawData, date) => {
   const countDays = new Date(date.year, date.month + 1, 0).getDate();
-
+  console.log("start");
   const newData = Array.from({ length: countDays }, (_, index) => {
-    const currentDate = new Date(date.year, date.month, index + 2);
+    const currentDate = new Date(date.year, date.month, index + 1);
 
     let dailyData = {
       userWaterGoal: 0,
-      date: currentDate.toISOString().split("T")[0],
+      date: currentDate.toDateString(),
       quantity: 0,
     };
-
     const filtered = rawData.filter((item) => {
       const itemDate = new Date(item.date);
 
-      return itemDate.toISOString().split("T")[0] === dailyData.date;
+      return itemDate.toLocaleDateString() === currentDate.toLocaleDateString();
     });
-
+    console.log(filtered);
     filtered.forEach((e) => {
       dailyData = {
         ...dailyData,

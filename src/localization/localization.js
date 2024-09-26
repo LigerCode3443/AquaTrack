@@ -84,7 +84,7 @@ export const welcomeSectionText = {
 
 export const dailyNormaText = {
   en: {
-    normaText: "My daily norma",
+    normaText: "My daily norm",
     liter: "L",
     todayText: "Today",
     addButtonText: "Add water",
@@ -175,84 +175,6 @@ export const calendarTitles = {
   },
 };
 
-export const SettingsProfileText = {
-  en: {
-    setting: "Setting",
-    uploadPhotoBtn: "Upload a photo",
-    yourGenderLabel: "Your gender identity",
-    femaleGenderLabel: "Female",
-    maleGenderLabel: "Male",
-    yourNameLabel: "Your name",
-    placeYourName: "Name",
-    labelEmail: "Email",
-    placeEmail: "Email",
-    dailyNormah: "My daily norma",
-    forWomanP: "For woman:",
-    forManP: "For man:",
-    starText:
-      "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
-    activeText: "Active time in hours",
-    infoUser: "Your weight in kilograms:",
-    TheTimeSportsLabel: "The time of active participation in sports:",
-    requiredWater: "The required amount of water in liters per day:",
-    writeDownLabel: "Write down how much water you will drink:",
-    l: "L",
-    saveBtn: "Save",
-    success: "Your data has been updated successfully",
-    validation: {
-      genderRequired: "Gender is required!",
-      nameRequired: "Name is required!",
-      nameMin: "Name must be at least 3 characters!",
-      nameMax: "Name must be no more than 50 characters!",
-      emailRequired: "Email is required!",
-      emailInvalid: "Must be a valid email!",
-      weightRequired: "Weight is required!",
-      weightNumber: "Weight must be a number!",
-      timeRequired: "Time is required!",
-      timeNumber: "Time must be a number!",
-      waterRequired: "Water intake is required!",
-      waterNumber: "Water must be a number!",
-    },
-  },
-  ukr: {
-    setting: "Налаштування",
-    uploadPhotoBtn: "Завантажити фото",
-    yourGenderLabel: "Ваша гендерна ідентичність",
-    femaleGenderLabel: "Жінка",
-    maleGenderLabel: "Чоловік",
-    yourNameLabel: "Ваше ім'я",
-    placeYourName: "Ім'я",
-    labelEmail: "Електронна пошта",
-    placeEmail: "Електронна пошта",
-    dailyNormah: "Моя денна норма",
-    forWomanP: "Для жінки:",
-    forManP: "Для чоловіка:",
-    starText:
-      "V - об'єм норми води в літрах на добу, M - маса вашого тіла, T - час активних занять спортом або іншим видом діяльності, співмірним за навантаженнями (за їх відсутності ви потрібно встановити 0)",
-    activeText: "Час активності в годинах",
-    infoUser: "Ваша вага в кілограмах:",
-    TheTimeSportsLabel: "Час активного заняття спортом:",
-    requiredWater: "Необхідна кількість води в літрах на день:",
-    writeDownLabel: "Запишіть, скільки води ви будете пити:",
-    l: "л",
-    saveBtn: "Зберегти",
-    success: "Ваші дані успішно оновлено",
-    validation: {
-      genderRequired: "Вкажіть вашу стать!",
-      nameRequired: "Ім'я обов'язкове!",
-      nameMin: "Ім'я повинно містити щонайменше 3 символи!",
-      nameMax: "Ім'я не повинно перевищувати 50 символів!",
-      emailRequired: "Електронна пошта обов'язкова!",
-      emailInvalid: "Введіть коректну електронну пошту!",
-      weightRequired: "Вага обов'язкова!",
-      weightNumber: "Вага повинна бути числом!",
-      timeRequired: "Час обов'язковий!",
-      timeNumber: "Час повинен бути числом!",
-      waterRequired: "Вкажіть кількість води!",
-      waterNumber: "Кількість води повинна бути числом!",
-    },
-  },
-};
 export const signOutText = {
   en: {
     titleText: "Log out",
@@ -327,19 +249,18 @@ export const deleteWaterText = {
 export const settingsText = {
   en: {
     titleText: "Settings",
-    femaleText: "female",
+    uploadBtn: "Upload photo",
     genderText: "Your gender identity: ",
     womanText: "Woman",
     manText: "Man",
-    nameText: "Your name:",
-    emailText: "Email:",
-    requirementText: "My daily requirement:",
+    nameText: "Your name",
+    emailText: "Email",
+    normaText: "My daily norma",
     forWomanText: "For woman:",
-    womanFormula: "V=(M*0,03) + (T*0,4)",
     forManText: "For man:",
-    manFormula: "V=(M*0,04) + (T*0,6)",
     weightText: "Your weight in kilograms:",
     activeTimeText: "The time of active participation in sports:",
+    waterGoalText: "Your Water Goal in liters per day:",
     requiredWaterText: "The required amount of water in liters per day:",
     liter: "ml",
     waterToDrinkText: "Write down how much water you will drink:",
@@ -350,19 +271,18 @@ export const settingsText = {
   },
   ukr: {
     titleText: "Налаштування",
-    femaleText: "Жінка",
+    uploadBtn: "Завантажити фото",
     genderText: "Ви себе ідентифікуєте як: ",
     womanText: "Жінка",
     manText: "Чоловік",
-    nameText: "Ваше ім'я:",
-    emailText: "Електронна пошта:",
-    requirementText: "Моя щоденна норма:",
+    nameText: "Ваше ім'я",
+    emailText: "Електронна пошта",
+    normaText: "Моя щоденна норма",
     forWomanText: "Для жінки:",
-    womanFormula: "V=(М*0,03) + (Т*0,4)",
     forManText: "Для чоловіка:",
-    manFormula: "V=(М*0,04) + (Т*0,6)",
     weightText: "Ваша вага в кілограмах:",
     activeTimeText: "Час активних занять спортом:",
+    waterGoalText: "Ваша ціль води в літрах на день:",
     requiredWaterText: "Необхідна кількість води в літрах на день:",
     liter: "мл",
     waterToDrinkText: "Запишіть, скільки води ви вип'єте:",
@@ -440,6 +360,7 @@ export const toastAlerts = {
       "Incorrect data! Check the entered water amount or date.",
     waterResourceError: "Resource not found.",
     waterRecordError: "An error occurred while saving the record. Try again.",
+    settingsUpdateSuccess: "Profile updated successfully!",
   },
   ukr: {
     waterRecordSuccess: "Запис про воду успішно створено!",
@@ -448,6 +369,7 @@ export const toastAlerts = {
     waterResourceError: "Ресурс не знайдено.",
     waterRecordError:
       "Сталася помилка під час збереження запису. Спробуйте ще раз.",
+    settingsUpdateSuccess: "Профіль успішно оновлено!",
   },
 };
 
@@ -473,5 +395,33 @@ export const notFoundText = {
   ukr: {
     oopsTitle: "Сторінка не знайдена",
     returnToHomeText: "Повернутися на домашню сторінку",
+  },
+};
+
+export const waterList = {
+  en: {
+    noWaterRecords: "No records for this day",
+  },
+  ukr: {
+    noWaterRecords: "Немає даних за цей день",
+  },
+};
+
+export const validationSettings = {
+  en: {
+    nameMin: "Name must be at least 3 characters",
+    nameMax: "Name must be less than 50 characters",
+    userEmail: "Invalid email address",
+    userWeight: "Weight must be a number",
+    userActiveTime: "Active time must be a number",
+    userWaterGoal: "Water goal must be a number",
+  },
+  ukr: {
+    nameMin: "Ім'я повинно містити принаймні 3 символи",
+    nameMax: "Ім'я повинно бути менше 50 символів",
+    userEmail: "Невірна адреса електронної пошти",
+    userWeight: "Вага повинна бути числом",
+    userActiveTime: "Активний час повинен бути числом",
+    userWaterGoal: "Ціль води повинна бути числом",
   },
 };

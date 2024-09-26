@@ -4,7 +4,7 @@ import { trackerApi } from "../../config/trackerApi";
 
 const updateData = (thunkApi) => {
   const state = thunkApi.getState();
-  console.log(state.water.records.date);
+
   thunkApi.dispatch(
     getRecordsThunk({
       year: new Date(state.water.records.date).getFullYear(),
@@ -21,12 +21,18 @@ const updateData = (thunkApi) => {
   thunkApi.dispatch(getLast7DaysThunk());
 };
 
+const getTimeZoneOffset = () => {
+  const date = new Date();
+  return -date.getTimezoneOffset() / 60;
+};
+
 export const getRecordsThunk = createAsyncThunk(
   "getRecords",
   async ({ year, month }, thunkApi) => {
     try {
       const data = await trackerApi.get("/water/", {
         params: {
+          timezoneOffset: getTimeZoneOffset(),
           year,
           month,
         },
@@ -49,6 +55,7 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
     try {
       const data = await trackerApi.get("/water/", {
         params: {
+          timezoneOffset: getTimeZoneOffset(),
           year,
           month: month + 1,
           day,
@@ -57,7 +64,7 @@ export const getByOneDayRecordsThunk = createAsyncThunk(
 
       return {
         records: data.data,
-        date: new Date(year, month, day).toLocaleDateString(),
+        date: new Date(year, month, day).toString(),
       };
     } catch (error) {
       toast.error(error.message);
@@ -72,6 +79,7 @@ export const getLast7DaysThunk = createAsyncThunk(
     try {
       const data = await trackerApi.get("/water/", {
         params: {
+          timezoneOffset: getTimeZoneOffset(),
           year: new Date().getFullYear(),
           month: new Date().getMonth() + 1,
         },

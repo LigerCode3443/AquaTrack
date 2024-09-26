@@ -140,6 +140,7 @@ h3 {
   line-height: 1.29;
   letter-spacing: -0.01em;
   transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 8px;
 }
 
 .userInfoInput:hover,
@@ -191,9 +192,11 @@ span.textAccent {
 }
 
 .saveButton {
-  min-width: 116px;
+  width: 116px;
+  height: 46px;
+  padding: 14px 40px 14px 40px;
+  opacity: 0px;
   display: flex;
-  padding: 14px 40px;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
@@ -222,6 +225,15 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.textWaterGoal {
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: #323f47;
 }
 
 .svgIcon {
@@ -283,9 +295,16 @@ input::-webkit-inner-spin-button {
   }
 
   .saveButton {
-    padding: 16px 50px;
-    font-size: 16px;
-    line-height: 1.5;
+    width: 141px;
+    height: 56px;
+    padding: 16px 50px 16px 50px;
+    gap: 10px;
+    border-radius: 30px;
+    opacity: 0px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
   }
   .svgIcon {
     width: 22px;

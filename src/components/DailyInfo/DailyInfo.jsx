@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getByOneDayRecordsThunk } from "../../redux/water/operations";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { selectOneDayRecords } from "../../redux/water/selectors";
-import { isToday, parse } from "date-fns";
 import { useTranslation } from "react-i18next";
 
 const DailyInfo = ({ selectedDate }) => {
@@ -55,22 +54,35 @@ const DailyInfo = ({ selectedDate }) => {
     }
   }, [selectedDate, dispatch]);
 
-  const parseDate = (dateString) => {
-    if (!dateString) {
-      return null;
-    }
+  const months = [
+    t("description.month.January"),
+    t("description.month.February"),
+    t("description.month.March"),
+    t("description.month.April"),
+    t("description.month.May"),
+    t("description.month.June"),
+    t("description.month.July"),
+    t("description.month.August"),
+    t("description.month.September"),
+    t("description.month.October"),
+    t("description.month.November"),
+    t("description.month.December"),
+  ];
 
-    const parsedDate = parse(dateString, "dd.MM.yyyy", new Date());
-    return isNaN(parsedDate.getTime()) ? null : parsedDate;
-  };
-
-  const parsedDate = parseDate(data.date);
-  const todayCheck = parsedDate ? isToday(parsedDate) : false;
+  const todayCheck =
+    new Date().toLocaleDateString() ===
+    new Date(data.date).toLocaleDateString();
 
   return (
     <div className={s.dailyInfo}>
       <div className={s.header}>
-        <h2>{todayCheck ? "Today" : data.date}</h2>
+        <h2>
+          {todayCheck
+            ? t("description.norma.todayText")
+            : `${new Date(data.date).getDate()}, ${
+                months[new Date(data.date).getMonth()]
+              }`}
+        </h2>
         <button className={s.btnPlus} onClick={handleAddWater}>
           <span className={s.circle}>
             <SvgIcon className={s.plusIcon} id="plus" width={14} height={14} />
