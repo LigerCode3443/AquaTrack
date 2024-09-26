@@ -227,6 +227,7 @@ const SettingsProfile = () => {
                   {...register("userWeight")}
                 />
               </div>
+
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
                   {t("description.settings.activeTimeText")}
@@ -240,25 +241,13 @@ const SettingsProfile = () => {
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
-
-                  {t("description.settings.waterGoalText")}
-
-                  The required amount of water in liters per day:
-                </p>
-                <p className={css.textAccent}>
-                  {requiredWater ? (
-                    `${requiredWater} L`
-                  ) : (
-                    <h3 className={css.textWaterGoal}>
-                      Write down how much water you will drink{" "}
-                    </h3>
-                  )}
-
+                  {t("description.settings.waterGoalText")}{" "}
+                  <span className={css.textAccent}>{`${requiredWater} L`}</span>
                 </p>
               </div>
               <div className={css.userInfoInputContainer}>
                 <h3 className={css.textWaterGoal}>
-                  Write down how much water you will drink{" "}
+                  {t("description.settings.waterToDrinkText")}{" "}
                 </h3>
                 <input
                   className={css.userInfoInput}
@@ -267,18 +256,6 @@ const SettingsProfile = () => {
                   {...register("userWaterGoal")}
                 />
               </div>
-
-              <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>
-                  {t("description.settings.requiredWaterText")}
-                </p>
-                <p className={css.textAccent}>
-                  {requiredWater
-                    ? `${requiredWater} L`
-                    : t("description.settings.waterToDrinkText")}
-                </p>
-              </div>
-
             </div>
           </div>
         </div>
