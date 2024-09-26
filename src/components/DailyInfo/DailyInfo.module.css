@@ -3,7 +3,7 @@
   flex-direction: column;
 
   gap: 10px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1439px) {
