@@ -71,7 +71,7 @@
 .cancel,
 .logout {
   border-radius: 30px;
-  padding: 14px 129px;
+  padding: 14px;
   min-width: 304px;
   height: 46px;
 }

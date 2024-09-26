@@ -2,14 +2,24 @@ import MediaQuery from "react-responsive";
 import s from "./WaterCard.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { format, parseISO } from "date-fns";
+import { useTranslation } from "react-i18next";
+import { uk, enUS } from "date-fns/locale";
+
+const localeMap = {
+  ukr: uk,
+  en: enUS,
+};
 
 const WaterCard = ({ quantity, time, onEdit, onDelete }) => {
+  const { t, i18n } = useTranslation();
   let formattedTime;
 
   try {
     const parsedDate = parseISO(time);
     if (!isNaN(parsedDate.getTime())) {
-      formattedTime = format(parsedDate, "h:mm a");
+      const currentLocale = localeMap[i18n.language] || enUS;
+      const timeFormat = i18n.language === "ukr" ? "HH:mm" : "h:mm a";
+      formattedTime = format(parsedDate, timeFormat, { locale: currentLocale });
     }
   } catch (error) {
     console.error("Invalid date format:", time, error);
@@ -26,7 +36,11 @@ const WaterCard = ({ quantity, time, onEdit, onDelete }) => {
       </MediaQuery>
 
       <div className={s.waterInfo}>
-        <p className={s.quantity}>{quantity} ml</p>
+        <p className={s.quantity}>
+          {quantity < 1000
+            ? `${quantity} ${t("description.titles.ml")}`
+            : `${(quantity / 1000).toFixed(2)} ${t("description.titles.L")}`}
+        </p>
         <p className={s.time}>{formattedTime}</p>
       </div>
 

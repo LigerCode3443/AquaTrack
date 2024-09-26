@@ -124,6 +124,7 @@ h3 {
 }
 
 .userInfoInputContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -143,8 +144,13 @@ h3 {
   margin-bottom: 8px;
 }
 
-.userInfoInput:hover,
-.userInfoInput:focus {
+.userInfoInputError {
+  composes: userInfoInput;
+  border-color: #ef5050;
+}
+
+.userInfoInput:hover:not(.userInfoInputError),
+.userInfoInput:focus:not(.userInfoInputError) {
   border: 1px solid #87d28d;
   outline: none;
 }
@@ -347,13 +353,26 @@ input::-webkit-inner-spin-button {
   background-color: transparent;
 }
 
-.error {
-  border: 1px solid #ef5050;
+.userParams {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.errorSpan {
-  font-size: 11px;
+.error {
+  position: absolute;
+  bottom: -8px;
+
+  font-size: 12px;
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #ef5050;
+}
+
+@media screen and (min-width: 768px) {
+  .error {
+    bottom: -12px;
+    font-size: 14px;
+    right: 0;
+  }
 }
