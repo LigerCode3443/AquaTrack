@@ -9,8 +9,11 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import defaultAvatar from "../../images/avatar/avatars.png";
+import { useTranslation } from "react-i18next";
+import i18next from "../../localization/configI18n.js";
 
 const SettingsProfile = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -22,13 +25,21 @@ const SettingsProfile = () => {
   const UserSchema = Yup.object().shape({
     userName: Yup.string()
       .trim()
-      .min(3, "Name must be at least 3 characters")
-      .max(50, "Name must be less than 50 characters"),
-    userEmail: Yup.string().email("Invalid email address"),
-    userWeight: Yup.number().typeError("Weight must be a number"),
-    userActiveTime: Yup.number().typeError("Active time must be a number"),
+      .min(3, i18next.t("description.validationSettings.nameMin"))
+      .max(50, i18next.t("description.validationSettings.nameMax")),
+    userEmail: Yup.string().email(
+      i18next.t("description.validationSettings.userEmail")
+    ),
+    userWeight: Yup.number().typeError(
+      i18next.t("description.validationSettings.userWeight")
+    ),
+    userActiveTime: Yup.number().typeError(
+      i18next.t("description.validationSettings.userActiveTime")
+    ),
     userGender: Yup.string(),
-    userWaterGoal: Yup.number().typeError("Water goal must be a number"),
+    userWaterGoal: Yup.number().typeError(
+      i18next.t("description.validationSettings.userWaterGoal")
+    ),
   });
 
   const { register, handleSubmit, watch } = useForm({
@@ -77,7 +88,7 @@ const SettingsProfile = () => {
       }
 
       dispatch(updateUserThunk(formData));
-      toast.success("Profile updated successfully", {
+      toast.success(t("description.toastAlerts.settingsUpdateSuccess"), {
         position: "top-right",
       });
     } catch (error) {
@@ -93,7 +104,7 @@ const SettingsProfile = () => {
     <div className={css.wrapper}>
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.userPic}>
-          <h2>Settings</h2>
+          <h2>{t("description.settings.titleText")}</h2>
           <div className={css.picWrapper}>
             <div className={css.pic}>
               <img
@@ -113,7 +124,9 @@ const SettingsProfile = () => {
                 height="18"
                 className={css.iconUpload}
               />
-              <p className={css.textRegular}>Upload Photo</p>
+              <p className={css.textRegular}>
+                {t("description.settings.uploadBtn")}
+              </p>
             </div>
             <input
               type="file"
@@ -127,7 +140,7 @@ const SettingsProfile = () => {
 
         <div className={css.inputs}>
           <div className={css.midContainer}>
-            <h3>Your Gender identity</h3>
+            <h3>{t("description.settings.genderText")}</h3>
             <div className={css.radioContainer}>
               {["female", "male"].map((genderOption) => (
                 <div className={css.radioButton} key={genderOption}>
@@ -139,7 +152,9 @@ const SettingsProfile = () => {
                     value={genderOption}
                   />
                   <label className={css.radioLabel} htmlFor={genderOption}>
-                    {genderOption === "female" ? "Female" : "Male"}
+                    {genderOption === "female"
+                      ? t("description.settings.womanText")
+                      : t("description.settings.manText")}
                   </label>
                 </div>
               ))}
@@ -149,7 +164,7 @@ const SettingsProfile = () => {
             <div className={css.wrapperInputsForm}>
               <div className={css.midContainer}>
                 <div className={css.userInfoInputContainer}>
-                  <h3>Your name</h3>
+                  <h3>{t("description.settings.nameText")}</h3>
                   <input
                     className={css.userInfoInput}
                     type="text"
@@ -158,7 +173,7 @@ const SettingsProfile = () => {
                   />
                 </div>
                 <div className={css.userInfoInputContainer}>
-                  <h3>Email</h3>
+                  <h3>{t("description.settings.emailText")}</h3>
                   <input
                     className={css.userInfoInput}
                     type="email"
@@ -167,38 +182,43 @@ const SettingsProfile = () => {
                   />
                 </div>
                 <div className={css.midContainer}>
-                  <h3>My Daily Norma</h3>
+                  <h3>{t("description.settings.normaText")}</h3>
                   <div className={css.formulaContainer}>
                     <div className={css.formula}>
-                      <p className={css.textRegular}>For Women:</p>
+                      <p className={css.textRegular}>
+                        {t("description.settings.forWomanText")}
+                      </p>
                       <p className={css.textAccent}>
                         V = (M * 0.03) + (T * 0.4)
                       </p>
                     </div>
                     <div className={css.formula}>
-                      <p className={css.textRegular}>For Men:</p>
+                      <p className={css.textRegular}>
+                        {t("description.settings.forManText")}
+                      </p>
                       <p className={css.textAccent}>
                         V = (M * 0.04) + (T * 0.6)
                       </p>
                     </div>
                   </div>
                   <div className={css.textarea}>
-                    <span className={css.textAccent}>*</span> V is the volume of
-                    the water norm in liters per day, M is your body weight, T
-                    is the time of active sports, or another type of activity
-                    commensurate in terms of loads (in the absence of these, you
-                    must set 0)
+                    <span className={css.textAccent}>*</span>{" "}
+                    {t("description.settings.formulaExplanation")}
                   </div>
                   <div className={css.note}>
                     <SvgIcon id="note-icon" className={css.svgIcon} />
-                    <p className={css.textRegular}>Active time in hours</p>
+                    <p className={css.textRegular}>
+                      {t("description.settings.activeTimeHour")}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <div>
               <div className={css.userInfoInputContainer}>
-                <p className={css.textRegular}>Your Weight in kilograms:</p>
+                <p className={css.textRegular}>
+                  {t("description.settings.weightText")}
+                </p>
                 <input
                   className={css.userInfoInput}
                   type="number"
@@ -208,7 +228,7 @@ const SettingsProfile = () => {
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
-                  The time of active participation in sports:
+                  {t("description.settings.activeTimeText")}
                 </p>
                 <input
                   className={css.userInfoInput}
@@ -219,6 +239,9 @@ const SettingsProfile = () => {
               </div>
               <div className={css.userInfoInputContainer}>
                 <p className={css.textRegular}>
+
+                  {t("description.settings.waterGoalText")}
+
                   The required amount of water in liters per day:
                 </p>
                 <p className={css.textAccent}>
@@ -229,6 +252,7 @@ const SettingsProfile = () => {
                       Write down how much water you will drink{" "}
                     </h3>
                   )}
+
                 </p>
               </div>
               <div className={css.userInfoInputContainer}>
@@ -242,12 +266,24 @@ const SettingsProfile = () => {
                   {...register("userWaterGoal")}
                 />
               </div>
+
+              <div className={css.userInfoInputContainer}>
+                <p className={css.textRegular}>
+                  {t("description.settings.requiredWaterText")}
+                </p>
+                <p className={css.textAccent}>
+                  {requiredWater
+                    ? `${requiredWater} L`
+                    : t("description.settings.waterToDrinkText")}
+                </p>
+              </div>
+
             </div>
           </div>
         </div>
 
         <button className={css.saveButton} type="submit" disabled={loading}>
-          Save
+          {t("description.settings.save")}
         </button>
       </form>
     </div>
